@@ -1,0 +1,124 @@
+Create Desa
+--> Migration
+--> Model
+--> Factory
+--> Controller(index, create, store, edit, update, destroy)
+--> Route(index, create, store, edit, update, destroy)
+--> View(index, create)
+
+Create Penduduk
+--> Migration
+--> Model
+--> Factory
+--> Controller(index, create, store, edit, update, destroy)
+--> Route(index, create, store, edit, update, destroy)
+--> View(index, create)
+
+Create Kartu Keluarga
+--> Migration
+--> Model
+--> Factory
+--> Controller(index, create, store, edit, update, destroy)
+--> Route(index, create, store, edit, update, destroy)
+--> View(index, create)
+
+Create key eloquent = Penduduk(F) to desa(P)
+--> Migration(Penduduk)
+--> Factory(Penduduk)
+--> Model(Desa, Penduduk)
+
+Create key eloquent = Penduduk(F) to kartu keluarga(P)
+--> Migration(Penduduk)
+--> Factory(Penduduk)
+--> Model(Kartu keluarga, Penduduk)
+
+Completing Kartu Keluarga
+--> Migration(add more field)
+--> Factory(add more faker)
+--> Controller (add more data to store)
+--> View(add more input to create)
+
+Completing Penduduk
+--> Migration(add more field)
+--> Factory(add more faker)
+--> Controller (add more data to store)
+--> View(add more input to create)
+
+Akta kematian
+--> Migration = aktakematian
+--> Model
+--> Factory
+--> Eloquent key(aktakematian(F) & Penduduk(P))
+
+Admin-Aktakematian
+--> Controller(Index, create, store, edit, update, destroy)
+--> Route(Index, create, store, edit, update, destroy)
+--> View(Index, create, edit)
+
+Penerbitan akta kelahiran
+--> Migration = penerbitan_akta_kelahiran
+--> Model
+--> Factory
+--> Eloquent key(penerbitan_akta_kelahiran(F) & Penduduk(P))
+
+Admin-Penerbitan akta kelahiran 
+--> Controller(Index, create, store, edit, update, destroy)
+--> Route(Index, create, store, edit, update, destroy)
+--> View(Index, create, edit)
+
+Perubahan kartu keluarga
+--> Migration = perubahan kartu keluarga
+--> Model
+--> Factory
+--> Eloquent key(perubahan kartu keluarga(F) & Penduduk(P))
+
+Admin-perubahan kartu keluarga
+--> Controller(Index, create, store, edit, update, destroy)
+--> Route(Index, create, store, edit, update, destroy)
+--> View(Index, create, edit)
+
+Pindah Domisili
+--> Migration = pindah Domisili
+--> Model
+--> Factory
+
+Admin-Pindah domisili
+--> Controller(Index, create, store, edit, update, destroy)
+--> Route(Index, create, store, edit, update, destroy)
+--> View(Index, create, edit)
+
+Domisili Usaha
+--> Migration = Domisili Usaha
+--> Model
+--> Factory
+
+Admin-Domisili Usaha
+--> Controller(Index, create, store, edit, update, destroy)
+--> Route(Index, create, store, edit, update, destroy)
+--> View(Index, create, edit)
+
+Eloquent key for Domisili usaha and/to Penduduk
+--> Relationship "Belongs to many" and "Belons to many"
+--> Make Migration for Pivot table(penduduk_domisili_usaha) > Many-to-Many
+--> Model Domisili Usaha(Belongs to many) & Penduduk(Belongs to many)
+--> Controller Domisili Usaha Controller(Index, create, store, edit, update, destroy)
+--> View Domisili usaha(Index, create, edit)
+
+Eloquent key for Pindah domisili and/to Penduduk
+--> Relationship "Belongs to many" and "Belons to many"
+--> Make Migration for Pivot table(penduduk_pindah_domisili) > Many-to-Many
+--> Model Pindah Domisili (Belongs to many) & Penduduk(Belongs to many)
+--> Controller Pindah Domisili Controller(Index, create, store, edit, update, destroy)
+--> View Pindah domisili (Index, create, edit)
+
+Register, login, & logout
+--> Migration(users)
+--> Model(User)
+--> View
+--> Controller
+--> Route
+
+<> Pivot table (penduduk & akta_kematian)
+--> Migration
+
+<> akta kelahiran

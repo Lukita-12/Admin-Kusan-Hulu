@@ -1,0 +1,171 @@
+<x-layout>
+
+    <div>
+        <x-form.form-layout action="{{ route('user.akta_kematian.store') }}">
+            
+            <div>
+                <x-form.form-label for="penduduk_id">
+                    Penduduk
+                </x-form.form-label>
+                <x-form.form-input
+                    type="text"
+                    name="penduduk_id"
+                    id="penduduk_id"
+                    value="{{ $penduduk->id }}"
+                    placeholder="Penduduk..."
+                     />
+                <x-form.form-error errorFor="penduduk_id" />
+            </div>
+
+            <div>
+                <x-form.form-label for="no_kk">
+                    NIK
+                </x-form.form-label>
+                <x-form.form-input
+                    type="text"
+                    name="no_kk"
+                    id="no_kk"
+                    value="{{ $penduduk->kartukeluarga->no_kk }}"
+                    placeholder="NIK..."
+                     />
+                <x-form.form-error errorFor="no_kk" />
+            </div>
+
+            <div>
+                <x-form.form-label for="agama">
+                    Agama
+                </x-form.form-label>
+                <x-form.form-input
+                    type="text"
+                    name="agama"
+                    id="agama"
+                    value="{{ $penduduk->agama }}"
+                    placeholder="Agama..."
+                     />
+                <x-form.form-error errorFor="agama" />
+            </div>
+
+            <div>
+                <x-form.form-label for="jenis_kelamin">
+                    Jenis kelamin
+                </x-form.form-label>
+                <x-form.form-select
+                    name="jenis_kelamin"
+                    id="jenis_kelamin"
+                    required>
+                    @foreach ($penduduks as $penduduk)
+                        <option value="{{ $penduduk->id }}">{{ $penduduk->jenis_kelamin }}</option>
+                    @endforeach
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </x-form.form-select>
+                <x-form.form-error errorFor="jenis_kelamin" />
+            </div>
+
+            <div>
+                <x-form.form-label for="alamat_lengkap">
+                    Alamat
+                </x-form.form-label>
+                <x-form.form-input
+                    type="text"
+                    name="alamat_lengkap"
+                    id="alamat_lengkap"
+                    :value="old('alamat_lengkap')"
+                    placeholder="Alamat..."
+                     />
+                <x-form.form-error errorFor="alamat_lengkap" />
+            </div>
+
+            <div>
+                <h1>MENINGGAL PADA</h1>
+            </div>
+
+            <div>
+                <x-form.form-label for="hari">
+                    Hari
+                </x-form.form-label>
+                <x-form.form-input
+                    type="text"
+                    name="hari"
+                    id="hari"
+                    :value="old('hari')"
+                    placeholder="Hari..."
+                     />
+                <x-form.form-error errorFor="hari" />
+            </div>
+            
+            <div>
+                <x-form.form-label for="tanggal">
+                    Tanggal
+                </x-form.form-label>
+                <x-form.form-input
+                    type="date"
+                    name="tanggal"
+                    id="tanggal"
+                    :value="old('tanggal')"
+                    placeholder="Tanggal..."
+                    required />
+                <x-form.form-error errorFor="tanggal" />
+            </div>
+
+            <div>
+                <x-form.form-label for="tanggal_meninggal">
+                    Tanggal meninggal
+                </x-form.form-label>
+                <x-form.form-input
+                    type="date"
+                    name="tanggal_meninggal"
+                    id="tanggal_meninggal"
+                    :value="old('tanggal_meninggal')"
+                    placeholder="Tanggal meninggal..."
+                     />
+                <x-form.form-error errorFor="tanggal_meninggal" />
+            </div>
+
+            <div>
+                <x-form.form-label for="pukul">
+                    Pukul
+                </x-form.form-label>
+                <x-form.form-input
+                    type="text"
+                    name="pukul"
+                    id="pukul"
+                    :value="old('pukul')"
+                    placeholder="Pukul..."
+                     />
+                <x-form.form-error errorFor="pukul" />
+            </div>
+
+            <div>
+                <x-form.form-label for="tempat_meninggal">
+                    Tempat meninggal
+                </x-form.form-label>
+                <x-form.form-textarea
+                    name="tempat_meninggal"
+                    id="tempat_meninggal"
+                    :value="old('tempat_meninggal')"
+                    placeholder="Tempat meninggal..." />
+                <x-form.form-error errorFor="tempat_meninggal" />
+            </div>
+
+            <div>
+                <x-form.form-label for="penyebab_meninggal">
+                    Penyebab meninggal
+                </x-form.form-label>
+                <x-form.form-textarea
+                    name="penyebab_meninggal"
+                    id="penyebab_meninggal"
+                    :value="old('penyebab_meninggal')"
+                    placeholder="Penyebab meninggal..." />
+                <x-form.form-error errorFor="penyebab_meninggal" />
+            </div>
+            
+            <div>
+                <a href="{{ url('/') }}">Batal</a>
+                <button type="submit">Simpan</button>
+            </div>
+
+        </x-form.form-layout>
+    </div>
+    
+</x-layout>
