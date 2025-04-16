@@ -15,6 +15,6 @@ class Kartukeluarga extends Model
 
     public function penduduk(): HasMany
     {
-        return $this->hasMany(Penduduk::class);
+        return $this->hasMany(Penduduk::class, 'kartukeluarga_id');
     }
 }

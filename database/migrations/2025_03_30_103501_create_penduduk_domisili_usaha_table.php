@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('penduduk_domisili_usaha', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(DomisiliUsaha::class)->constrained();
-            $table->foreignIdFor(Penduduk::class)->constrained();
+            $table->foreignIdFor(DomisiliUsaha::class);
+            $table->foreignIdFor(Penduduk::class);
             $table->timestamps();
         });
     }

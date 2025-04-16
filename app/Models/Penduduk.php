@@ -23,7 +23,7 @@ class Penduduk extends Model
 
     public function kartukeluarga(): BelongsTo
     {
-        return $this->belongsTo(Kartukeluarga::class);
+        return $this->belongsTo(Kartukeluarga::class, 'kartukeluarga_id');
     }
     
     public function penerbitanAktaKelahiran(): HasOne
@@ -49,5 +49,10 @@ class Penduduk extends Model
     public function pindahDomisili(): BelongsToMany
     {
         return $this->belongsToMany(PindahDomisili::class, 'penduduk_pindah_domisili');
+    }
+
+    public function domisiliPenduduk(): HasMany
+    {
+        return $this->hasMany(DomisiliPenduduk::class);
     }
 }

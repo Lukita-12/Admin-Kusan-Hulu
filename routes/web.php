@@ -170,3 +170,4 @@ Route::prefix('user')->group(function () {
     });
 });
 
+require __DIR__. '/user.php';

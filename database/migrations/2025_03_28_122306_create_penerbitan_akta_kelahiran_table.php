@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('penerbitan_akta_kelahiran', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Penduduk::class)->constrained();
+            $table->foreignIdFor(Penduduk::class);
             $table->date('tanggal');
             $table->string('nomor_akta');
             $table->text('tempat_kelahiran');

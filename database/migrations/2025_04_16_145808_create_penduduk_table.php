@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('penduduk', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Desa::class);
-            $table->foreignIdFor(Kartukeluarga::class);
+            $table->foreignIdFor(Desa::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Kartukeluarga::class)->constrained()->cascadeOnDelete();
             $table->string('nama');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->default('Laki-laki');
             $table->string('status_perkawinan');
