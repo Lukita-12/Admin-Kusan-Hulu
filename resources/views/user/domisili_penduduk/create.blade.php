@@ -5,13 +5,12 @@
         
         <x-container.main class="px-12 py-6">
             <x-form.form action="{{ route('user.domisili_penduduk.store') }}" class="w-full flex flex-col items-center shadow">
-                @csrf
 
                 <x-container.form>
                     <x-container.label-input>
                         <x-form.label for="no_kk">Nomor Kartu Keluarga</x-form.label>
                         <div class="flex gap-3">
-                            <x-form.input type="text" id="no_kk" name="no_kk" placeholder="Cari..." />
+                            <x-form.input type="text" id="no_kk" name="no_kk" placeholder="Cari..." required/>
                             <x-form.button type="button" id="btn-cari" class="w-1/4">Cari</x-form.button>
                         </div>
                         <x-form.error errorFor="no_kk" />
@@ -60,10 +59,10 @@
                         <x-form.textarea type="text" id="alamat" name="alamat" rows="4" readonly onfocus="this.blur();"></x-form.textarea>
                     </x-container.label-input>
             
-                    <div class="flex justify-end gap-3">
+                    <x-container.form-button>
                         <x-form.button-link href="#">Batal</x-form.button-link>
                         <x-form.button type="submit">Buat</x-form.button>
-                    </div>
+                    </x-container.form-button>
                 </x-container.form>
             </x-form.form>
 
@@ -71,7 +70,7 @@
                 document.getElementById('btn-cari').addEventListener('click', function() {
                     const no_kk = document.getElementById('no_kk').value;
 
-                    fetch("{{ route('domisili-usaha.cari') }}?no_kk=" + no_kk)
+                    fetch("{{ route('domisili_penduduk.cari') }}?no_kk=" + no_kk)
                         .then(response => {
                             if (!response.ok) throw new Error('KK tidak ditemukan');
                             return response.json();

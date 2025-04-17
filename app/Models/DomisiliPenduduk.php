@@ -12,6 +12,9 @@ class DomisiliPenduduk extends Model
     use HasFactory;
     protected $table = 'domisili_penduduk';
     protected $guarded = [];
+    protected $casts = [
+        'tanggal_pengajuan' => 'datetime',
+    ];
 
     public function penduduk():BelongsTo
     {

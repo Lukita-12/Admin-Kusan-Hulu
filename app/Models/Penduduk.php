@@ -15,6 +15,9 @@ class Penduduk extends Model
     use HasFactory;
     protected $table = 'penduduk';
     protected $guarded = [];
+    protected $casts = [
+        'tanggal_lahir' => 'datetime',
+    ];
 
     public function desa(): BelongsTo
     {
