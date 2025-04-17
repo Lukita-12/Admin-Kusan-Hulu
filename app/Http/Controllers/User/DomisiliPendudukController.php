@@ -18,20 +18,24 @@ class DomisiliPendudukController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('user.domisili_penduduk.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'penduduk_id' => 'required|exists:penduduk,id',
+        ]);
+    
+        DomisiliPenduduk::create([
+            'penduduk_id'       => $validated['penduduk_id'],
+            'tanggal_pengajuan' => now(), // otomatis tanggal saat ini
+            'nomor_surat'       => null,        // biarkan kosong dulu
+        ]);
+
+        return redirect()->route('user.domisili_penduduk.create');
     }
 
     /**
@@ -80,14 +84,15 @@ class DomisiliPendudukController extends Controller
         $penduduk = $kk->penduduk()->first(); // asumsi ambil 1 orang
 
         return response()->json([
-            'nama' => $penduduk->nama ?? '',
-            'ttl' => $penduduk->tempat_lahir . ', ' . Carbon::parse($penduduk->tanggal_lahir)->translatedFormat('d F Y'),
-            'jenis_kelamin' => $penduduk->jenis_kelamin ?? '',
+            'penduduk_id'       => $penduduk->id ?? '',
+            'nama'              => $penduduk->nama ?? '',
+            'ttl'               => $penduduk->tempat_lahir . ', ' . Carbon::parse($penduduk->tanggal_lahir)->translatedFormat('d F Y'),
+            'jenis_kelamin'     => $penduduk->jenis_kelamin ?? '',
             'status_perkawinan' => $penduduk->status_perkawinan ?? '',
-            'agama' => $penduduk->agama ?? '',
-            'pekerjaan' => $penduduk->pekerjaan ?? '',
-            'warga_negara' => $penduduk->warga_negara ?? '',
-            'alamat' => $kk->alamat ?? '',
+            'agama'             => $penduduk->agama ?? '',
+            'pekerjaan'         => $penduduk->pekerjaan ?? '',
+            'warga_negara'      => $penduduk->warga_negara ?? '',
+            'alamat'            => $kk->alamat ?? '',
         ]);
     }
 }

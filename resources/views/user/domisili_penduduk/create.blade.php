@@ -4,7 +4,7 @@
         <x-sidebar.sidebar />
         
         <x-container.main class="px-12 py-6">
-            <x-form.form action="#" class="w-full flex flex-col items-center shadow">
+            <x-form.form action="{{ route('user.domisili_penduduk.store') }}" class="w-full flex flex-col items-center shadow">
                 @csrf
 
                 <x-container.form>
@@ -14,7 +14,11 @@
                             <x-form.input type="text" id="no_kk" name="no_kk" placeholder="Cari..." />
                             <x-form.button type="button" id="btn-cari" class="w-1/4">Cari</x-form.button>
                         </div>
+                        <x-form.error errorFor="no_kk" />
                     </x-container.label-input>
+
+                    <!-- Penduduk ID -->
+                    <x-form.input type="hidden" id="penduduk_id" name="penduduk_id" />
             
                     <x-container.label-input>
                         <x-form.label for="nama">Nama</x-form.label>
@@ -73,6 +77,7 @@
                             return response.json();
                         })
                         .then(data => {
+                            document.getElementById('penduduk_id').value = data.penduduk_id;
                             document.getElementById('nama').value = data.nama;
                             document.getElementById("ttl").value = data.ttl;
                             document.getElementById('jenis_kelamin').value = data.jenis_kelamin;
