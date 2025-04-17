@@ -1,0 +1,1 @@
+<div {{ $attributes->merge(['class' => 'flex min-h-screen']) }}>{{ $slot }}</div>
