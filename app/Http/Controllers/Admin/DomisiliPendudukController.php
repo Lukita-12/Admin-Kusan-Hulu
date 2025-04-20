@@ -9,12 +9,14 @@ use Illuminate\Validation\Rule;
 
 class DomisiliPendudukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $domisiliPenduduks = DomisiliPenduduk::with(['penduduk.kartukeluarga'])
+            ->latest()->simplePaginate(6);
+
+        return view('admin.domisili_penduduk.index', [
+            'domisiliPenduduks' => $domisiliPenduduks,
+        ]);
     }
 
     /**
@@ -67,5 +69,29 @@ class DomisiliPendudukController extends Controller
     public function destroy(DomisiliPenduduk $domisiliPenduduk)
     {
         //
+    }
+
+    public function accept(DomisiliPenduduk $domisiliPenduduk)
+    {
+        $domisiliPenduduk->status = 'Diproses';
+        $domisiliPenduduk->save();
+
+        return redirect('/admin/domisili-penduduk');
+    }
+
+    public function reject(DomisiliPenduduk $domisiliPenduduk)
+    {
+        $domisiliPenduduk->status = 'Ditolak';
+        $domisiliPenduduk->save();
+
+        return redirect('/admin/domisili-penduduk');
+    }
+
+    public function complete(DomisiliPenduduk $domisiliPenduduk)
+    {
+        $domisiliPenduduk->status = 'Selesai';
+        $domisiliPenduduk->save();
+
+        return redirect('/admin/domisili-penduduk');
     }
 }

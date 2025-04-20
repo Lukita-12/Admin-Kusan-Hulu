@@ -93,7 +93,7 @@
                     </x-container.label-input>
         
                     <x-container.form-button>
-                        <x-form.button-link href="#" class="w-1/10">Batal</x-form.button-link>
+                        <x-form.button-link href="{{ route('admin.domisili_penduduk.index') }}" class="w-1/10">Batal</x-form.button-link>
                         <x-form.button type="submit" class="w-1/10">Simpan</x-form.button>
                     </x-container.form-button>
                 </x-container.form>
