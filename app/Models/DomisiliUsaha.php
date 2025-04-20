@@ -14,6 +14,6 @@ class DomisiliUsaha extends Model
 
     public function penduduk()
     {
-        return $this->belongsToMany(Penduduk::class, 'penduduk_domisili_usaha');
+        return $this->belongsTo(Penduduk::class);
     }
 }

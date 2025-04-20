@@ -129,12 +129,6 @@ Route::prefix('user')->group(function () {
         Route::get('/akta-kematian/{aktaKematian}', 'show') ->name('user.akta_kematian.show');
     });
 
-    Route::controller(UserDomisiliUsahaController::class)->group(function () {
-        Route::get('/domisili-usaha/create', 'create')          ->name('user.domisili_usaha.create');
-        Route::post('/domisili-usaha', 'store')                 ->name('user.domisili_usaha.store');
-        Route::get('/domisili-usaha/{domisiliUsaha}', 'show')   ->name('user.domisili_usaha.show');
-    });
-
     Route::controller(UserPendudukController::class)->group(function () {
         Route::get('/penduduk/create', 'create')    ->name('user.penduduk.create');
         Route::post('/penduduk', 'store')           ->name('user.penduduk.store');

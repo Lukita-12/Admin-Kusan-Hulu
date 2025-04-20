@@ -76,15 +76,15 @@
                             return response.json();
                         })
                         .then(data => {
-                            document.getElementById('penduduk_id').value = data.penduduk_id;
-                            document.getElementById('nama').value = data.nama;
-                            document.getElementById("ttl").value = data.ttl;
-                            document.getElementById('jenis_kelamin').value = data.jenis_kelamin;
-                            document.getElementById('status_perkawinan').value = data.status_perkawinan;
-                            document.getElementById('agama').value = data.agama;
-                            document.getElementById('pekerjaan').value = data.pekerjaan;
-                            document.getElementById('warga_negara').value = data.warga_negara;
-                            document.getElementById('alamat').value = data.alamat;
+                            document.getElementById('penduduk_id').value        = data.penduduk_id;
+                            document.getElementById('nama').value               = data.nama;
+                            document.getElementById("ttl").value                = data.ttl;
+                            document.getElementById('jenis_kelamin').value      = data.jenis_kelamin;
+                            document.getElementById('status_perkawinan').value  = data.status_perkawinan;
+                            document.getElementById('agama').value              = data.agama;
+                            document.getElementById('pekerjaan').value          = data.pekerjaan;
+                            document.getElementById('warga_negara').value       = data.warga_negara;
+                            document.getElementById('alamat').value             = data.alamat;
                         })
                         .catch(error => {
                             alert(error.message);

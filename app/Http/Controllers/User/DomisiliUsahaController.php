@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\DomisiliUsaha;
+use App\Models\Kartukeluarga;
 use App\Models\Penduduk;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DomisiliUsahaController extends Controller
@@ -25,30 +27,16 @@ class DomisiliUsahaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'penduduk_name' => ['required'],
-            'tanggal'       => ['required', 'date'],
+            'penduduk_id'   => ['required', 'exists:penduduk,id'],
             'nama_usaha'    => ['required'],
             'jenis_usaha'   => ['required'],
             'alamat_usaha'  => ['required'],
         ]);
-
-        // Find residents in the "people" table by full_name
-        $namaPenduduk = Penduduk::where('nama', $validatedData['penduduk_name'])->first();
-
-        if (!$namaPenduduk) {
-            return back()->withErrors(['penduduk_name' => 'Nama penduduk tidak ditemukan!'])->withInput();
-        }
+        // Tambahkan tanggal sekarang ke dalam data yang sudah divalidasi
+        $validatedData['tanggal'] = now();
         
         // Create domaint
-        $domisiliPenduduk = DomisiliUsaha::create([
-            'tanggal'       => $validatedData['tanggal'],
-            'nama_usaha'    => $validatedData['nama_usaha'],
-            'jenis_usaha'   => $validatedData['jenis_usaha'],
-            'alamat_usaha'  => $validatedData['alamat_usaha'],
-        ]);
-
-        // Attach to Pivot Table
-        $domisiliPenduduk->penduduk()->attach($namaPenduduk->id);
+        DomisiliUsaha::create($validatedData);
 
         return redirect('/');
     }
@@ -82,5 +70,24 @@ class DomisiliUsahaController extends Controller
     public function destroy(DomisiliUsaha $domisiliUsaha)
     {
         //
+    }
+
+    public function cariKK(Request $request)
+    {
+        $noKK   = (string) $request->input('no_kk');
+        $kk     = Kartukeluarga::where('no_kk', $noKK)->first();
+
+        if (!$kk) {
+            return response()->json(['error' => 'No. Kartu Keluarga tdak ditemukan!', 404]);
+        }
+
+        $penduduk = $kk->penduduk()->first();
+
+        return response()->json([
+            'penduduk_id'       => $penduduk->id ?? '',
+            'nama'              => $penduduk->nama ?? '',
+            'ttl'               => $penduduk->tempat_lahir . ', ' . Carbon::parse($penduduk->tanggal_lahir)->translatedFormat('d F Y'),
+            'alamat'            => $kk->alamat ?? '',
+        ]);
     }
 }
