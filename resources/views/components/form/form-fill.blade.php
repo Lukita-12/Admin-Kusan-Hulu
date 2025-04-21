@@ -1,0 +1,1 @@
+<div {{ $attributes->merge(['class' => 'w-full flex flex-col gap-3']) }}>{{ $slot }}</div>

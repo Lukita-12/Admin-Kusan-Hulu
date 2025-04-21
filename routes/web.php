@@ -126,12 +126,6 @@ Route::prefix('user')->group(function () {
         Route::get('/penduduk/{penduduk}', 'show')  ->name('user.penduduk.show');
     });
 
-    Route::controller(UserPindahDomisiliController::class)->group(function () {
-        Route::get('/pindah-domisili/create', 'create')         ->name('user.pindah_domisili.create');
-        Route::post('/pindah-domisili', 'store')                ->name('user.pindah_domisili.store');
-        Route::get('/pindah-domisili/{pindahDomisili}', 'show') ->name('user.pindah_domisili.show');
-    });
-
     Route::controller(UserKartuKeluargaController::class)->group(function () {
         Route::get('/kartu-keluarga/create', 'create')          ->name('user.kartu_keluarga.create');
         Route::post('/kartu-keluarga', 'store')                 ->name('user.kartu_keluarga.store');

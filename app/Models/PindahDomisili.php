@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PindahDomisili extends Model
 {
@@ -13,8 +13,8 @@ class PindahDomisili extends Model
     protected $table = 'pindah_domisili';
     protected $guarded = [];
 
-    public function penduduk(): BelongsToMany
+    public function penduduk(): HasMany
     {
-        return $this->belongsToMany(Penduduk::class, 'penduduk_pindah_domisili');
+        return $this->hasMany(Penduduk::class);
     }
 }

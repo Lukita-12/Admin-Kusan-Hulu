@@ -44,11 +44,6 @@ class Penduduk extends Model
         return $this->belongsToMany(AktaKematian::class, 'akta_kematian_penduduk');
     }
 
-    public function pindahDomisili(): BelongsToMany
-    {
-        return $this->belongsToMany(PindahDomisili::class, 'penduduk_pindah_domisili');
-    }
-
     // Re.
 
     public function domisiliPenduduk(): HasMany
@@ -59,5 +54,10 @@ class Penduduk extends Model
     public function domisiliUsaha(): HasMany
     {
         return $this->hasMany(DomisiliUsaha::class);
+    }
+
+    public function pindahDomisili(): HasOne
+    {
+        return $this->hasOne(PindahDomisili::class);
     }
 }

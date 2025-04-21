@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kartukeluarga;
 use App\Models\Penduduk;
 use App\Models\PindahDomisili;
 use Carbon\Carbon;
@@ -26,29 +27,16 @@ class PindahDomisiliController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'penduduk_name' => ['required'],
+            'penduduk_id'   => ['required', 'exists:penduduk,id'],
             'alamat_asal'   => ['required'],
             'tujuan'        => ['required'],
             'alasan_pindah' => ['required'],
         ]);
 
-        $namaPenduduk = Penduduk::where('nama', $validatedData['penduduk_name'])->first();
-
-        if (!$namaPenduduk) {
-            return back()->withErrors(['penduduk_name' => 'Nama penduduk tidak ditemukan!'])->withInput();
-        }
-
         // Add 'tgl' manually to the validated data
-        $validatedData['tanggal'] = Carbon::now();
+        $validatedData['tanggal'] = now();
 
-        $pindahPenduduk = PindahDomisili::create([
-            'tanggal'       => $validatedData['tanggal'],
-            'alamat_asal'   => $validatedData['alamat_asal'],
-            'tujuan'        => $validatedData['tujuan'],
-            'alasan_pindah' => $validatedData['alasan_pindah'],
-        ]);
-
-        $pindahPenduduk->penduduk()->attach($namaPenduduk->id);
+        PindahDomisili::create($validatedData);
 
         return redirect('/');
     }
@@ -82,5 +70,29 @@ class PindahDomisiliController extends Controller
     public function destroy(PindahDomisili $pindahDomisili)
     {
         //
+    }
+
+    public function cariKK(Request $request)
+    {
+        $no_kk  = (string) $request->input('no_kk');
+        $kk     = Kartukeluarga::where('no_kk', $no_kk)->first();
+
+        if (!$kk) {
+            return response()->json(['error' => 'No. Kartu Keluarga tidak ditemukan!', 404]);
+        }
+
+        $penduduk = $kk->penduduk()->first();
+
+        return response()->json([
+            'penduduk_id'           => $penduduk->id ?? '',
+            'nama'                  => $penduduk->nama ?? '',
+            'ttl'                   => $penduduk->tempat_lahir . ', ' . Carbon::parse($penduduk->tanggal_lahir)->translatedFormat('d F Y'),
+            'jenis_kelamin'         => $penduduk->jenis_kelamin ?? '',
+            'pekerjaan'             => $penduduk->pekerjaan ?? '',
+            'agama'                 => $penduduk->agama ?? '',
+            'status_perkawinan'     => $penduduk->status_perkawinan ?? '',
+            'warga_negara'          => $penduduk->warga_negara?? '',
+            'pendidikan_terakhir'   => $penduduk->pendidikan_terakhir ?? '',
+        ]);
     }
 }

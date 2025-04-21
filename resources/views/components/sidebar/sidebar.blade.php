@@ -20,7 +20,7 @@
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>
-                    <x-sidebar.nav-link href="{{ url('/user/pindah-domisili/create') }}">Pindah domisili</x-sidebar.nav-link>
+                    <x-sidebar.nav-link href="{{ url('/pindah-domisili/create') }}">Pindah domisili</x-sidebar.nav-link>
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>

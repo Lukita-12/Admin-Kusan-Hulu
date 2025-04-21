@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Penduduk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,10 @@ class PindahDomisiliFactory extends Factory
     public function definition(): array
     {
         return [
-            'tanggal' => fake()->date(),
-            'alamat_asal' => fake()->address(),
-            'tujuan' => fake()->address(),
+            'penduduk_id'   => Penduduk::factory(),
+            'tanggal'       => fake()->date(),
+            'alamat_asal'   => fake()->address(),
+            'tujuan'        => fake()->address(),
             'alasan_pindah' => fake()->sentence(),
         ];
     }
