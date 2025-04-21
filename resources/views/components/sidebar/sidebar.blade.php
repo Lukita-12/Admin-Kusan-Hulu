@@ -12,7 +12,7 @@
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>
-                    <x-sidebar.nav-link href="{{ url('/user/domisili-usaha/create') }}">Domisili usaha</x-sidebar.nav-link>
+                    <x-sidebar.nav-link href="{{ url('/domisili-usaha/create') }}">Domisili usaha</x-sidebar.nav-link>
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>

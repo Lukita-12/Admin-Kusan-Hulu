@@ -1,0 +1,1 @@
+<tr {{ $attributes->merge(['class' => 'odd:bg-slate-200 even:bg-slate-100']) }}>{{ $slot }}</tr>

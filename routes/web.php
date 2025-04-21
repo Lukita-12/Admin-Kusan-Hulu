@@ -103,15 +103,6 @@ Route::prefix('admin')->group(function() {
         Route::delete('/pindah-domisili/{pindahDomisili}', 'destroy')->name('admin.pindah_domisili.destroy');
     });
 
-    Route::controller(DomisiliUsahaController::class)->group(function () {
-        Route::get('/domisili-usaha', 'index')->name('admin.domisili_usaha.index');
-        Route::get('/domisili-usaha/create', 'create')->name('admin.domisili_usaha.create');
-        Route::post('/domisili-usaha', 'store')->name('admin.domisili_usaha.store');
-        Route::get('/domisili-usaha/{domisiliUsaha}/edit', 'edit')->name('admin.domisili_usaha.edit');
-        Route::put('/domisili-usaha/{domisiliUsaha}', 'update')->name('admin.domisili_usaha.update');
-        Route::delete('/domisili-usaha/{domisiliUsaha}', 'destroy')->name('admin.domisili_usaha.destroy');
-    });
-
     Route::controller(AkunController::class)->group(function () {
         Route::get('/akun', 'index')->name('admin.akun.index');
         Route::get('/akun/create', 'create')->name('admin.akun.create');

@@ -11,7 +11,7 @@ class DomisiliUsahaController extends Controller
 {
     public function index()
     {
-        $domisiliUsahas = DomisiliUsaha::latest()->paginate();
+        $domisiliUsahas = DomisiliUsaha::with('penduduk')->latest()->simplePaginate();
 
         return view('/admin/domisili_usaha.index', [
             'domisiliUsahas' => $domisiliUsahas,
@@ -106,6 +106,30 @@ class DomisiliUsahaController extends Controller
         $domisiliUsaha->penduduk()->detach();
 
         $domisiliUsaha->delete();
+
+        return redirect('/admin/domisili-usaha');
+    }
+
+    public function accept(DomisiliUsaha $domisiliUsaha)
+    {
+        $domisiliUsaha->status = 'Diproses';
+        $domisiliUsaha->save();
+
+        return redirect('/admin/domisili-usaha');
+    }
+
+    public function reject(DomisiliUsaha $domisiliUsaha)
+    {
+        $domisiliUsaha->status = 'Ditolak';
+        $domisiliUsaha->save();
+
+        return redirect('/admin/domisili-usaha');
+    }
+
+    public function complete(DomisiliUsaha $domisiliUsaha)
+    {
+        $domisiliUsaha->status = 'Selesai';
+        $domisiliUsaha->save();
 
         return redirect('/admin/domisili-usaha');
     }

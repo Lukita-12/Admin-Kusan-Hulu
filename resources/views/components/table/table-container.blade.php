@@ -1,0 +1,1 @@
+<div {{ $attributes->merge(['class' => 'w-full overflow-auto']) }}>{{ $slot }}</div>
