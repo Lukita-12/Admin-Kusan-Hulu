@@ -34,11 +34,6 @@ class Penduduk extends Model
     {
         return $this->hasOne(PerubahanKartuKeluarga::class);
     }
-    
-    public function aktaKematian(): BelongsToMany
-    {
-        return $this->belongsToMany(AktaKematian::class, 'akta_kematian_penduduk');
-    }
 
     // Re.
 
@@ -60,5 +55,10 @@ class Penduduk extends Model
     public function penerbitanAktaKelahiran(): HasMany
     {
         return $this->hasMany(PenerbitanAktaKelahiran::class);
+    }
+
+    public function aktaKematian(): HasOne
+    {
+        return $this->hasOne(AktaKematian::class);
     }
 }

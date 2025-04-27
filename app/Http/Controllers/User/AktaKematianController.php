@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\AktaKematian;
+use App\Models\Kartukeluarga;
 use App\Models\Penduduk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,35 +31,16 @@ class AktaKematianController extends Controller
     {
         {
             $validatedData = $request->validate([
-                'nama_pelapor'          => ['required'],
-                'nama_dilapor'          => ['required'],
-                'tanggal_meninggal'     => ['required'],
-                'tempat_meninggal'      => ['required'],
-                'penyebab_meninggal'    => ['required'],
+                'penduduk_id'       => ['required', 'exists:penduduk,id'],
+                'tanggal_meninggal' => ['required'],
+                'tempat_meninggal'  => ['required'],
+                'penyebab_meninggal'=> ['required'],
             ]);
-
-            // Find residents in the "people" table by full_name
-            $pelapor = Penduduk::where('nama', $validatedData['nama_pelapor'])->first();
-            $dilapor = Penduduk::where('nama', $validatedData['nama_dilapor'])->first();
 
             // Add 'tgl' manually to the validated data
-            $validatedData['tanggal'] = Carbon::now();
-    
-            $akta = AktaKematian::create([
-                'tanggal'               => $validatedData['tanggal'],
-                'tanggal_meninggal'     => $validatedData['tanggal_meninggal'],
-                'tempat_meninggal'      => $validatedData['tempat_meninggal'],
-                'penyebab_meninggal'    => $validatedData['penyebab_meninggal'],
-            ]);
-    
-            // Attach residents to pivot table if they exist
-            if ($pelapor) {
-                $akta->penduduk()->attach($pelapor->id);
-            }
-    
-            if ($dilapor) {
-                $akta->penduduk()->attach($dilapor->id);
-            }
+            $validatedData['tanggal'] = now();
+            
+            AktaKematian::create($validatedData);
     
             return redirect('/');
         }
@@ -93,5 +75,26 @@ class AktaKematianController extends Controller
     public function destroy(AktaKematian $aktaKematian)
     {
         //
+    }
+
+    public function cariKK(Request $request)
+    {
+        $no_kk  = (string) $request->input('no_kk');
+        $kk     = Kartukeluarga::where('no_kk', $no_kk)->first();
+
+        if (!$kk) {
+            return response()->json(['error' => 'No. Kartu Keluarga tidak ditemukan!', 404]);
+        }
+
+        $penduduk = $kk->penduduk()->first();
+
+        return response()->json([
+            'penduduk_id'           => $penduduk->id ?? '',
+            'nama'                  => $penduduk->nama ?? '',
+            'ttl'                   => $penduduk->tempat_lahir . ', ' . Carbon::parse($penduduk->tanggal_lahir)->translatedFormat('d F Y'),
+            'jenis_kelamin'         => $penduduk->jenis_kelamin ?? '',
+            'agama'                 => $penduduk->agama ?? '',
+            'alamat_lengkap'        => $penduduk->alamat_lengkap ?? '',
+        ]);
     }
 }

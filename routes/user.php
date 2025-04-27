@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AktaKematianController;
 use App\Http\Controllers\User\DomisiliPendudukController;
 use App\Http\Controllers\User\DomisiliUsahaController;
 use App\Http\Controllers\User\PenerbitanAktaKelahiranController;
@@ -34,4 +35,11 @@ Route::controller(PenerbitanAktaKelahiranController::class)->group(function () {
     Route::post('/penerbitan-akta-kelahiran', 'store')->name('user.penerbitan_akta_kelahiran.store');
 
     Route::get('/penerbitan-akta-kelahiran/cari-kk', 'cariKK')->name('user.penerbitan_akta_kelahiran.cari');
+});
+
+Route::controller(AktaKematianController::class)->group(function () {
+    Route::get('/akta-kematian/create', 'create')->name('user.akta_kematian.create');
+    Route::post('/akta-kematian', 'store')->name('user.akta_kematian.store');
+
+    Route::get('/akta-kematian/cari-KK', 'cariKK')->name('user.akta_kematian.cari');
 });

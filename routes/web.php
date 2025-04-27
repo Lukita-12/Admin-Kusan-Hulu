@@ -114,12 +114,6 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::prefix('user')->group(function () {
-    Route::controller(UserAktaKematianController::class)->group(function () {
-        Route::get('/akta-kematian/create', 'create')       ->name('user.akta_kematian.create');
-        Route::post('/akta-kematian', 'store')              ->name('user.akta_kematian.store');
-        Route::get('/akta-kematian/{aktaKematian}', 'show') ->name('user.akta_kematian.show');
-    });
-
     Route::controller(UserPendudukController::class)->group(function () {
         Route::get('/penduduk/create', 'create')    ->name('user.penduduk.create');
         Route::post('/penduduk', 'store')           ->name('user.penduduk.store');

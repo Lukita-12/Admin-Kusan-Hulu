@@ -1,234 +1,105 @@
 <x-layout>
 
-    <div>
-        <x-form.form-layout action="{{ route('user.akta_kematian.store') }}">
+    <x-form.form-container>
+        <x-form.form action="{{ route('user.akta_kematian.store') }}">
+            <x-form.form-layout>
+                <x-form.label-input>
+                    <x-form.label>NIK</x-form.label>
+                    <div class="w-full flex gap-3">
+                        <x-form.input type="text" name="no_kk" id="no_kk" :value="old('no_kk')" placeholder="NIK..." required />
+                        <x-form.button type="button" id="btn-cari" class="min-w-1/4">Cari</x-form.button>
+                        <x-form.error errorFor="no_kk" />
+                    </div>
+                </x-form.label-input>
 
-            <div>
-                <h1>YANG MELAPORKAN</h1>
-            </div>
+                <!-- Penduduk id -->
+                <x-form.input type="hidden" id="penduduk_id" name="penduduk_id" />
+                
+                <x-form.label-input>
+                    <x-form.label for="nama">Nama</x-form.label>
+                    <x-form.input type="text" name="nama" id="nama" :value="old('nama')" placeholder="Nama" readonly onfocus="this.blur();"/>
+                    <x-form.error errorFor="nama" />
+                </x-form.label-input>
+    
+                <x-form.label-input>
+                    <x-form.label for="ttl">Tempat Tanggal Lahir</x-form.label>
+                    <x-form.input type="text" name="ttl" id="ttl" :value="old('ttl')" placeholder="Tempat tanggal lahir..." readonly onfocus="this.blur();" required/>
+                    <x-form.error errorFor="ttl" />
+                </x-form.label-input>
+    
+                <x-form.label-input>
+                    <x-form.label for="jenis_kelamin">Jenis Kelamin</x-form.label>
+                    <x-form.input type="text" name="jenis_kelamin" id="jenis_kelamin" :value="old('jenis_kelamin')" placeholder="Jenis kelamin..." readonly onfocus="this.blur();" required/>
+                    <x-form.error errorFor="jenis_kelamin" />
+                </x-form.label-input>
 
-            <div>
-                <x-form.form-label for="nama_pelapor">
-                    Nama
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nama_pelapor"
-                    id="nama_pelapor"
-                    value="{{ old('nama_pelapor') }}"
-                    placeholder="Nama yang melaporkan"
-                    required />
-                <x-form.form-error errorFor="nama_pelapor" />
-            </div>
+                <x-form.label-input>
+                    <x-form.label for="agama">Agama</x-form.label>
+                    <x-form.input type="text" name="agama" id="agama" :value="old('agama')" placeholder="Agama..." readonly onfocus="this.blur();"/>
+                    <x-form.error errorFor="agama" />
+                </x-form.label-input>
 
-            <div>
-                <x-form.form-label for="nik_pelapor">
-                    NIK
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nik_pelapor"
-                    id="nik_pelapor"
-                    value="{{ old('nik_pelapor') }}"
-                    placeholder="NIK..."
-                    required />
-                <x-form.form-error errorFor="nik_pelapor" />
-            </div>
+                <x-form.label-input>
+                    <x-form.label for="alamat">Alamat</x-form.label>
+                    <x-form.textarea type="text" name="alamat_lengkap" id="alamat_lengkap" :value="old('alamat_lengkap')" placeholder="Alamat..." readonly onfocus="this.blur();" required>
+                        {{ old('alamat_lengkap') }}
+                    </x-form.textarea>
+                    <x-form.error errorFor="alamat_lengkap" />
+                </x-form.label-input>
 
-            <div>
-                <x-form.form-label for="jenis_kelamin_pendaftar">
-                    Jenis kelamin
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="jenis_kelamin_pendaftar"
-                    id="jenis_kelamin_pendaftar"
-                    value="{{ old('jenis_kelamin_pendaftar') }}"
-                    placeholder="Jenis kelamin..."
-                    required />
-                <x-form.form-error errorFor="jenis_kelamin_pendaftar" />
-            </div>
+                <x-form.span-dashed />
 
-            <div>
-                <x-form.form-label for="agama">
-                    Agama
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="agama_pendaftar"
-                    id="agama"
-                    value="{{ old('agama') }}"
-                    placeholder="Agama..."
-                    required />
-                <x-form.form-error errorFor="agama" />
-            </div>
+                <x-form.label-input>
+                    <x-form.label for="tanggal_meninggal">Tanggal Meninggal</x-form.label>
+                    <x-form.input type="date" name="tanggal_meninggal" id="tanggal_meninggal" :value="old('tanggal_meninggal')" required />
+                    <x-form.error errorFor="tanggal_meninggal" />
+                </x-form.label-input>
 
-            <div>
-                <x-form.form-label for="pekerjaan">
-                    Pekerjaan
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="pekerjaan"
-                    id="pekerjaan"
-                    value="{{ old('pekerjaan') }}"
-                    placeholder="Pekerjaan..."
-                    required />
-                <x-form.form-error errorFor="pekerjaan" />
-            </div>
+                <x-form.label-input>
+                    <x-form.label for="tempat_meninggal">Tempat Meninggal</x-form.label>
+                    <x-form.textarea type="date" name="tempat_meninggal" id="tempat_meninggal" placeholder="Tempat meninggal" required>
+                        {{ old('tempat_meninggal') }}
+                    </x-form.textarea>
+                    <x-form.error errorFor="tempat_meninggal" />
+                </x-form.label-input>
 
-            <div>
-                <x-form.form-label for="alamat">
-                    Alamat
-                </x-form.form-label>
-                <x-form.form-textarea
-                    type="text"
-                    name="alamat"
-                    id="alamat"
-                    value="{{ old('alamat') }}"
-                    placeholder="Alamat..."
-                    required>
-                </x-form.form-textarea>
-                <x-form.form-error errorFor="alamat" />
-            </div>
+                <x-form.label-input>
+                    <x-form.label for="penyebab_meninggal">Penyebab Meninggal</x-form.label>
+                    <x-form.textarea name="penyebab_meninggal" id="penyebab_meninggal" :value="old('penyebab_meninggal')" placeholder="Penyebab meninggal" required>
+                        {{ old('penyebab_meninggal') }}
+                    </x-form.textarea>
+                    <x-form.error errorFor="penyebab_meninggal" />
+                </x-form.label-input>
 
-            <div>
-                <h1>YANG DILAPORKAN</h1>
-            </div>
+                <x-form.button-container>
+                    <x-form.button-link href="{{ url('/') }}" class="w-1/10">Batal</x-form.button-link>
+                    <x-form.button type="submit" class="w-1/10">Kirim</x-form.button>
+                </x-form.button-container>
+            </x-form.form-layout>
+        </x-form.form>
+    </x-form.form-container>
 
-            <div>
-                <x-form.form-label for="nama_dilapor">
-                    Nama
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nama_dilapor"
-                    id="nama_dilapor"
-                    value="{{ old('nama_dilapor') }}"
-                    placeholder="Nama lengkap"
-                    required />
-                <x-form.form-error errorFor="nama_dilapor" />
-            </div>
+    <script>
+        document.getElementById('btn-cari').addEventListener('click', function() {
+            const no_kk = document.getElementById('no_kk').value;
 
-            <div>
-                <x-form.form-label for="nik_dilapor">
-                    NIK
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nik_dilapor"
-                    id="nik_dilapor"
-                    value="{{ old('nik_dilapor') }}"
-                    placeholder="NIK..."
-                    required />
-                <x-form.form-error errorFor="nik_dilapor" />
-            </div>
-
-            <div>
-                <x-form.form-label for="jenis_kelamin_dilapor">
-                    Jenis kelamin
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="jenis_kelamin_dilapor"
-                    id="jenis_kelamin_dilapor"
-                    value="{{ old('jenis_kelamin_dilapor') }}"
-                    placeholder="Jenis kelamin..."
-                    required />
-                <x-form.form-error errorFor="jenis_kelamin_dilapor" />
-            </div>
-
-            <div>
-                <x-form.form-label for="agama_dilapor">
-                    Agama
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="agama_dilapor"
-                    id="agama_dilapor"
-                    value="{{ old('agama_dilapor') }}"
-                    placeholder="Agama..."
-                    required />
-                <x-form.form-error errorFor="agama_dilapor" />
-            </div>
-
-            <div>
-                <x-form.form-label for="pekerjaan">
-                    Pekerjaan
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="pekerjaan"
-                    id="pekerjaan"
-                    value="{{ old('pekerjaan') }}"
-                    placeholder="Pekerjaan..."
-                    required />
-                <x-form.form-error errorFor="pekerjaan" />
-            </div>
-
-            <div>
-                <x-form.form-label for="alamat">
-                    Alamat
-                </x-form.form-label>
-                <x-form.form-textarea
-                    type="text"
-                    name="alamat"
-                    id="alamat"
-                    value="{{ old('alamat') }}"
-                    placeholder="Alamat..."
-                    required>
-                </x-form.form-textarea>
-                <x-form.form-error errorFor="alamat" />
-            </div>
-
-            <div>
-                <h1>MENINGGAL PADA</h1>
-            </div>
-
-            <div>
-                <x-form.form-label for="tanggal_meninggal">
-                    Tanggal meninggal
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="tanggal_meninggal"
-                    id="tanggal_meninggal"
-                    :value="old('tanggal_meninggal')"
-                    placeholder="Tanggal meninggal"
-                     />
-                <x-form.form-error errorFor="tanggal_meninggal" />
-            </div>
-
-            <div>
-                <x-form.form-label for="tempat_meninggal">
-                    Tempat meninggal
-                </x-form.form-label>
-                <x-form.form-textarea
-                    name="tempat_meninggal"
-                    id="tempat_meninggal"
-                    :value="old('tempat_meninggal')"
-                    placeholder="Tempat meninggal" />
-                <x-form.form-error errorFor="tempat_meninggal" />
-            </div>
-            
-            <div>
-                <x-form.form-label for="penyebab_meninggal">
-                    Penyebab meninggal
-                </x-form.form-label>
-                <x-form.form-textarea
-                    name="penyebab_meninggal"
-                    id="penyebab_meninggal"
-                    :value="old('penyebab_meninggal')"
-                    placeholder="Penyebab meninggal" />
-                <x-form.form-error errorFor="penyebab_meninggal" />
-            </div>
-            
-            <div>
-                <a href="{{ route('user.akta_kematian.create') }}">Batal</a>
-                <button type="submit">Simpan</button>
-            </div>
-
-        </x-form.form-layout>
-    </div>
+            fetch("{{ route('user.penerbitan_akta_kelahiran.cari') }}?no_kk=" + no_kk)
+            .then(response => {
+                if (!response.ok) throw Error('No. Kartu Keluarga tidak ditemukan!');
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('penduduk_id').value    = data.penduduk_id;
+                document.getElementById('nama').value           = data.nama;
+                document.getElementById('ttl').value            = data.ttl;
+                document.getElementById('jenis_kelamin').value  = data.jenis_kelamin;
+                document.getElementById('agama').value          = data.agama;
+                document.getElementById('alamat_lengkap').value = data.alamat_lengkap;
+            })
+            .catch(error => {
+                alert(error.message);
+            })
+        });
+    </script>
     
 </x-layout>

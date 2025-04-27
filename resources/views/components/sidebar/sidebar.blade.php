@@ -28,11 +28,11 @@
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>
-                    <x-sidebar.nav-link href="{{ url('/user/penerbitan-akta-kelahiran/create') }}">Akta kelahiran</x-sidebar.nav-link>
+                    <x-sidebar.nav-link href="{{ url('/penerbitan-akta-kelahiran/create') }}">Akta kelahiran</x-sidebar.nav-link>
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>
-                    <x-sidebar.nav-link href="{{ url('/user/akta-kematian/create') }}">Akta kematian</x-sidebar.nav-link>
+                    <x-sidebar.nav-link href="{{ url('/akta-kematian/create') }}">Akta kematian</x-sidebar.nav-link>
                 </x-container.icon-navlink>
                 <x-container.icon-navlink>
                     <x-sidebar.icon></x-sidebar.icon>
