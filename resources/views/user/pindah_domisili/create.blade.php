@@ -2,7 +2,7 @@
 
     <x-form.form-container>
         <x-form.form action="{{ route('user.pindah_domisili.store') }}">
-            <x-form.form-fill class="w-full flex flex-col gap-3">
+            <x-form.form-layout>
                 <div class="flex">
                     <x-form.label>NIK</x-form.label>
                     <div class="w-full flex gap-3">
@@ -63,7 +63,7 @@
                     <x-form.error errorFor="pendidikan_terakhir" />
                 </div>
     
-                <x-form.span-line></x-form.span-line>
+                <x-form.span-dashed />
     
                 <div class="flex">
                     <x-form.label>Alamat Asal</x-form.label>
@@ -93,7 +93,7 @@
                     <x-form.button-link href="{{ url('/') }}" class="w-1/10">Batal</x-form.button-link>
                     <x-form.button type="submit" class="w-1/10">Kirim</x-form.button>
                 </x-form.button-container>
-            </x-form.form-fill>            
+            </x-form.form-layout>            
         </x-form.form>
     </x-form.form-container>
 

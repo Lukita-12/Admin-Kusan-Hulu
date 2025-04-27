@@ -14,15 +14,15 @@ return new class extends Migration
     {
         Schema::create('penerbitan_akta_kelahiran', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Penduduk::class);
+            $table->foreignIdFor(Penduduk::class)->constrained()->cascadeOnDelete();
             $table->date('tanggal');
-            $table->string('nomor_akta');
-            $table->text('tempat_kelahiran');
+            $table->string('nomor_akta')->nullable();
             $table->string('nama_anak');
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->default('Laki-laki');
-            $table->string('agama');
             $table->string('nama_ayah');
             $table->string('nama_ibu');
+            $table->text('tempat_kelahiran');
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->default('Laki-laki');
+            $table->string('agama');
             $table->string('upload_sp_bidan');
             $table->string('upload_sp_rt');
             $table->timestamps();

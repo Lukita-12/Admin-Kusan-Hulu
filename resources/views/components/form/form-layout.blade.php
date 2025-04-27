@@ -1,5 +1,1 @@
-<form method="POST" {{ $attributes->merge() }}>
-    @csrf
-    
-    {{ $slot }}
-</form>
+<div {{ $attributes->merge(['class' => 'w-full flex flex-col gap-3']) }}>{{ $slot }}</div>

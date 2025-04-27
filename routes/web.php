@@ -132,12 +132,6 @@ Route::prefix('user')->group(function () {
         Route::get('/kartu-keluarga/{kartuKeluarga}', 'show')   ->name('user.kartu_keluarga.show');
     });
 
-    Route::controller(UserPenerbitanAktaKelahiranController::class)->group(function () {
-        Route::get('/penerbitan-akta-kelahiran/create', 'create')                   ->name('user.penerbitan_akta_kelahiran.create');
-        Route::post('/penerbitan-akta-kelahiran', 'store')                          ->name('user.penerbitan_akta_kelahiran.store');
-        Route::get('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}', 'show')  ->name('user.penerbitan_akta_kelahiran.show');
-    });
-
     Route::controller(UserPerubahanKartuKeluargaController::class)->group(function () {
         Route::get('/perubahan-kartu-keluarga/create', 'create')                    ->name('user.perubahan_kartu_keluarga.create');
         Route::post('/perubahan-kartu-keluarga', 'store')                           ->name('user.perubahan_kartu_keluarga.store');

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\DomisiliPendudukController;
 use App\Http\Controllers\User\DomisiliUsahaController;
+use App\Http\Controllers\User\PenerbitanAktaKelahiranController;
 use App\Http\Controllers\User\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,11 @@ Route::controller(PindahDomisiliController::class)->group(function() {
     Route::post('/pindah-domisili', 'store')->name('user.pindah_domisili.store');
 
     Route::get('/pindah-domisili/cari-kk', 'cariKK')->name('user.pindah_domisili.cari');
+});
+
+Route::controller(PenerbitanAktaKelahiranController::class)->group(function () {
+    Route::get('/penerbitan-akta-kelahiran/create', 'create')->name('user.penerbitan_akta_kelahiran.create');
+    Route::post('/penerbitan-akta-kelahiran', 'store')->name('user.penerbitan_akta_kelahiran.store');
+
+    Route::get('/penerbitan-akta-kelahiran/cari-kk', 'cariKK')->name('user.penerbitan_akta_kelahiran.cari');
 });
