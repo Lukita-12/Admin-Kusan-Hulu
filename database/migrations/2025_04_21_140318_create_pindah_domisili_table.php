@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('alamat_asal');
             $table->text('tujuan');
             $table->text('alasan_pindah');
+            $table->string('status')->default('Diajuakan');
             $table->timestamps();
         });
     }

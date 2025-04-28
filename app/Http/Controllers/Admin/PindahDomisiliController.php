@@ -11,7 +11,7 @@ class PindahDomisiliController extends Controller
 {
     public function index()
     {
-        $pindahDomisilis = PindahDomisili::latest()->paginate(6);
+        $pindahDomisilis = PindahDomisili::latest()->simplePaginate(6);
 
         return view('admin.pindah_domisili.index', [
             'pindahDomisilis' => $pindahDomisilis,
@@ -49,9 +49,6 @@ class PindahDomisiliController extends Controller
         return redirect('admin/pindah-domisili');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(PindahDomisili $pindahDomisili)
     {
         dd('You hit it right Show!');
@@ -59,16 +56,17 @@ class PindahDomisiliController extends Controller
 
     public function edit(PindahDomisili $pindahDomisili)
     {
-        $namaPenduduk = $pindahDomisili->penduduk->first();
+        // $namaPenduduk = $pindahDomisili->penduduk->first();
 
         return view('admin.pindah_domisili.edit', [
-            'namaPenduduk'      => $namaPenduduk,
             'pindahDomisili'    => $pindahDomisili,
         ]);
     }
 
     public function update(Request $request, PindahDomisili $pindahDomisili)
     {
+        dd(request()->all());
+        
         $validatedData = $request->validate([
             'nama_penduduk' => ['required'],
             'tanggal'       => ['required', 'date'],
@@ -101,5 +99,29 @@ class PindahDomisiliController extends Controller
         $pindahDomisili->delete();
 
         return redirect('admin/pindah-domisili');
+    }
+
+    public function accept(PindahDomisili $pindahDomisili)
+    {
+        $pindahDomisili->status = 'Diproses';
+        $pindahDomisili->save();
+
+        return redirect('/admin/pindah-domisili');
+    }
+
+    public function reject(PindahDomisili $pindahDomisili)
+    {
+        $pindahDomisili->status = 'Ditolak';
+        $pindahDomisili->save();
+
+        return redirect('/admin/pindah-domisili');
+    }
+
+    public function complete(PindahDomisili $pindahDomisili)
+    {
+        $pindahDomisili->status = 'Selesai';
+        $pindahDomisili->save();
+
+        return redirect('/admin/pindah-domisili');
     }
 }

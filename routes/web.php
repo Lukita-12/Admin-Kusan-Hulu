@@ -94,15 +94,6 @@ Route::prefix('admin')->group(function() {
         Route::delete('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'destroy')->name('admin.perubahan_kartu_keluarga.destroy');
     });
 
-    Route::controller(PindahDomisiliController::class)->group(function () {
-        Route::get('/pindah-domisili', 'index')->name('admin.pindah_domisili.index');
-        Route::get('/pindah-domisili/create', 'create')->name('admin.pindah_domisili.create');
-        Route::post('/pindah-domisili', 'store')->name('admin.pindah_domisili.store');
-        Route::get('/pindah-domisili/{pindahDomisili}/edit', 'edit')->name('admin.pindah_domisili.edit');
-        Route::put('/pindah-domisili/{pindahDomisili}', 'update')->name('admin.pindah_domisili.update');
-        Route::delete('/pindah-domisili/{pindahDomisili}', 'destroy')->name('admin.pindah_domisili.destroy');
-    });
-
     Route::controller(AkunController::class)->group(function () {
         Route::get('/akun', 'index')->name('admin.akun.index');
         Route::get('/akun/create', 'create')->name('admin.akun.create');

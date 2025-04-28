@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DomisiliPendudukController;
 use App\Http\Controllers\Admin\DomisiliUsahaController;
+use App\Http\Controllers\Admin\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -27,4 +28,22 @@ Route::prefix('admin')->group(function () {
         Route::patch('/domisili-usaha/{domisiliUsaha}/reject', 'reject')->name('admin.domisili_usaha.reject');
         Route::patch('/domisili-usaha/{domisiliUsaha}/complete' , 'complete')->name('admin.domisili_usaha.complete');
     });
+
+    Route::controller(PindahDomisiliController::class)->group(function () {
+        Route::get('/pindah-domisili', 'index')->name('admin.pindah_domisili.index');
+        Route::get('/pindah-domisili/{pindahDomisili}/edit', 'edit')->name('admin.pindah_domisili.edit');
+        Route::put('/pindah-domisili/{pindahDomisili}', 'update')->name('admin.pindah_domisili.update');
+        Route::delete('/pindah-domisili/{pindahDomisili}', 'destroy')->name('admin.pindah_domisili.destroy');
+
+        Route::patch('/pindah-domisili/{pindahDomisili}/accept' , 'accept')->name('admin.pindah_domisili.accept');
+        Route::patch('/pindah-domisili/{pindahDomisili}/reject', 'reject')->name('admin.pindah_domisili.reject');
+        Route::patch('/pindah-domisili/{pindahDomisili}/complete' , 'complete')->name('admin.pindah_domisili.complete');
+    });
+
+    /*
+    Route::controller(PindahDomisiliController::class)->group(function () {
+        Route::get('/pindah-domisili/create', 'create')->name('admin.pindah_domisili.create');
+        Route::post('/pindah-domisili', 'store')->name('admin.pindah_domisili.store');
+    });
+    */
 });
