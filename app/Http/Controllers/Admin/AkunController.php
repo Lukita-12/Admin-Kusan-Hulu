@@ -10,7 +10,7 @@ class AkunController extends Controller
 {
     public function index()
     {
-        $users = User::latest()->paginate(6);
+        $users = User::latest()->simplePaginate(6);
 
         return view('/admin.akun.index', [
             'users' => $users,

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AktaKematianController;
+use App\Http\Controllers\Admin\AkunController;
 use App\Http\Controllers\Admin\DesaController;
 use App\Http\Controllers\Admin\DomisiliPendudukController;
 use App\Http\Controllers\Admin\DomisiliUsahaController;
@@ -93,5 +94,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/kartu-keluarga/{kartukeluarga}/edit', 'edit')->name('admin.kartu_keluarga.edit');
         Route::put('/kartu-keluarga/{kartukeluarga}', 'update')->name('admin.kartu_keluarga.update');
         Route::delete('/kartu-keluarga/{kartukeluarga}', 'destroy')->name('admin.kartu_keluarga.destroy');
+    });
+
+    Route::controller(AkunController::class)->group(function () {
+        Route::get('/akun', 'index')->name('admin.akun.index');
+        Route::get('/akun/create', 'create')->name('admin.akun.create');
+        Route::post('/akun', 'store')->name('admin.akun.store');
+        Route::get('/akun/{akun}/edit', 'edit')->name('admin.akun.edit');
+        Route::put('/akun/{akun}', 'update')->name('admin.akun.update');
+        Route::delete('/akun/{akun}', 'destroy')->name('admin.akun.destroy');
     });
 });

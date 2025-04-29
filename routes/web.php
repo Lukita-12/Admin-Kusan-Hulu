@@ -58,15 +58,6 @@ Route::prefix('admin')->group(function() {
         Route::put('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'update')->name('admin.perubahan_kartu_keluarga.update');
         Route::delete('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'destroy')->name('admin.perubahan_kartu_keluarga.destroy');
     });
-
-    Route::controller(AkunController::class)->group(function () {
-        Route::get('/akun', 'index')->name('admin.akun.index');
-        Route::get('/akun/create', 'create')->name('admin.akun.create');
-        Route::post('/akun', 'store')->name('admin.akun.store');
-        Route::get('/akun/{akun}/edit', 'edit')->name('admin.akun.edit');
-        Route::put('/akun/{akun}', 'update')->name('admin.akun.update');
-        Route::delete('/akun/{akun}', 'destroy')->name('admin.akun.destroy');
-    });
 });
 
 Route::prefix('user')->group(function () {
