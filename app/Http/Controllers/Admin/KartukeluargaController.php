@@ -24,20 +24,20 @@ class KartukeluargaController extends Controller
 
     public function store(Request $request)
     {
-        $validatedAttributes = $request->validate([
-            'no_kk' => ['required'],
-            'kepala_keluarga' => ['required'],
-            'alamat' => ['required'],
-            'kelurahan_desa' => ['required'],
-            'kecamatan' => ['required'],
-            'kabupaten' => ['required'],
-            'provinsi' => ['required'],
-            'kode_pos' => ['required'],
-            'tanggal_penerbitan' => ['required', 'date'],
+        $validatedData = $request->validate([
+            'no_kk'             => ['required'],
+            'kepala_keluarga'   => ['required'],
+            'alamat'            => ['required'],
+            'kelurahan_desa'    => ['required'],
+            'kecamatan'         => ['required'],
+            'kabupaten'         => ['required'],
+            'provinsi'          => ['required'],
+            'kode_pos'          => ['required'],
+            'tanggal_penerbitan'=> ['required', 'date'],
         ]);
 
-        // dd($validatedAttributes);
-        Kartukeluarga::create($validatedAttributes);
+        // dd($validatedData);
+        Kartukeluarga::create($validatedData);
 
         return redirect('/admin/kartu-keluarga');
     }
@@ -60,15 +60,15 @@ class KartukeluargaController extends Controller
     public function update(Request $request, Kartukeluarga $kartukeluarga)
     {
         $validatedAttributes = $request->validate([
-            'no_kk' => ['required'],
-            'kepala_keluarga' => ['required'],
-            'alamat' => ['required'],
-            'kelurahan_desa' => ['required'],
-            'kecamatan' => ['required'],
-            'kabupaten' => ['required'],
-            'provinsi' => ['required'],
-            'kode_pos' => ['required'],
-            'tanggal_penerbitan' => ['required', 'date'],
+            'no_kk'             => ['required'],
+            'kepala_keluarga'   => ['required'],
+            'alamat'            => ['required'],
+            'kelurahan_desa'    => ['required'],
+            'kecamatan'         => ['required'],
+            'kabupaten'         => ['required'],
+            'provinsi'          => ['required'],
+            'kode_pos'          => ['required'],
+            'tanggal_penerbitan'=> ['required', 'date'],
         ]);
 
         // dd($validatedAttributes);

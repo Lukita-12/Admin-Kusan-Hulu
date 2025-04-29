@@ -2,7 +2,10 @@
 
     <x-table.container variant="main">
         <x-table.container variant="header">
-            <x-table.search type="text" placeholder="Cari..." />
+            <x-table.container variant="search-button">
+                <x-table.search type="text" placeholder="Cari..." />
+                <x-table.button-link variant="create" href="{{ route('admin.kartu_keluarga.create') }}">+ Baru</x-table.button-link>
+            </x-table.container>
             <x-table.filter>
                 <option value="Terbaru">Terbaru</option>
                 <option value="Terlama">Terlama</option>
