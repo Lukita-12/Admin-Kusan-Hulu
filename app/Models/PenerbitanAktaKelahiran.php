@@ -12,6 +12,9 @@ class PenerbitanAktaKelahiran extends Model
     use HasFactory;
     protected $table = 'penerbitan_akta_kelahiran';
     protected $guarded = [];
+    protected $casts = [
+        'tanggal' => 'datetime',
+    ];
 
     public function penduduk(): BelongsTo
     {

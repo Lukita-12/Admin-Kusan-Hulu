@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DomisiliPendudukController;
 use App\Http\Controllers\Admin\DomisiliUsahaController;
+use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,17 @@ Route::prefix('admin')->group(function () {
         Route::post('/pindah-domisili', 'store')->name('admin.pindah_domisili.store');
     });
     */
+
+    Route::controller(PenerbitanAktaKelahiranController::class)->group(function () {
+        Route::get('/penerbitan-akta-kelahiran', 'index')->name('admin.penerbitan_akta_kelahiran.index');
+        Route::get('/penerbitan-akta-kelahiran/create', 'create')->name('admin.penerbitan_akta_kelahiran.create');
+        Route::post('/penerbitan-akta-kelahiran', 'store')->name('admin.penerbitan_akta_kelahiran.store');
+        Route::get('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/edit', 'edit')->name('admin.penerbitan_akta_kelahiran.edit');
+        Route::put('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}', 'update')->name('admin.penerbitan_akta_kelahiran.update');
+        Route::delete('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}', 'destroy')->name('admin.penerbitan_akta_kelahiran.destroy');
+
+        Route::patch('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/accept', 'accept')->name('admin.penerbitan_akta_kelahiran.accept');
+        Route::patch('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/reject', 'reject')->name('admin.penerbitan_akta_kelahiran.reject');
+        Route::patch('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/complete', 'complete')->name('admin.penerbitan_akta_kelahiran.complete');
+    });
 });

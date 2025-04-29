@@ -11,7 +11,7 @@ class PenerbitanAktaKelahiranController extends Controller
 {
     public function index()
     {
-        $penerbitanAktaKelahirans = PenerbitanAktaKelahiran::latest()->paginate(6);
+        $penerbitanAktaKelahirans = PenerbitanAktaKelahiran::latest()->simplePaginate(6);
 
         return view('/admin.penerbitan_akta_kelahiran.index', [
             'penerbitanAktaKelahirans' => $penerbitanAktaKelahirans
@@ -121,6 +121,30 @@ class PenerbitanAktaKelahiranController extends Controller
     {
         $penerbitanAktaKelahiran->delete();
         
+        return redirect('/admin/penerbitan-akta-kelahiran');
+    }
+
+    public function accept(PenerbitanAktaKelahiran $penerbitanAktaKelahiran)
+    {
+        $penerbitanAktaKelahiran->status = 'Diproses';
+        $penerbitanAktaKelahiran->save();
+
+        return redirect('/admin/penerbitan-akta-kelahiran');
+    }
+
+    public function reject(PenerbitanAktaKelahiran $penerbitanAktaKelahiran)
+    {
+        $penerbitanAktaKelahiran->status = 'Ditolak';
+        $penerbitanAktaKelahiran->save();
+
+        return redirect('/admin/penerbitan-akta-kelahiran');
+    }
+
+    public function complete(PenerbitanAktaKelahiran $penerbitanAktaKelahiran)
+    {
+        $penerbitanAktaKelahiran->status = 'Selesai';
+        $penerbitanAktaKelahiran->save();
+
         return redirect('/admin/penerbitan-akta-kelahiran');
     }
 }

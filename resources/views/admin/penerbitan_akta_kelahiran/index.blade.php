@@ -1,59 +1,79 @@
 <x-layout>
 
-    <div>
-        <a href="{{ route('admin.penerbitan_akta_kelahiran.create') }}">+ Baru</a>
-    </div>
+    <x-table.container variant="main">
+        <x-table.container variant="header">
+            <x-table.search type="text" placeholder="Cari" />
+            <x-table.filter>
+                <option value="Terbaru">Terbaru</option>
+                <option value="Terlama">Terlama</option>
+            </x-table.filter>
+        </x-table.container>
 
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>No.</td>
-                    <td>Tanggal</td>
-                    <td>Nomor akta</td>
-                    <td>Tempat kelahiran</td>
-                    <td>Nama anak</td>
-                    <td>Jenis kelamin</td>
-                    <td>Agama</td>
-                    <td>Nama ayah</td>
-                    <td>Nama ibu</td>
-                    <td>Upload St. Bidan</td>
-                    <td>Upload St. RT</td>
-                    <td>Aksi</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($penerbitanAktaKelahirans as $penerbitanAktaKelahiran)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->tanggal }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->nomor_akta }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->tempat_kelahiran }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->nama_anak }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->jenis_kelamin }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->agama }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->nama_ayah }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->nama_ibu }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->upload_sp_bidan }}</td>
-                        <td>{{ $penerbitanAktaKelahiran->upload_sp_rt }}</td>
-                        <td>
-                            <div>
-                                <a href="{{ route('admin.penerbitan_akta_kelahiran.edit', $penerbitanAktaKelahiran->id) }}">Edit</a>
-                                <form method="POST" action="{{ route('admin.penerbitan_akta_kelahiran.destroy', $penerbitanAktaKelahiran->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Hapus</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        <x-table.container variant="table">
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.tr>
+                        <x-table.td variant="head">No.</x-table.td>
+                        <x-table.td variant="head">Tanggal</x-table.td>
+                        <x-table.td variant="head">Nomor akta</x-table.td>
+                        <x-table.td variant="head">Nama anak</x-table.td>
+                        <x-table.td variant="head">Nama ayah</x-table.td>
+                        <x-table.td variant="head">Nama ibu</x-table.td>
+                        <x-table.td variant="head">Tempat kelahiran</x-table.td>
+                        <x-table.td variant="head">Jenis kelamin</x-table.td>
+                        <x-table.td variant="head">Agama</x-table.td>
+                        <x-table.td variant="head">Upload St. Bidan</x-table.td>
+                        <x-table.td variant="head">Upload St. RT</x-table.td>
+                        <x-table.td variant="head">Status</x-table.td>
+                        <x-table.td variant="head">Aksi</x-table.td>
+                    </x-table.tr>
+                </x-table.thead>
+                <tbody>
+                    @foreach ($penerbitanAktaKelahirans as $penerbitanAktaKelahiran)
+                        <x-table.tr variant="body">
+                            <x-table.td>{{ $loop->iteration }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->tanggal->format('d M Y') }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->nomor_akta }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->nama_anak }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->nama_ayah }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->nama_ibu }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->tempat_kelahiran }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->jenis_kelamin }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->agama }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->upload_sp_bidan }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->upload_sp_rt }}</x-table.td>
+                            <x-table.td>{{ $penerbitanAktaKelahiran->status }}</x-table.td>
+                            <x-table.td>
+                                <x-table.container variant="button">
+                                   <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.accept', $penerbitanAktaKelahiran) }}">
+                                        @method('PATCH')
+                                        <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                                    </x-table.form>
+                                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.reject', $penerbitanAktaKelahiran) }}">
+                                        @method('PATCH')
+                                        <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                                    </x-table.form>
+                                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.complete', $penerbitanAktaKelahiran) }}">
+                                        @method('PATCH')
+                                        <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                                    </x-table.form> 
 
-    <div>
-        {{ $penerbitanAktaKelahirans->links() }}
-    </div>
+                                    <x-table.button-link href="{{ route('admin.penerbitan_akta_kelahiran.edit', $penerbitanAktaKelahiran) }}">Edit</x-table.button-link>
+                                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.destroy', $penerbitanAktaKelahiran) }}">
+                                        @method('DELETE')
+                                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                    </x-table.form>
+                                </x-table.container>
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforeach
+                </tbody>
+            </x-table.table>
+        </x-table.container>
+
+        <x-table.container variant="footer">
+            {{ $penerbitanAktaKelahirans->links() }}
+        </x-table.container>
+    </x-table.container>
 
 </x-layout>

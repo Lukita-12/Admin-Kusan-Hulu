@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('agama');
             $table->string('upload_sp_bidan');
             $table->string('upload_sp_rt');
+            $table->string('status')->default('Diajukan');
             $table->timestamps();
         });
     }
