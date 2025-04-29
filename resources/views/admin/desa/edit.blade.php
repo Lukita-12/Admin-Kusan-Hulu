@@ -1,29 +1,25 @@
 <x-layout>
 
-    <div>
-        <x-form.form-layout action="{{ route('admin.desa.update', $desa->id) }}">
+    <x-form.container variant="main">
+        <x-form.form action="{{ route('admin.desa.update', $desa) }}">
             @method('PUT')
 
-            <div>
-                <x-form.form-label for="nama_desa">
-                    Nama desa
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nama_desa"
-                    id="nama_desa"
-                    value="{{ $desa->nama_desa }}"
-                    placeholder="Nama desa..."
-                     />
-                <x-form.form-error errorFor="nama_desa" />
-            </div>
-
-            <div>
-                <a href="{{ route('admin.desa.index') }}">Batal</a>
-                <button type="submit">Simpan</button>
-            </div>
-
-        </x-form.form-layout>
-    </div>
+            <x-form.container variant="form">
+                <x-form.container variant="label-input">
+                    <x-form.label for="nama_desa">Nama desa</x-form.label>
+    
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nama_desa" id="nama_desa" value="{{ old('nama_desa', $desa->nama_desa ?? '-') }}" placeholder="Nama desa..." />
+                        <x-form.error errorFor="nama_desa" />
+                    </x-form.container>
+                </x-form.container>
+    
+                <x-form.container variant="button">
+                    <x-form.button-link href="{{ route('admin.desa.index') }}">Batal</x-form.button-link>
+                    <x-form.button variant="save" type="submit">Simpan</x-form.button>
+                </x-form.container>
+            </x-form.container>
+        </x-form.form>
+    </x-form.container>
     
 </x-layout>

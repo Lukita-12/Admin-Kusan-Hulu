@@ -2,7 +2,10 @@
 
     <x-table.container variant="main">
         <x-table.container variant="header">
-            <x-table.search type="text" placeholder="Cari..." />
+            <x-table.container variant="search-create">
+                <x-table.search type="text" placeholder="Cari..." />
+                <x-table.button-link variant="create" href="{{ route('admin.desa.create') }}">+ Baru</x-table.button-link>
+            </x-table.container>
             <x-table.filter>
                 <option value="Terbaru">Terbaru</option>
                 <option value="Terlama">Terlama</option>
@@ -24,7 +27,7 @@
                         <x-table.td>{{ $desa->nama_desa }}</x-table.td>
                         <x-table.td>
                             <x-table.container variant="button">
-                                <x-table.button-link href="{{ route('admin.desa.edit', $desa) }}">Edit</x-table.button-link>
+                                <x-table.button-link variant="edit" href="{{ route('admin.desa.edit', $desa) }}">Edit</x-table.button-link>
                                 <x-table.form action="{{ route('admin.desa.destroy', $desa) }}">
                                     @method('DELETE')
                                     <x-table.button variant="delete" type="submit">Hapus</x-table.button>

@@ -2,7 +2,7 @@
 
     <x-table.container variant="main">
         <x-table.container variant="header">
-            <x-table.container variant="search-button">
+            <x-table.container variant="search-create">
                 <x-table.search type="text" placeholder="Cari..." />
                 <x-table.button-link variant="create" href="{{ route('admin.kartu_keluarga.create') }}">+ Baru</x-table.button-link>
             </x-table.container>
@@ -44,7 +44,7 @@
                             <x-table.td>{{ $kartukeluarga->tanggal_penerbitan }}</x-table.td>
                             <x-table.td>
                                 <x-table.container variant="button">
-                                    <x-table.button-link href="{{ route('admin.kartu_keluarga.edit', $kartukeluarga) }}">Edit</x-table.button-link>
+                                    <x-table.button-link variant="edit" href="{{ route('admin.kartu_keluarga.edit', $kartukeluarga) }}">Edit</x-table.button-link>
                                     <x-table.form action="{{ route('admin.kartu_keluarga.destroy', $kartukeluarga) }}">
                                         @method('DELETE')
                                         <x-table.button variant="delete" type="submit">Hapus</x-table.button>

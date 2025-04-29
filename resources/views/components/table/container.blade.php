@@ -7,7 +7,7 @@
         'table' => 'w-full overflow-auto',
         'footer'=> 'w-full h-16 flex gap-20 items-center px-4',
 
-        'search-button' => 'w-full flex items-center gap-3',
+        'search-create' => 'w-full flex items-center gap-3',
         'button'=> 'w-full flex justify-center items-center gap-2'
     }
 @endphp
