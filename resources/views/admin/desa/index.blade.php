@@ -1,39 +1,44 @@
 <x-layout>
 
-    <div>
-        <a href="{{ route('admin.desa.create') }}">+ Baru</a>
-    </div>
+    <x-table.container variant="main">
+        <x-table.container variant="header">
+            <x-table.search type="text" placeholder="Cari..." />
+            <x-table.filter>
+                <option value="Terbaru">Terbaru</option>
+                <option value="Terlama">Terlama</option>
+            </x-table.filter>
+        </x-table.container>
 
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>No.</td>
-                    <td>Nama desa</td>
-                    <td>Aksi</td>
-                </tr>
-            </thead>
+        <x-table.table>
+            <x-table.thead>
+                <x-table.tr>
+                    <x-table.td>No.</x-table.td>
+                    <x-table.td>Nama desa</x-table.td>
+                    <x-table.td>Aksi</x-table.td>
+                </x-table.tr>
+            </x-table.thead>
             <tbody>
                 @foreach ($desas as $desa)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $desa->nama_desa }}</td>
-                        <td>
-                            <a href="{{ route('admin.desa.edit', $desa->id) }}">Edit</a>
-                            <form method="POST" action="{{ route('admin.desa.destroy', $desa->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
+                    <x-table.tr variant="body">
+                        <x-table.td>{{ $loop->iteration }}</x-table.td>
+                        <x-table.td>{{ $desa->nama_desa }}</x-table.td>
+                        <x-table.td>
+                            <x-table.container variant="button">
+                                <x-table.button-link href="{{ route('admin.desa.edit', $desa) }}">Edit</x-table.button-link>
+                                <x-table.form action="{{ route('admin.desa.destroy', $desa) }}">
+                                    @method('DELETE')
+                                    <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                </x-table.form>
+                            </x-table.container>
+                        </x-table.td>
+                    </x-table.tr>
                 @endforeach
             </tbody>
-        </table>
-    </div>
+        </x-table.table>
 
-    <div>
-        {{ $desas->links() }}
-    </div>
+        <x-table.container variant="footer">
+            {{ $desas->links() }}
+        </x-table.container>
+    </x-table.container>
 
 </x-layout>

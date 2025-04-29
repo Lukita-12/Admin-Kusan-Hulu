@@ -10,7 +10,7 @@ class DesaController extends Controller
 {
     public function index()
     {
-        $desas = Desa::latest()->paginate(6);
+        $desas = Desa::latest()->simplePaginate(6);
 
         return view('/admin.desa.index', [
             'desas' => $desas
