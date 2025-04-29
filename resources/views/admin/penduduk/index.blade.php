@@ -1,57 +1,64 @@
 <x-layout>
 
-    <div>
-        <a href="{{ route('admin.penduduk.create') }}">+ Baru</a>
-    </div>
+    <x-table.container variant="main">
+        <x-table.container variant="header">
+            <x-table.search type="text" placeholder="Cari..." />
+            <x-table.filter>
+                <option value="Terbaru">Terbaru</option>
+                <option value="Terlama">Terlama</option>
+            </x-table.filter>
+        </x-table.container>
 
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>No.</td>
-                    <td>Nama</td>
-                    <td>Jenis kelamin</td>
-                    <td>Status perkawinan</td>
-                    <td>Tempat tanggal lahir</td>
-                    <td>Agama</td>
-                    <td>Pendidikan terakhir</td>
-                    <td>Pekerjaan</td>
-                    <td>Alamat lengkap</td>
-                    <td>Kedudukan dalam keluarga</td>
-                    <td>Warga Negara</td>
-                    <td>Aksi</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($penduduks as $penduduk)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $penduduk->nama }}</td>
-                        <td>{{ $penduduk->jenis_kelamin }}</td>
-                        <td>{{ $penduduk->status_perkawinan }}</td>
-                        <td>{{ $penduduk->tempat_lahir }}, {{ $penduduk->tanggal_lahir }}</td>
-                        <td>{{ $penduduk->agama }}</td>
-                        <td>{{ $penduduk->pendidikan_terakhir }}</td>
-                        <td>{{ $penduduk->pekerjaan }}</td>
-                        <td>{{ $penduduk->alamat_lengkap }}</td>
-                        <td>{{ $penduduk->kedudukan_dalam_keluarga }}</td>
-                        <td>{{ $penduduk->warga_negara }}</td>
-                        <td>
-                            <a href="{{ route('admin.penduduk.edit', $penduduk->id) }}">Edit</a>
-                            <form method="POST" action="{{ route('admin.penduduk.destroy', $penduduk->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        <x-table.container variant="table">
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.tr>
+                        <x-table.td variant="head">No.</x-table.td>
+                        <x-table.td variant="head">Nama</x-table.td>
+                        <x-table.td variant="head">Jenis kelamin</x-table.td>
+                        <x-table.td variant="head">Status perkawinan</x-table.td>
+                        <x-table.td variant="head">Tempat tanggal lahir</x-table.td>
+                        <x-table.td variant="head">Agama</x-table.td>
+                        <x-table.td variant="head">Pendidikan terakhir</x-table.td>
+                        <x-table.td variant="head">Pekerjaan</x-table.td>
+                        <x-table.td variant="head">Alamat lengkap</x-table.td>
+                        <x-table.td variant="head">Kedudukan dalam keluarga</x-table.td>
+                        <x-table.td variant="head">Warga Negara</x-table.td>
+                        <x-table.td variant="head">Aksi</x-table.td>
+                    </x-table.tr>
+                </x-table.thead>
+                <tbody>
+                    @foreach ($penduduks as $penduduk)
+                        <x-table.tr variant="body">
+                            <x-table.td>{{ $loop->iteration }}</x-table.td>
+                            <x-table.td>{{ $penduduk->nama }}</x-table.td>
+                            <x-table.td>{{ $penduduk->jenis_kelamin }}</x-table.td>
+                            <x-table.td>{{ $penduduk->status_perkawinan }}</x-table.td>
+                            <x-table.td>{{ $penduduk->tempat_lahir }}, {{ $penduduk->tanggal_lahir }}</x-table.td>
+                            <x-table.td>{{ $penduduk->agama }}</x-table.td>
+                            <x-table.td>{{ $penduduk->pendidikan_terakhir }}</x-table.td>
+                            <x-table.td>{{ $penduduk->pekerjaan }}</x-table.td>
+                            <x-table.td>{{ $penduduk->alamat_lengkap }}</x-table.td>
+                            <x-table.td>{{ $penduduk->kedudukan_dalam_keluarga }}</x-table.td>
+                            <x-table.td>{{ $penduduk->warga_negara }}</x-table.td>
+                            <x-table.td>
+                                <x-table.container variant="button">
+                                    <x-table.button-link href="{{ route('admin.penduduk.edit', $penduduk) }}">Edit</x-table.button-link>
+                                    <x-table.form action="{{ route('admin.penduduk.destroy', $penduduk) }}">
+                                        @method('DELETE')
+                                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                    </x-table.form>
+                                </x-table.container>
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforeach
+                </tbody>
+            </x-table.table>
+        </x-table.container>
 
-    <div>
-        {{ $penduduks->links() }}
-    </div>
+        <x-table.container variant="footer">
+            {{ $penduduks->links() }}
+        </x-table.container>
+    </x-table.container>
 
 </x-layout>

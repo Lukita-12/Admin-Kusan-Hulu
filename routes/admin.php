@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DesaController;
 use App\Http\Controllers\Admin\DomisiliPendudukController;
 use App\Http\Controllers\Admin\DomisiliUsahaController;
 use App\Http\Controllers\Admin\KartukeluargaController;
+use App\Http\Controllers\Admin\PendudukController;
 use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
@@ -103,5 +104,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/akun/{akun}/edit', 'edit')->name('admin.akun.edit');
         Route::put('/akun/{akun}', 'update')->name('admin.akun.update');
         Route::delete('/akun/{akun}', 'destroy')->name('admin.akun.destroy');
+    });
+
+    Route::controller(PendudukController::class)->group(function () {
+        Route::get('/penduduk', 'index')->name('admin.penduduk.index');
+        Route::get('/penduduk/create', 'create')->name('admin.penduduk.create');
+        Route::post('/penduduk', 'store')->name('admin.penduduk.store');
+        Route::get('/penduduk/{penduduk}/edit', 'edit')->name('admin.penduduk.edit');
+        Route::put('/penduduk/{penduduk}', 'update')->name('admin.penduduk.update');
+        Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
     });
 });

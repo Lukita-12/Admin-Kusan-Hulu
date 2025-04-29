@@ -40,16 +40,6 @@ Route::post('/login', [SessionController::class, 'store'])->name('login.store');
 Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
 Route::prefix('admin')->group(function() {
-
-    Route::controller(PendudukController::class)->group(function () {
-        Route::get('/penduduk', 'index')->name('admin.penduduk.index');
-        Route::get('/penduduk/create', 'create')->name('admin.penduduk.create');
-        Route::post('/penduduk', 'store')->name('admin.penduduk.store');
-        Route::get('/penduduk/{penduduk}/edit', 'edit')->name('admin.penduduk.edit');
-        Route::put('/penduduk/{penduduk}', 'update')->name('admin.penduduk.update');
-        Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
-    });
-
     Route::controller(PerubahanKartuKeluargaController::class)->group(function () {
         Route::get('/perubahan-kartu-keluarga', 'index')->name('admin.perubahan_kartu_keluarga.index');
         Route::get('/perubahan-kartu-keluarga/create', 'create')->name('admin.perubahan_kartu_keluarga.create');

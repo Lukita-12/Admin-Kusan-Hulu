@@ -12,7 +12,7 @@ class PendudukController extends Controller
 {
     public function index()
     {
-        $penduduks = Penduduk::latest()->paginate(6);
+        $penduduks = Penduduk::latest()->simplePaginate(6);
 
         return view('/admin.penduduk.index', [
             'penduduks' => $penduduks
