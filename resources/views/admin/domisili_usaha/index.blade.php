@@ -61,7 +61,7 @@
             </x-table.table>
         </x-table.container>
 
-        <x-table.container  variant="footer">
+        <x-table.container variant="footer">
             {{ $domisiliUsahas->links() }}
         </x-table.container>
     </x-table.container>

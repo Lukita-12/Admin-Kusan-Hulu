@@ -18,9 +18,9 @@ class DomisiliPendudukFactory extends Factory
     public function definition(): array
     {
         return [
-            'penduduk_id' => Penduduk::factory(),
-            'tanggal_pengajuan' => fake()->date(),
-            'nomor_surat'       => fake()->numberBetween([1000000000, 9999999999]),
+            'penduduk_id'   => Penduduk::factory(),
+            'tanggal'       => fake()->date(),
+            'nomor_surat'   => fake()->numberBetween([1000000000, 9999999999]),
         ];
     }
 }

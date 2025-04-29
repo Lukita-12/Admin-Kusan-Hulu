@@ -9,6 +9,6 @@
     }
 @endphp
 
-<button {{ $attributes->merge(['class' => "$buttonClass text-sm text-slate-100 text-center px-3 py-1 rounded-sm"]) }}>
+<button {{ $attributes->merge(['class' => "$buttonClass font-semibold text-sm text-slate-100 text-center px-3 py-1 rounded-sm"]) }}>
     {{ $slot }}
 </button>

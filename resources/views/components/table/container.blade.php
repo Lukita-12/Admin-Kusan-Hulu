@@ -1,7 +1,7 @@
 @props(['variant' => 'default'])
 @php
     $container = match($variant) {
-        default => 'w-full',
+        default => 'w-full border border-dashed',
         'main'  => 'w-full bg-slate-200 flex flex-col justify-center rounded-lg shadow shadow-slate-500/60',
         'header'=> 'w-full bg-blue-400/80 flex justify-between items-center px-4 py-2 rounded-t-lg',
         'table' => 'w-full overflow-auto',

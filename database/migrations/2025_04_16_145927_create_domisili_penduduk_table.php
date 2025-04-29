@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('domisili_penduduk', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Penduduk::class)->constrained()->cascadeOnDelete();
-            $table->date('tanggal_pengajuan');
+            $table->date('tanggal');
             $table->string('nomor_surat')->nullable();
             $table->string('status')->default('Diajukan');
             $table->timestamps();

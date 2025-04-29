@@ -13,7 +13,7 @@ class DomisiliPenduduk extends Model
     protected $table = 'domisili_penduduk';
     protected $guarded = [];
     protected $casts = [
-        'tanggal_pengajuan' => 'datetime',
+        'tanggal' => 'datetime',
     ];
 
     public function penduduk():BelongsTo
