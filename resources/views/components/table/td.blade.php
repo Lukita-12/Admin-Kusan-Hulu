@@ -2,9 +2,11 @@
 
 @php
     $textClass = match($variant) {
-        default => '',
-        'head'  => 'font-semibold',
-    };
+        default => 'py-4',
+        'head'  => 'font-bold py-2',
+    }
 @endphp
 
-<td {{ $attributes->merge(['class' => "$textClass px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap"]) }}>{{ $slot }}</td>
+<td {{ $attributes->merge(['class' => "$textClass px-12 text-slate-700 text-lg text-center whitespace-nowrap"]) }}>
+    {{ $slot }}
+</td>

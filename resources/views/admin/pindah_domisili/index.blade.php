@@ -1,11 +1,11 @@
 <x-layout>
 
-    <div class="bg-slate-200 flex flex-col justify-center rounded-lg shadow shadow-slate-500/60">
-        <div class="flex justify-between items-center px-4 py-1">
+    <div class="bg-slate-200 w-full flex flex-col justify-center rounded-lg shadow shadow-slate-500/60">
+        <div class="bg-blue-400/80 w-full flex justify-between items-center px-4 py-2 rounded-t-lg">
             <input type="text" placeholder="Search..." class="bg-slate-100 w-1/5 px-3 py-1 rounded-lg">
             <div class="flex items-center gap-2">
-                <label for="filter_status" class="font-medium text-lg">Filter:</label>
-                <select name="filter_status" id="filter_status" class="outline-none">
+                <label for="filter_status" class="font-medium text-xl text-slate-100">Filter:</label>
+                <select name="filter_status" id="filter_status" class="outline-none tet-slate-700 text-lg">
                     <option value="Terbaru">Terbaru</option>
                     <option value="Terlama">Terlama</option>
                 </select>
@@ -16,13 +16,13 @@
             <table class="w-full table-auto">
                 <thead class="border-b-2 border-slate-500 bg-slate-100">
                     <tr>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">No.</td>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">Tanggal</td>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">Alamat asal</td>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">Tujuan</td>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">Alasan pindah</td>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">Status</td>
-                        <td class="font-bold px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">Aksi</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">No.</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">Tanggal</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">Alamat asal</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">Tujuan</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">Alasan pindah</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">Status</td>
+                        <td class="font-bold px-12 py-2 text-slate-700 text-lg text-center whitespace-nowrap">Aksi</td>
                     </tr>
                 </thead>
                 <tbody>

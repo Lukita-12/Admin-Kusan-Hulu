@@ -11,7 +11,7 @@ class DomisiliUsahaController extends Controller
 {
     public function index()
     {
-        $domisiliUsahas = DomisiliUsaha::with('penduduk')->latest()->simplePaginate();
+        $domisiliUsahas = DomisiliUsaha::with('penduduk')->latest()->simplePaginate(6);
 
         return view('/admin/domisili_usaha.index', [
             'domisiliUsahas' => $domisiliUsahas,
@@ -102,9 +102,6 @@ class DomisiliUsahaController extends Controller
 
     public function destroy(DomisiliUsaha $domisiliUsaha)
     {
-        // Detach all related people before deleting (to avoid orphaned records)
-        $domisiliUsaha->penduduk()->detach();
-
         $domisiliUsaha->delete();
 
         return redirect('/admin/domisili-usaha');

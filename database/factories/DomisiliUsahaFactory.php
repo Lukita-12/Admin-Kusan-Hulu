@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Penduduk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class DomisiliUsahaFactory extends Factory
     public function definition(): array
     {
         return [
+            'penduduk_id'   => Penduduk::factory(),
             'tanggal'       => fake()->date(),
             'nama_usaha'    => fake()->company(),
             'jenis_usaha'   => fake()->jobTitle(),
