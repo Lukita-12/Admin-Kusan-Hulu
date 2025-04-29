@@ -12,6 +12,9 @@ class PerubahanKartuKeluarga extends Model
     use HasFactory;
     protected $table = 'perubahan_kartu_keluarga';
     protected $guarded = [];
+    protected $casts = [
+        'tanggal' => 'datetime',
+    ];
 
     public function penduduk():BelongsTo
     {

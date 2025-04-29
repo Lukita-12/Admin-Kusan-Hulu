@@ -18,9 +18,9 @@ class PerubahanKartuKeluargaFactory extends Factory
     public function definition(): array
     {
         return [
-            'penduduk_id' => Penduduk::factory(),
-            'tanggal' => fake()->date(),
-            'deskripsi_perubahan' => fake()->sentence(),
+            'penduduk_id'           => Penduduk::factory(),
+            'tanggal'               => fake()->date(),
+            'deskripsi_perubahan'   => fake()->sentence(),
         ];
     }
 }

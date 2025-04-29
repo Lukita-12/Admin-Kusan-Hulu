@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DomisiliUsahaController;
 use App\Http\Controllers\Admin\KartukeluargaController;
 use App\Http\Controllers\Admin\PendudukController;
 use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
+use App\Http\Controllers\Admin\PerubahanKartuKeluargaController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
 
@@ -113,5 +114,18 @@ Route::prefix('admin')->group(function () {
         Route::get('/penduduk/{penduduk}/edit', 'edit')->name('admin.penduduk.edit');
         Route::put('/penduduk/{penduduk}', 'update')->name('admin.penduduk.update');
         Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
+    });
+
+    Route::controller(PerubahanKartuKeluargaController::class)->group(function () {
+        Route::get('/perubahan-kartu-keluarga', 'index')->name('admin.perubahan_kartu_keluarga.index');
+        Route::get('/perubahan-kartu-keluarga/create', 'create')->name('admin.perubahan_kartu_keluarga.create');
+        Route::post('/perubahan-kartu-keluarga', 'store')->name('admin.perubahan_kartu_keluarga.store');
+        Route::get('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/edit', 'edit')->name('admin.perubahan_kartu_keluarga.edit');
+        Route::put('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'update')->name('admin.perubahan_kartu_keluarga.update');
+        Route::delete('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'destroy')->name('admin.perubahan_kartu_keluarga.destroy');
+
+        Route::patch('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/accept' , 'accept')->name('admin.perubahan_kartu_keluarga.accept');
+        Route::patch('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/reject', 'reject')->name('admin.perubahan_kartu_keluarga.reject');
+        Route::patch('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/complete' , 'complete')->name('admin.perubahan_kartu_keluarga.complete');
     });
 });

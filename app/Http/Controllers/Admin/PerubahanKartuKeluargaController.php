@@ -11,7 +11,7 @@ class PerubahanKartuKeluargaController extends Controller
 {
     public function index()
     {
-        $perubahanKartuKeluargas = PerubahanKartuKeluarga::latest()->paginate(6);
+        $perubahanKartuKeluargas = PerubahanKartuKeluarga::with(['penduduk'])->latest()->simplePaginate(6);
         
         return view('/admin.perubahan_kartu_keluarga.index', [
             'perubahanKartuKeluargas' => $perubahanKartuKeluargas,
@@ -84,6 +84,30 @@ class PerubahanKartuKeluargaController extends Controller
     public function destroy(PerubahanKartuKeluarga $perubahanKartuKeluarga)
     {
         $perubahanKartuKeluarga->delete();
+
+        return redirect('/admin/perubahan-kartu-keluarga');
+    }
+
+    public function accept(PerubahanKartuKeluarga $perubahanKartuKeluarga)
+    {
+        $perubahanKartuKeluarga->status = 'Diproses';
+        $perubahanKartuKeluarga->save();
+
+        return redirect('/admin/perubahan-kartu-keluarga');
+    }
+
+    public function reject(PerubahanKartuKeluarga $perubahanKartuKeluarga)
+    {
+        $perubahanKartuKeluarga->status = 'Ditolak';
+        $perubahanKartuKeluarga->save();
+
+        return redirect('/admin/perubahan-kartu-keluarga');
+    }
+
+    public function complete(PerubahanKartuKeluarga $perubahanKartuKeluarga)
+    {
+        $perubahanKartuKeluarga->status = 'Selesai';
+        $perubahanKartuKeluarga->save();
 
         return redirect('/admin/perubahan-kartu-keluarga');
     }

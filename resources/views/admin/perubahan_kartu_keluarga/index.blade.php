@@ -1,40 +1,65 @@
 <x-layout>
 
-    <div>
-        <a href="{{ route('admin.perubahan_kartu_keluarga.create') }}">+ Baru</a>
-    </div>
+    <x-table.container variant="main">
+        <x-table.container variant="header">
+            <x-table.search type="text" placeholder="Cari..." />
+            <x-table.filter>
+                <option value="Terbaru">Terbaru</option>
+                <option value="Terlama">Terlama</option>
+            </x-table.filter>
+        </x-table.container>
 
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>No.</td>
-                    <td>Tanggal</td>
-                    <td>Deskripsi perubahan</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($perubahanKartuKeluargas as $perubahanKartuKeluarga)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $perubahanKartuKeluarga->tanggal }}</td>
-                        <td>{{ $perubahanKartuKeluarga->deskripsi_perubahan }}</td>
-                        <td>
-                            <a href="{{ route('admin.perubahan_kartu_keluarga.edit', $perubahanKartuKeluarga->id) }}">Edit</a>
-                            <form method="POST" action="{{ route('admin.perubahan_kartu_keluarga.destroy', $perubahanKartuKeluarga->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        <x-table.container variant="table">
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.tr>
+                        <x-table.td variant="head">No.</x-table.td>
+                        <x-table.td variant="head">Tanggal Pengajuan</x-table.td>
+                        <x-table.td variant="head">Nama Penduduk</x-table.td>
+                        <x-table.td variant="head">Deskripsi Perubahan</x-table.td>
+                        <x-table.td variant="head">Status</x-table.td>
+                        <x-table.td variant="head">Aksi</x-table.td>
+                    </x-table.tr>
+                </x-table.thead>
+                <tbody>
+                    @foreach ($perubahanKartuKeluargas as $perubahanKartuKeluarga)
+                        <x-table.tr variant="body">
+                            <x-table.td>{{ $loop->iteration }}</x-table.td>
+                            <x-table.td>{{ $perubahanKartuKeluarga->tanggal->format('d M Y') }}</x-table.td>
+                            <x-table.td>{{ $perubahanKartuKeluarga->penduduk->nama }}</x-table.td>
+                            <x-table.td>{{ $perubahanKartuKeluarga->deskripsi_perubahan }}</x-table.td>
+                            <x-table.td>{{ $perubahanKartuKeluarga->status }}</x-table.td>
+                            <x-table.td>
+                                <x-table.container variant="button">
+                                    <x-table.form action="{{ route('admin.perubahan_kartu_keluarga.accept', $perubahanKartuKeluarga) }}">
+                                        @method('PATCH')
+                                        <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                                    </x-table.form>
+                                    <x-table.form action="{{ route('admin.perubahan_kartu_keluarga.reject', $perubahanKartuKeluarga) }}">
+                                        @method('PATCH')
+                                        <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                                    </x-table.form>
+                                    <x-table.form action="{{ route('admin.perubahan_kartu_keluarga.complete', $perubahanKartuKeluarga) }}">
+                                        @method('PATCH')
+                                        <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                                    </x-table.form>
+    
+                                    <x-table.button-link href="{{ route('admin.perubahan_kartu_keluarga.edit', $perubahanKartuKeluarga) }}">Edit</x-table.button-link>
+                                    <x-table.form action="{{ route('admin.perubahan_kartu_keluarga.destroy', $perubahanKartuKeluarga) }}">
+                                        @method('DELETE')
+                                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                    </x-table.form>
+                                </x-table.container>
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforeach
+                </tbody>
+            </x-table.table>
+        </x-table.container>
 
-    <div>
-        {{ $perubahanKartuKeluargas->links() }}
-    </div>
+        <x-table.container variant="footer">
+            {{ $perubahanKartuKeluargas->links() }}
+        </x-table.container>
+    </x-table.container>
 
 </x-layout>

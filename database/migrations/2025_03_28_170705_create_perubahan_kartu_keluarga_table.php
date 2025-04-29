@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Penduduk::class);
             $table->date('tanggal');
             $table->text('deskripsi_perubahan');
+            $table->text('status')->default('Diajukan');
             $table->timestamps();
         });
     }
