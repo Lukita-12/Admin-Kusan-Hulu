@@ -10,7 +10,7 @@ class KartukeluargaController extends Controller
 {
     public function index()
     {
-        $kartukeluargas = Kartukeluarga::latest()->paginate(6);
+        $kartukeluargas = Kartukeluarga::latest()->simplePaginate(6);
 
         return view('/admin.kartu_keluarga.index', [
             'kartukeluargas' => $kartukeluargas

@@ -40,23 +40,6 @@ Route::post('/login', [SessionController::class, 'store'])->name('login.store');
 Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
 Route::prefix('admin')->group(function() {
-    Route::controller(DesaController::class)->group(function () {
-        Route::get('/desa', 'index')->name('admin.desa.index');
-        Route::get('/desa/create', 'create')->name('admin.desa.create');
-        Route::post('/desa', 'store')->name('admin.desa.store');
-        Route::get('/desa/{desa}/edit', 'edit')->name('admin.desa.edit');
-        Route::put('/desa/{desa}', 'update')->name('admin.desa.update');
-        Route::delete('/desa/{desa}', 'destroy')->name('admin.desa.destroy');
-    });
-
-    Route::controller(KartukeluargaController::class)->group(function () {
-        Route::get('/kartu-keluarga', 'index')->name('admin.kartu_keluarga.index');
-        Route::get('/kartu-keluarga/create', 'create')->name('admin.kartu_keluarga.create');
-        Route::post('/kartu-keluarga', 'store')->name('admin.kartu_keluarga.store');
-        Route::get('/kartu-keluarga/{kartukeluarga}/edit', 'edit')->name('admin.kartu_keluarga.edit');
-        Route::put('/kartu-keluarga/{kartukeluarga}', 'update')->name('admin.kartu_keluarga.update');
-        Route::delete('/kartu-keluarga/{kartukeluarga}', 'destroy')->name('admin.kartu_keluarga.destroy');
-    });
 
     Route::controller(PendudukController::class)->group(function () {
         Route::get('/penduduk', 'index')->name('admin.penduduk.index');
