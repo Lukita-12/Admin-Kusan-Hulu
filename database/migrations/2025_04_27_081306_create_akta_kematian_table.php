@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tanggal_meninggal');
             $table->text('tempat_meninggal');
             $table->text('penyebab_meninggal');
+            $table->string('status')->default('Diajukan');
             $table->timestamps();
         });
     }

@@ -12,6 +12,9 @@ class AktaKematian extends Model
     use HasFactory;
     protected $table = 'akta_kematian';
     protected $guarded = [];
+    protected $casts    = [
+        'tanggal' => 'datetime',
+    ];
 
     public function penduduk(): BelongsTo
     {

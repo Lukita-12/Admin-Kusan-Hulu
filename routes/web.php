@@ -67,15 +67,6 @@ Route::prefix('admin')->group(function() {
         Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
     });
 
-    Route::controller(AktaKematianController::class)->group(function () {
-        Route::get('/akta-kematian', 'index')->name('admin.akta_kematian.index');
-        Route::get('/akta-kematian/create', 'create')->name('admin.akta_kematian.create');
-        Route::post('/akta-kematian', 'store')->name('admin.akta_kematian.store');
-        Route::get('/akta-kematian/{aktaKematian}/edit', 'edit')->name('admin.akta_kematian.edit');
-        Route::put('/akta-kematian/{aktaKematian}', 'update')->name('admin.akta_kematian.update');
-        Route::delete('/akta-kematian/{aktaKematian}', 'destroy')->name('admin.akta_kematian.destroy');
-    });
-
     Route::controller(PerubahanKartuKeluargaController::class)->group(function () {
         Route::get('/perubahan-kartu-keluarga', 'index')->name('admin.perubahan_kartu_keluarga.index');
         Route::get('/perubahan-kartu-keluarga/create', 'create')->name('admin.perubahan_kartu_keluarga.create');

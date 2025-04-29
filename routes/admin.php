@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AktaKematianController;
 use App\Http\Controllers\Admin\DomisiliPendudukController;
 use App\Http\Controllers\Admin\DomisiliUsahaController;
 use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
@@ -59,5 +60,18 @@ Route::prefix('admin')->group(function () {
         Route::patch('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/accept', 'accept')->name('admin.penerbitan_akta_kelahiran.accept');
         Route::patch('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/reject', 'reject')->name('admin.penerbitan_akta_kelahiran.reject');
         Route::patch('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/complete', 'complete')->name('admin.penerbitan_akta_kelahiran.complete');
+    });
+
+    Route::controller(AktaKematianController::class)->group(function () {
+        Route::get('/akta-kematian', 'index')->name('admin.akta_kematian.index');
+        Route::get('/akta-kematian/create', 'create')->name('admin.akta_kematian.create');
+        Route::post('/akta-kematian', 'store')->name('admin.akta_kematian.store');
+        Route::get('/akta-kematian/{aktaKematian}/edit', 'edit')->name('admin.akta_kematian.edit');
+        Route::put('/akta-kematian/{aktaKematian}', 'update')->name('admin.akta_kematian.update');
+        Route::delete('/akta-kematian/{aktaKematian}', 'destroy')->name('admin.akta_kematian.destroy');
+
+        Route::patch('/akta-kematian/{aktaKematian}/accept' , 'accept')->name('admin.akta_kematian.accept');
+        Route::patch('/akta-kematian/{aktaKematian}/reject', 'reject')->name('admin.akta_kematian.reject');
+        Route::patch('/akta-kematian/{aktaKematian}/complete' , 'complete')->name('admin.akta_kematian.complete');
     });
 });

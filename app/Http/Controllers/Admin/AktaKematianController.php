@@ -11,7 +11,7 @@ class AktaKematianController extends Controller
 {
     public function index()
     {
-        $aktaKematians = AktaKematian::latest()->paginate(6);
+        $aktaKematians = AktaKematian::with('penduduk')->latest()->simplePaginate(6);
 
         return view('/admin.akta_kematian.index', [
             'aktaKematians' => $aktaKematians
@@ -117,9 +117,31 @@ class AktaKematianController extends Controller
 
     public function destroy(AktaKematian $aktaKematian)
     {
-        $aktaKematian->penduduk()->detach();
-
         $aktaKematian->delete();
+
+        return redirect('/admin/akta-kematian');
+    }
+
+    public function accept(AktaKematian $aktaKematian)
+    {
+        $aktaKematian->status = 'Diproses';
+        $aktaKematian->save();
+
+        return redirect('/admin/akta-kematian');
+    }
+
+    public function reject(AktaKematian $aktaKematian)
+    {
+        $aktaKematian->status = 'Ditolak';
+        $aktaKematian->save();
+
+        return redirect('/admin/akta-kematian');
+    }
+
+    public function complete(AktaKematian $aktaKematian)
+    {
+        $aktaKematian->status = 'Selesai';
+        $aktaKematian->save();
 
         return redirect('/admin/akta-kematian');
     }
