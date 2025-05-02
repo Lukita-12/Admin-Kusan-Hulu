@@ -39,10 +39,6 @@ Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store'])->name('login.store');
 Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-Route::prefix('admin')->group(function() {
-    
-});
-
 Route::prefix('user')->group(function () {
     Route::controller(UserPendudukController::class)->group(function () {
         Route::get('/penduduk/create', 'create')    ->name('user.penduduk.create');

@@ -1,95 +1,70 @@
 <x-layout>
 
-    <div>
-        <x-form.form-layout action="{{ route('admin.akta_kematian.update', $aktaKematian->id) }}">
+    <x-form.container variant="main">
+        <x-form.form action="{{ route('admin.akta_kematian.update', $aktaKematian->id) }}">
             @method('PUT')
 
-            <div>
-                <x-form.form-label for="tanggal">
-                    Tanggal pelaporan
-                </x-form.form-label>
-                <x-form.form-input
-                    type="date"
-                    name="tanggal"
-                    id="tanggal"
-                    value="{{ $aktaKematian->tanggal }}"
-                    placeholder="Tanggal..."
-                    required />
-                <x-form.form-error errorFor="tanggal" />
-            </div>
+            <x-form.container variant="form">
 
-            <div>
-                <x-form.form-label for="nama_pelapor">
-                    Nama pelapor
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nama_pelapor"
-                    id="nama_pelapor"
-                    value="{{ old('nama_pelapor', $pelapor?->nama) }}"
-                    required />
-                <x-form.form-error errorFor="nama_pelapor" />
-            </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="penduduk">Nama Penduduk</x-form.label>
 
-            <div>
-                <x-form.form-label for="nama_dilapor">
-                    Nama yang dilaporkan
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nama_dilapor"
-                    id="nama_dilapor"
-                    value="{{ old('nama_dilapor', $dilapor?->nama) }}"
-                    required />
-                <x-form.form-error errorFor="nama_dilapor" />
-            </div>
+                    <x-form.container variant="input-error">
+                        <x-form.select name="penduduk_id" id="penduduk_id" requried>
+                            @foreach ($penduduks as $penduduk)
+                                <option value="{{ $penduduk->id }}"
+                                    {{ old('penduduk_id', $aktaKematian->penduduk_id) == $penduduk->id ? 'selected' : '' }} >
+                                    {{ $penduduk->kartukeluarga->no_kk }}, {{ $penduduk->nama }}
+                                </option>
+                            @endforeach
+                        </x-form.select>
+                        <x-form.error errorFor="penduduk_id" />
+                    </x-form.container>
+                </x-form.container>
 
-            <div>
-                <x-form.form-label for="tanggal_meninggal">
-                    Tanggal meninggal
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="tanggal_meninggal"
-                    id="tanggal_meninggal"
-                    value="{{ $aktaKematian->tanggal_meninggal }}"
-                    placeholder="Tanggal meninggal..."
-                     />
-                <x-form.form-error errorFor="tanggal_meninggal" />
-            </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="tanggal_pengajuan">Tanggal Pengajuan</x-form.label>
 
-            <div>
-                <x-form.form-label for="tempat_meninggal">
-                    Tempat meninggal
-                </x-form.form-label>
-                <x-form.form-textarea
-                    name="tempat_meninggal"
-                    id="tempat_meninggal"
-                    placeholder="Tempat meninggal...">
-                        {{ $aktaKematian->tempat_meninggal }}
-                </x-form.form-textarea>
-                <x-form.form-error errorFor="tempat_meninggal" />
-            </div>
-            
-            <div>
-                <x-form.form-label for="penyebab_meninggal">
-                    Penyebab meninggal
-                </x-form.form-label>
-                <x-form.form-textarea
-                    name="penyebab_meninggal"
-                    id="penyebab_meninggal"
-                    placeholder="Penyebab meninggal...">
-                        {{ $aktaKematian->penyebab_meninggal }}
-                </x-form.form-textarea>
-                <x-form.form-error errorFor="penyebab_meninggal" />
-            </div>
-            
-            <div>
-                <a href="{{ route('admin.akta_kematian.index') }}">Batal</a>
-                <button type="submit">Simpan</button>
-            </div>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $aktaKematian->tanggal->format('Y-m-d')) }}" placeholder="Tanggal pengajuan..." required />
+                        <x-form.error errorFor="tanggal" />
+                    </x-form.container>
+                </x-form.container>
 
-        </x-form.form-layout>
-    </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="tanggal_meninggal">Tanggal Meninggal</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="tanggal_meninggal" id="tanggal_meninggal" value="{{ old('tanggal_meninggal', $aktaKematian->tanggal_meninggal) }}" placeholder="dd/mm/YYYY" required/>
+                        <x-form.error errorFor="tanggal_meninggal" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="tempat_meninggal">Tempat Meninggal</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.textarea name="tempat_meninggal" id="tempat_meninggal" placeholder="Tempat meninggal..." required >{{ old('tempat_meninggal', $aktaKematian->tempat_meninggal) }}</x-form.textarea>
+                        <x-form.error errorFor="tempat_meninggal" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="penyebab_meninggal">Penyebab meninggal</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.textarea name="penyebab_meninggal" id="penyebab_meninggal" placeholder="Penyebab meninggal..." required>{{ old('penyebab_meninggal', $aktaKematian->penyebab_meninggal) }}</x-form.textarea>
+                        <x-form.error errorFor="penyebab_meninggal" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="button">
+                    <x-form.button-link href="{{ route('admin.akta_kematian.index') }}">Batal</x-form.button-link>
+                    <x-form.button variant="save" type="submit">Simpan</x-form.button>
+                </x-form.container>
+
+            </x-form.container>
+        </x-form.form>
+    </x-form.container>
     
 </x-layout>

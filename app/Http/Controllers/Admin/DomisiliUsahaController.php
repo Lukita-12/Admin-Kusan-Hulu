@@ -20,36 +20,24 @@ class DomisiliUsahaController extends Controller
 
     public function create()
     {
-        return view('/admin/domisili_usaha.create');
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
+
+        return view('/admin/domisili_usaha.create', [
+            'penduduks' => $penduduks,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'penduduk_name' => ['required'],
+            'penduduk_id'   => ['required', 'exists:penduduk,id'],
             'tanggal'       => ['required', 'date'],
             'nama_usaha'    => ['required'],
             'jenis_usaha'   => ['required'],
             'alamat_usaha'  => ['required'],
         ]);
 
-        // Find residents in the "people" table by full_name
-        $namaPenduduk = Penduduk::where('nama', $validatedData['penduduk_name'])->first();
-
-        if (!$namaPenduduk) {
-            return back()->withErrors(['penduduk_name' => 'Nama penduduk tidak ditemukan!'])->withInput();
-        }
-
-        // Create domaint
-        $domisiliPenduduk = DomisiliUsaha::create([
-            'tanggal'       => $validatedData['tanggal'],
-            'nama_usaha'    => $validatedData['nama_usaha'],
-            'jenis_usaha'   => $validatedData['jenis_usaha'],
-            'alamat_usaha'  => $validatedData['alamat_usaha'],
-        ]);
-
-        // Attach to Pivot Table
-        $domisiliPenduduk->penduduk()->attach($namaPenduduk->id);
+        DomisiliUsaha::create($validatedData);
 
         return redirect('/admin/domisili-usaha');
     }
@@ -64,38 +52,25 @@ class DomisiliUsahaController extends Controller
 
     public function edit(DomisiliUsaha $domisiliUsaha)
     {
-        $pemilik = $domisiliUsaha->penduduk->first();
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
 
         return view('/admin/domisili_usaha.edit', [
             'domisiliUsaha' => $domisiliUsaha,
-            'pemilik' => $pemilik,
+            'penduduks' => $penduduks,
         ]);
     }
 
     public function update(Request $request, DomisiliUsaha $domisiliUsaha)
     {
         $validatedData = $request->validate([
-            'penduduk_name' => ['required'],
+            'penduduk_id'   => ['required', 'exists:penduduk,id'],
             'tanggal'       => ['required', 'date'],
             'nama_usaha'    => ['required'],
             'jenis_usaha'   => ['required'],
             'alamat_usaha'  => ['required'],
         ]);
-
-        $pemilik = Penduduk::where('nama', $validatedData['penduduk_name'])->first();
-
-        // Create domaint
-        $domisiliUsaha->update([
-            'tanggal'       => $request->input('tanggal'),
-            'nama_usaha'    => $request->input('nama_usaha'),
-            'jenis_usaha'   => $request->input('jenis_usaha'),
-            'alamat_usaha'  => $request->input('alamat_usaha'),
-        ]);
-
-        // Attach selected value to pivot table
-        if ($pemilik) {
-            $domisiliUsaha->penduduk()->sync([$pemilik->id]);
-        }
+        
+        $domisiliUsaha->update($validatedData);
 
         return redirect('/admin/domisili-usaha');
     }

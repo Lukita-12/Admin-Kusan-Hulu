@@ -21,14 +21,20 @@ class PendudukController extends Controller
 
     public function create()
     {
-        return view('/admin.penduduk.create');
+        $desas          = Desa::latest()->get();
+        $kartukeluargas = Kartukeluarga::latest()->get();
+
+        return view('/admin.penduduk.create', [
+            'desas'         => $desas,
+            'kartukeluargas'=> $kartukeluargas,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'desa'                      => ['required'],
-            'nokartu'         => ['required'],
+            'desa_id'                   => ['required', 'exists:desa,id'],
+            'kartukeluarga_id'          => ['required', 'exists:kartukeluarga,id'],
             'nama'                      => ['required'],
             'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
             'status_perkawinan'         => ['required'],
@@ -41,22 +47,6 @@ class PendudukController extends Controller
             'kedudukan_dalam_keluarga'  => ['required'],
             'warga_negara'              => ['required'],
         ]);
-
-        $desa = Desa::where('nama_desa', $validatedData['desa'])->first();
-        $kartuKeluarga = Kartukeluarga::where('no_kk', $validatedData['nokartu'])->first();
-        
-        if (!$desa) {
-            return back()->withErrors(['desa' => 'Desa tidak ditemukan'])->withInput();
-        }
-        if (!$kartuKeluarga) {
-            return back()->withErrors(['nokartu' => 'No. Kartu keluarga tisak ditemukan!'])->withInput();
-        }
-
-        // Add desa_id to attributes
-        $validatedData['desa_id'] = $desa->id;
-        unset($validatedData['desa']); // Remove desa_name from the array
-        $validatedData['kartukeluarga_id'] = $kartuKeluarga->id;
-        unset($validatedData['nokartu']); // Remove desa_name from the array
 
         Penduduk::create($validatedData);
 
@@ -73,16 +63,21 @@ class PendudukController extends Controller
 
     public function edit(Penduduk $penduduk)
     {
+        $desas          = Desa::latest()->get();
+        $kartukeluargas = Kartukeluarga::latest()->get();
+
         return view('/admin.penduduk.edit', [
-            'penduduk' => $penduduk,
+            'penduduk'      => $penduduk,
+            'desas'         => $desas,
+            'kartukeluargas'=> $kartukeluargas,
         ]);
     }
 
     public function update(Request $request, Penduduk $penduduk)
     {
         $validatedData = $request->validate([
-            'desa'                      => ['required'],
-            'nokartu'         => ['required'],
+            'desa_id'                   => ['required', 'exists:desa,id'],
+            'kartukeluarga_id'          => ['required', 'exists:kartukeluarga,id'],
             'nama'                      => ['required'],
             'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
             'status_perkawinan'         => ['required'],
@@ -95,22 +90,6 @@ class PendudukController extends Controller
             'kedudukan_dalam_keluarga'  => ['required'],
             'warga_negara'              => ['required'],
         ]);
-
-        $desa = Desa::where('nama_desa', $validatedData['desa'])->first();
-        $kartuKeluarga = Kartukeluarga::where('no_kk', $validatedData['nokartu'])->first();
-        
-        if (!$desa) {
-            return back()->withErrors(['desa' => 'Desa tidak ditemukan'])->withInput();
-        }
-        if (!$kartuKeluarga) {
-            return back()->withErrors(['nokartu' => 'No. Kartu keluarga tisak ditemukan!'])->withInput();
-        }
-
-        // Add desa_id to attributes
-        $validatedData['desa_id'] = $desa->id;
-        unset($validatedData['desa']); // Remove desa_name from the array
-        $validatedData['kartukeluarga_id'] = $kartuKeluarga->id;
-        unset($validatedData['nokartu']); // Remove desa_name from the array
 
         $penduduk->update($validatedData);
 

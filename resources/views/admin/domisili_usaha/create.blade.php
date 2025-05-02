@@ -1,84 +1,69 @@
 <x-layout>
 
-    <div>
-        <x-form.form-layout action="{{ route('admin.domisili_usaha.store') }}">
+    <x-form.container variant="main">
+        <x-form.form action="{{ route('admin.domisili_usaha.store') }}">
+            <x-form.container variant="form">
 
-            <div>
-                <x-form.form-label for="penduduk_name">
-                    Nama
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="penduduk_name"
-                    id="penduduk_name"
-                    :value="old('penduduk_name')"
-                    placeholder="Nama"
-                    required />
-                <x-form.form-error errorFor="penduduk_name" />
-            </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="penduduk">Nama Penduduk</x-form.label>
 
-            <div>
-                <x-form.form-label for="tanggal">
-                    Tanggal
-                </x-form.form-label>
-                <x-form.form-input
-                    type="date"
-                    name="tanggal"
-                    id="tanggal"
-                    :value="old('tanggal')"
-                    placeholder="Tanggal"
-                    required />
-                <x-form.form-error errorFor="tanggal" />
-            </div>
+                    <x-form.container variant="input-error">
+                        <x-form.select name="penduduk_id" id="penduduk_id" required>
+                            <option value="">Pilih penduduk</option>
+                            @foreach ($penduduks as $penduduk)
+                                <option value="{{ $penduduk->id }}"
+                                    {{ old('penduduk_id') == $penduduk->id ? 'selected' : '' }} >
+                                    {{ $penduduk->kartukeluarga->no_kk }}, {{ $penduduk->nama }}
+                                </option>
+                            @endforeach
+                        </x-form.select>
+                        <x-form.error errorFor="penduduk_id" />
+                    </x-form.container>
+                </x-form.container>
 
-            <div>
-                <x-form.form-label for="nama_usaha">
-                    Nama usaha
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="nama_usaha"
-                    id="nama_usaha"
-                    :value="old('nama_usaha')"
-                    placeholder="Nama usaha"
-                    required />
-                <x-form.form-error errorFor="nama_usaha" />
-            </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="tanggal_pengajuan">Tanggal Pengajuan</x-form.label>
 
-            <div>
-                <x-form.form-label for="jenis_usaha">
-                    Jenis usaha
-                </x-form.form-label>
-                <x-form.form-input
-                    type="text"
-                    name="jenis_usaha"
-                    id="jenis_usaha"
-                    :value="old('jenis_usaha')"
-                    placeholder="Jenis usaha"
-                    required />
-                <x-form.form-error errorFor="jenis_usaha" />
-            </div>
+                    <x-form.container variant=input-error>
+                        <x-form.input type="date" name="tanggal" id="tanggal" :value="old('tanggal')" placeholder="Tanggal pengajuan..." required />
+                        <x-form.error errorFor="tanggal" />
+                    </x-form.container>
+                </x-form.container>
 
-            <div>
-                <x-form.form-label for="alamat_usaha">
-                    Alamat usaha
-                </x-form.form-label>
-                <x-form.form-textarea
-                    name="alamat_usaha"
-                    id="alamat_usaha"
-                    :value="old('alamat_usaha')"
-                    placeholder="Alamat usaha"
-                    required>
-                </x-form.form-textarea>
-                <x-form.form-error errorFor="alamat_usaha" />
-            </div>
-            
-            <div>
-                <a href="{{ route('admin.domisili_usaha.index') }}">Batal</a>
-                <button type="submit">Simpan</button>
-            </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="nama_usaha">Nama Usaha</x-form.label>
+    
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nama_usaha" id="nama_usaha" :value="old('nama_usaha')" placeholder="Nama usaha..." required />
+                        <x-form.error errorFor="nama_usaha" />
+                    </x-form.container>
+                </x-form.container>
+    
+                <x-form.container variant="label-input">
+                    <x-form.label for="jenis_usaha">Jenis Usaha</x-form.label>
+    
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="jenis_usaha" id="jenis_usaha" :value="old('jenis_usaha')" placeholder="Jenis usaha..." required />
+                        <x-form.error errorFor="jenis_usaha" />
+                    </x-form.container>
+                </x-form.container>
 
-        </x-form.form-layout>
-    </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="alamat_usaha">Alamat usaha</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.textarea name="alamat_usaha" id="alamat_usaha" placeholder="Alamat usaha" required>{{ old('alamat_usaha') }}</x-form.textarea>
+                        <x-form.error errorFor="alamat_usaha" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="button">
+                    <x-form.button-link href="{{ route('admin.domisili_usaha.index') }}">Batal</x-form.button-link>
+                    <x-form.button variant="save" type="submit">Simpan</x-form.button>
+                </x-form.container>
+
+            </x-form.container>            
+        </x-form.form>
+    </x-form.container>
     
 </x-layout>

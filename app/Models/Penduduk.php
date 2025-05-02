@@ -17,18 +17,7 @@ class Penduduk extends Model
     protected $guarded = [];
     protected $casts = [
         'tanggal_lahir' => 'datetime',
-    ];
-
-    public function desa(): BelongsTo
-    {
-        return $this->belongsTo(Desa::class);
-    }
-
-    public function kartukeluarga(): BelongsTo
-    {
-        return $this->belongsTo(Kartukeluarga::class, 'kartukeluarga_id');
-    }
-    
+    ];    
     
     public function perubahanKartuKeluarga():HasOne
     {
@@ -36,6 +25,15 @@ class Penduduk extends Model
     }
 
     // Re.
+    public function desa(): BelongsTo
+    {
+        return $this->belongsTo(Desa::class);
+    }
+
+    public function kartukeluarga(): BelongsTo
+    {
+        return $this->belongsTo(Kartukeluarga::class);
+    }
 
     public function domisiliPenduduk(): HasMany
     {
@@ -47,9 +45,9 @@ class Penduduk extends Model
         return $this->hasMany(DomisiliUsaha::class);
     }
 
-    public function pindahDomisili(): HasOne
+    public function pindahDomisili(): HasMany
     {
-        return $this->hasOne(PindahDomisili::class);
+        return $this->hasMany(PindahDomisili::class);
     }
 
     public function penerbitanAktaKelahiran(): HasMany
@@ -57,8 +55,8 @@ class Penduduk extends Model
         return $this->hasMany(PenerbitanAktaKelahiran::class);
     }
 
-    public function aktaKematian(): HasOne
+    public function aktaKematian(): HasMany
     {
-        return $this->hasOne(AktaKematian::class);
+        return $this->hasMany(AktaKematian::class);
     }
 }

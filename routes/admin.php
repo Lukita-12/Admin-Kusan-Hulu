@@ -13,6 +13,42 @@ use App\Http\Controllers\Admin\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
+    Route::controller(DesaController::class)->group(function () {
+        Route::get('/desa', 'index')->name('admin.desa.index');
+        Route::get('/desa/create', 'create')->name('admin.desa.create');
+        Route::post('/desa', 'store')->name('admin.desa.store');
+        Route::get('/desa/{desa}/edit', 'edit')->name('admin.desa.edit');
+        Route::put('/desa/{desa}', 'update')->name('admin.desa.update');
+        Route::delete('/desa/{desa}', 'destroy')->name('admin.desa.destroy');
+    });
+
+    Route::controller(KartukeluargaController::class)->group(function () {
+        Route::get('/kartu-keluarga', 'index')->name('admin.kartu_keluarga.index');
+        Route::get('/kartu-keluarga/create', 'create')->name('admin.kartu_keluarga.create');
+        Route::post('/kartu-keluarga', 'store')->name('admin.kartu_keluarga.store');
+        Route::get('/kartu-keluarga/{kartukeluarga}/edit', 'edit')->name('admin.kartu_keluarga.edit');
+        Route::put('/kartu-keluarga/{kartukeluarga}', 'update')->name('admin.kartu_keluarga.update');
+        Route::delete('/kartu-keluarga/{kartukeluarga}', 'destroy')->name('admin.kartu_keluarga.destroy');
+    });
+    
+    Route::controller(AkunController::class)->group(function () {
+        Route::get('/akun', 'index')->name('admin.akun.index');
+        Route::get('/akun/create', 'create')->name('admin.akun.create');
+        Route::post('/akun', 'store')->name('admin.akun.store');
+        Route::get('/akun/{akun}/edit', 'edit')->name('admin.akun.edit');
+        Route::put('/akun/{akun}', 'update')->name('admin.akun.update');
+        Route::delete('/akun/{akun}', 'destroy')->name('admin.akun.destroy');
+    });
+
+    Route::controller(PendudukController::class)->group(function () {
+        Route::get('/penduduk', 'index')->name('admin.penduduk.index');
+        Route::get('/penduduk/create', 'create')->name('admin.penduduk.create');
+        Route::post('/penduduk', 'store')->name('admin.penduduk.store');
+        Route::get('/penduduk/{penduduk}/edit', 'edit')->name('admin.penduduk.edit');
+        Route::put('/penduduk/{penduduk}', 'update')->name('admin.penduduk.update');
+        Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
+    });
+
     Route::controller(DomisiliPendudukController::class)->group(function () {
         Route::get('/domisili-penduduk', 'index')->name('admin.domisili_penduduk.index');
         Route::get('/domisili-penduduk/{domisiliPenduduk}/edit', 'edit')->name('admin.domisili_penduduk.edit');
@@ -38,6 +74,8 @@ Route::prefix('admin')->group(function () {
 
     Route::controller(PindahDomisiliController::class)->group(function () {
         Route::get('/pindah-domisili', 'index')->name('admin.pindah_domisili.index');
+        Route::get('/pindah-domisili/create', 'create')->name('admin.pindah_domisili.create');
+        Route::post('/pindah-domisili', 'store')->name('admin.pindah_domisili.store');
         Route::get('/pindah-domisili/{pindahDomisili}/edit', 'edit')->name('admin.pindah_domisili.edit');
         Route::put('/pindah-domisili/{pindahDomisili}', 'update')->name('admin.pindah_domisili.update');
         Route::delete('/pindah-domisili/{pindahDomisili}', 'destroy')->name('admin.pindah_domisili.destroy');
@@ -46,13 +84,6 @@ Route::prefix('admin')->group(function () {
         Route::patch('/pindah-domisili/{pindahDomisili}/reject', 'reject')->name('admin.pindah_domisili.reject');
         Route::patch('/pindah-domisili/{pindahDomisili}/complete' , 'complete')->name('admin.pindah_domisili.complete');
     });
-
-    /*
-    Route::controller(PindahDomisiliController::class)->group(function () {
-        Route::get('/pindah-domisili/create', 'create')->name('admin.pindah_domisili.create');
-        Route::post('/pindah-domisili', 'store')->name('admin.pindah_domisili.store');
-    });
-    */
 
     Route::controller(PenerbitanAktaKelahiranController::class)->group(function () {
         Route::get('/penerbitan-akta-kelahiran', 'index')->name('admin.penerbitan_akta_kelahiran.index');
@@ -78,42 +109,6 @@ Route::prefix('admin')->group(function () {
         Route::patch('/akta-kematian/{aktaKematian}/accept' , 'accept')->name('admin.akta_kematian.accept');
         Route::patch('/akta-kematian/{aktaKematian}/reject', 'reject')->name('admin.akta_kematian.reject');
         Route::patch('/akta-kematian/{aktaKematian}/complete' , 'complete')->name('admin.akta_kematian.complete');
-    });
-
-    Route::controller(DesaController::class)->group(function () {
-        Route::get('/desa', 'index')->name('admin.desa.index');
-        Route::get('/desa/create', 'create')->name('admin.desa.create');
-        Route::post('/desa', 'store')->name('admin.desa.store');
-        Route::get('/desa/{desa}/edit', 'edit')->name('admin.desa.edit');
-        Route::put('/desa/{desa}', 'update')->name('admin.desa.update');
-        Route::delete('/desa/{desa}', 'destroy')->name('admin.desa.destroy');
-    });
-
-    Route::controller(KartukeluargaController::class)->group(function () {
-        Route::get('/kartu-keluarga', 'index')->name('admin.kartu_keluarga.index');
-        Route::get('/kartu-keluarga/create', 'create')->name('admin.kartu_keluarga.create');
-        Route::post('/kartu-keluarga', 'store')->name('admin.kartu_keluarga.store');
-        Route::get('/kartu-keluarga/{kartukeluarga}/edit', 'edit')->name('admin.kartu_keluarga.edit');
-        Route::put('/kartu-keluarga/{kartukeluarga}', 'update')->name('admin.kartu_keluarga.update');
-        Route::delete('/kartu-keluarga/{kartukeluarga}', 'destroy')->name('admin.kartu_keluarga.destroy');
-    });
-
-    Route::controller(AkunController::class)->group(function () {
-        Route::get('/akun', 'index')->name('admin.akun.index');
-        Route::get('/akun/create', 'create')->name('admin.akun.create');
-        Route::post('/akun', 'store')->name('admin.akun.store');
-        Route::get('/akun/{akun}/edit', 'edit')->name('admin.akun.edit');
-        Route::put('/akun/{akun}', 'update')->name('admin.akun.update');
-        Route::delete('/akun/{akun}', 'destroy')->name('admin.akun.destroy');
-    });
-
-    Route::controller(PendudukController::class)->group(function () {
-        Route::get('/penduduk', 'index')->name('admin.penduduk.index');
-        Route::get('/penduduk/create', 'create')->name('admin.penduduk.create');
-        Route::post('/penduduk', 'store')->name('admin.penduduk.store');
-        Route::get('/penduduk/{penduduk}/edit', 'edit')->name('admin.penduduk.edit');
-        Route::put('/penduduk/{penduduk}', 'update')->name('admin.penduduk.update');
-        Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
     });
 
     Route::controller(PerubahanKartuKeluargaController::class)->group(function () {

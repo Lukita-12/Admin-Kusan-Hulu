@@ -2,7 +2,11 @@
 
     <x-table.container variant="main">
         <x-table.container variant="header">
-            <x-table.search type="text" placeholder="Cari..." />
+            <x-table.container variant="search-create">
+                <x-table.search type="text" placeholder="Cari..." />
+                <x-table.button-link variant="create" href="{{ route('admin.penduduk.create') }}">+ Baru</x-table.button-link>
+            </x-table.container>
+
             <x-table.filter>
                 <option value="Terbaru">Terbaru</option>
                 <option value="Terlama">Terlama</option>
@@ -34,7 +38,7 @@
                             <x-table.td>{{ $penduduk->nama }}</x-table.td>
                             <x-table.td>{{ $penduduk->jenis_kelamin }}</x-table.td>
                             <x-table.td>{{ $penduduk->status_perkawinan }}</x-table.td>
-                            <x-table.td>{{ $penduduk->tempat_lahir }}, {{ $penduduk->tanggal_lahir }}</x-table.td>
+                            <x-table.td>{{ $penduduk->tempat_lahir }}, {{ $penduduk->tanggal_lahir->format('d M Y') }}</x-table.td>
                             <x-table.td>{{ $penduduk->agama }}</x-table.td>
                             <x-table.td>{{ $penduduk->pendidikan_terakhir }}</x-table.td>
                             <x-table.td>{{ $penduduk->pekerjaan }}</x-table.td>
@@ -43,7 +47,7 @@
                             <x-table.td>{{ $penduduk->warga_negara }}</x-table.td>
                             <x-table.td>
                                 <x-table.container variant="button">
-                                    <x-table.button-link href="{{ route('admin.penduduk.edit', $penduduk) }}">Edit</x-table.button-link>
+                                    <x-table.button-link variant="edit" href="{{ route('admin.penduduk.edit', $penduduk) }}">Edit</x-table.button-link>
                                     <x-table.form action="{{ route('admin.penduduk.destroy', $penduduk) }}">
                                         @method('DELETE')
                                         <x-table.button variant="delete" type="submit">Hapus</x-table.button>

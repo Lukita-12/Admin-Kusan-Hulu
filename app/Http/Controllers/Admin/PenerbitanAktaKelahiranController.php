@@ -20,13 +20,17 @@ class PenerbitanAktaKelahiranController extends Controller
 
     public function create()
     {
-        return view('/admin.penerbitan_akta_kelahiran.create');
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
+
+        return view('/admin.penerbitan_akta_kelahiran.create', [
+            'penduduks' => $penduduks,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_penduduk'     => ['required'],
+            'penduduk_id'       => ['required', 'exists:penduduk,id'],
             'tanggal'           => ['required', 'date'],
             'nomor_akta'        => ['required'],
             'tempat_kelahiran'  => ['required'],
@@ -39,24 +43,16 @@ class PenerbitanAktaKelahiranController extends Controller
             'upload_sp_rt'      => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
         ]);
 
-        $akta = Penduduk::where('nama', $validatedData['nama_penduduk'])->first();
-        if (!$akta) {
-            return back()->withErrors(['nama_penduduk' => 'Penduduk tidak ditemukan'])->withInput();
-        }
-
         // Handle Image Upload
         foreach (['upload_sp_bidan', 'upload_sp_rt'] as $field) {
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
                 $fileName = $field . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $filePath = $file->storeAs('uploads/sp', $fileName, 'public');
+                $filePath = $file->storeAs('uploads/surat_pengantar', $fileName, 'public');
     
                 $validatedData[$field] = $filePath; // Save file path in DB
             }
         }
-        
-        $validatedData['penduduk_id'] = $akta->id;
-        unset($validatedData['nama_penduduk']); // Remove desa_name from the array
 
         PenerbitanAktaKelahiran::create($validatedData);
 
@@ -73,15 +69,18 @@ class PenerbitanAktaKelahiranController extends Controller
 
     public function edit(PenerbitanAktaKelahiran $penerbitanAktaKelahiran)
     {
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
+
         return view('/admin.penerbitan_akta_kelahiran.edit', [
-            'penerbitanAktaKelahiran' => $penerbitanAktaKelahiran
+            'penerbitanAktaKelahiran'   => $penerbitanAktaKelahiran,
+            'penduduks'                 => $penduduks,
         ]);
     }
 
     public function update(Request $request, PenerbitanAktaKelahiran $penerbitanAktaKelahiran)
     {
         $validatedData = $request->validate([
-            'nama_penduduk'     => ['required'],
+            'penduduk_id'       => ['required', 'exists:penduduk,id'],
             'tanggal'           => ['required', 'date'],
             'nomor_akta'        => ['required'],
             'tempat_kelahiran'  => ['required'],
@@ -94,23 +93,17 @@ class PenerbitanAktaKelahiranController extends Controller
             'upload_sp_rt'      => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
         ]);
 
-        $akta = Penduduk::where('nama', $validatedData['nama_penduduk'])->first();
-        if (!$akta) {
-            return back()->withErrors(['nama_penduduk' => 'Penduduk tidak ditemukan'])->withInput();
-        }
-        $validatedData['penduduk_id'] = $akta->id;
-        unset($validatedData['nama_penduduk']); // Remove desa_name from the array
-
         // Handle Image Upload
         foreach (['upload_sp_bidan', 'upload_sp_rt'] as $field) {
+
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
                 $fileName = $field . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $filePath = $file->storeAs('uploads/sp', $fileName, 'public');
+                $filePath = $file->storeAs('uploads/surat_pengantar', $fileName, 'public');
     
                 $validatedData[$field] = $filePath; // Save file path in DB
             }
-        }        
+        } 
 
         $penerbitanAktaKelahiran->update($validatedData);
 

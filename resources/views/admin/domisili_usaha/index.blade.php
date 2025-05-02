@@ -2,7 +2,11 @@
 
     <x-table.container variant="main">
         <x-table.container variant="header">
-            <x-table.search type="text" placeholder="Search..." />
+            <x-table.container variant="search-create">
+                <x-table.search type="text" placeholder="Search..." />
+                <x-table.button-link variant="create" href="{{ route('admin.domisili_usaha.create') }}">+ Buat</x-table.button-link>
+            </x-table.container>
+
             <x-table.filter>
                 <option value="Terbaru">Terbaru</option>
                 <option value="Terlama">Terlama</option>
@@ -27,7 +31,7 @@
                     @foreach ($domisiliUsahas as $domisiliUsaha)
                         <x-table.tr variant="body">
                             <x-table.td>{{ $loop->iteration }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->tanggal }}</x-table.td>
+                            <x-table.td>{{ $domisiliUsaha->tanggal->format('d M Y') }}</x-table.td>
                             <x-table.td>{{ $domisiliUsaha->penduduk->nama }}</x-table.td>
                             <x-table.td>{{ $domisiliUsaha->nama_usaha }}</x-table.td>
                             <x-table.td>{{ $domisiliUsaha->jenis_usaha }}</x-table.td>
@@ -48,7 +52,7 @@
                                         <x-table.button variant="complete" type="submit">Selesai</x-table.button>
                                     </x-table.form>
 
-                                    <x-table.button-link href="#">Edit</x-table.button-link>
+                                    <x-table.button-link variant="edit" href="{{ route('admin.domisili_usaha.edit', $domisiliUsaha) }}">Edit</x-table.button-link>
                                     <x-table.form action="{{ route('admin.domisili_usaha.destroy', $domisiliUsaha) }}">
                                         @method('DELETE')
                                         <x-table.button variant="delete" type="submit">Hapus</x-table.button>

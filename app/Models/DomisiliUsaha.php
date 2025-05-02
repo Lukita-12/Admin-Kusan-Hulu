@@ -9,8 +9,11 @@ class DomisiliUsaha extends Model
 {
     /** @use HasFactory<\Database\Factories\DomisiliUsahaFactory> */
     use HasFactory;
-    protected $table = 'domisili_usaha';
-    protected $guarded = [];
+    protected $table    = 'domisili_usaha';
+    protected $guarded  = [];
+    protected $casts    = [
+        'tanggal' => 'datetime',
+    ];
 
     public function penduduk()
     {

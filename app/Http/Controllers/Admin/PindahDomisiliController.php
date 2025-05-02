@@ -11,7 +11,7 @@ class PindahDomisiliController extends Controller
 {
     public function index()
     {
-        $pindahDomisilis = PindahDomisili::latest()->simplePaginate(6);
+        $pindahDomisilis = PindahDomisili::with('penduduk.kartukeluarga')->latest()->simplePaginate(6);
 
         return view('admin.pindah_domisili.index', [
             'pindahDomisilis' => $pindahDomisilis,
@@ -20,31 +20,24 @@ class PindahDomisiliController extends Controller
 
     public function create()
     {
-        return view('admin.pindah_domisili.create');
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
+
+        return view('admin.pindah_domisili.create', [
+            'penduduks' => $penduduks,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_penduduk' => ['required'],
+            'penduduk_id'   => ['required', 'exists:penduduk,id'],
             'tanggal'       => ['required', 'date'],
             'alamat_asal'   => ['required'],
             'tujuan'        => ['required'],
             'alasan_pindah' => ['required'],
         ]);
 
-        $pendudukdomisili = Penduduk::where('nama', $validatedData['nama_penduduk'])->first();
-
-        $pindahPenduduk = PindahDomisili::create([
-            'tanggal'       => $validatedData['tanggal'],
-            'alamat_asal'   => $validatedData['alamat_asal'],
-            'tujuan'        => $validatedData['tujuan'],
-            'alasan_pindah' => $validatedData['alasan_pindah'],
-        ]);
-
-        if ($pendudukdomisili) {
-            $pindahPenduduk->penduduk()->attach($pendudukdomisili->id);
-        }
+        PindahDomisili::create($validatedData);
 
         return redirect('admin/pindah-domisili');
     }
@@ -56,46 +49,31 @@ class PindahDomisiliController extends Controller
 
     public function edit(PindahDomisili $pindahDomisili)
     {
-        // $namaPenduduk = $pindahDomisili->penduduk->first();
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
 
         return view('admin.pindah_domisili.edit', [
-            'pindahDomisili'    => $pindahDomisili,
+            'pindahDomisili'=> $pindahDomisili,
+            'penduduks'     => $penduduks,
         ]);
     }
 
     public function update(Request $request, PindahDomisili $pindahDomisili)
-    {
-        dd(request()->all());
-        
+    {        
         $validatedData = $request->validate([
-            'nama_penduduk' => ['required'],
+            'penduduk_id'   => ['required', 'exists:penduduk,id'],
             'tanggal'       => ['required', 'date'],
             'alamat_asal'   => ['required'],
             'tujuan'        => ['required'],
             'alasan_pindah' => ['required'],
         ]);
-
-        $pendudukdomisili = Penduduk::where('nama', $validatedData['nama_penduduk'])->first();
-
-        $pindahDomisili->update([
-            'tanggal'       => $validatedData['tanggal'],
-            'alamat_asal'   => $validatedData['alamat_asal'],
-            'tujuan'        => $validatedData['tujuan'],
-            'alasan_pindah' => $validatedData['alasan_pindah'],
-        ]);
-
-        // Attach selected value to pivot table
-        if ($pendudukdomisili) {
-            $pindahDomisili->penduduk()->sync([$pendudukdomisili->id]);
-        }
+        
+        $pindahDomisili->update($validatedData);
 
         return redirect('admin/pindah-domisili');
     }
 
     public function destroy(PindahDomisili $pindahDomisili)
     {
-        $pindahDomisili->penduduk()->detach();
-        
         $pindahDomisili->delete();
 
         return redirect('admin/pindah-domisili');

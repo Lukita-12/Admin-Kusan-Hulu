@@ -20,39 +20,24 @@ class AktaKematianController extends Controller
 
     public function create()
     {
-        return view('/admin.akta_kematian.create');
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
+
+        return view('/admin.akta_kematian.create', [
+            'penduduks' => $penduduks,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_pelapor'          => ['required'],
-            'nama_dilapor'          => ['required'],
-            'tanggal'               => ['required', 'date'],
-            'tanggal_meninggal'     => ['required'],
-            'tempat_meninggal'      => ['required'],
-            'penyebab_meninggal'    => ['required'],
+            'penduduk_id'       => ['required', 'exists:penduduk,id'],
+            'tanggal'           => ['required', 'date'],
+            'tanggal_meninggal' => ['required'],
+            'tempat_meninggal'  => ['required'],
+            'penyebab_meninggal'=> ['required'],
         ]);
-
-        // Find residents in the "people" table by full_name
-        $pelapor = Penduduk::where('nama', $validatedData['nama_pelapor'])->first();
-        $dilapor = Penduduk::where('nama', $validatedData['nama_dilapor'])->first();
-
-        $akta = AktaKematian::create([
-            'tanggal'               => $validatedData['tanggal'],
-            'tanggal_meninggal'     => $validatedData['tanggal_meninggal'],
-            'tempat_meninggal'      => $validatedData['tempat_meninggal'],
-            'penyebab_meninggal'    => $validatedData['penyebab_meninggal'],
-        ]);
-
-        // Attach residents to pivot table if they exist
-        if ($pelapor) {
-            $akta->penduduk()->attach($pelapor->id);
-        }
-
-        if ($dilapor) {
-            $akta->penduduk()->attach($dilapor->id);
-        }
+        
+        AktaKematian::create($validatedData);
 
         return redirect('/admin/akta-kematian');
     }
@@ -67,50 +52,25 @@ class AktaKematianController extends Controller
 
     public function edit(AktaKematian $aktaKematian)
     {
-        // Assuming the first attached penduduk is the pelapor, and the second is dilapor
-        $pelapor = $aktaKematian->penduduk->first();
-        $dilapor = $aktaKematian->penduduk->count() > 1 ? $aktaKematian->penduduk->last() : null;
+        $penduduks = Penduduk::with('kartukeluarga')->latest()->get();
 
         return view('admin.akta_kematian.edit', [
-            'aktaKematian' => $aktaKematian,
-            'pelapor' => $pelapor,
-            'dilapor' => $dilapor,
+            'aktaKematian'  => $aktaKematian,
+            'penduduks'      => $penduduks,
         ]);
     }
 
     public function update(Request $request, AktaKematian $aktaKematian)
     {
         $validatedData = $request->validate([
-            'nama_pelapor'          => ['required'],
-            'nama_dilapor'          => ['required'],
-            'tanggal'               => ['required', 'date'],
-            'tanggal_meninggal'     => ['required'],
-            'tempat_meninggal'      => ['required'],
-            'penyebab_meninggal'    => ['required'],
+            'penduduk_id'       => ['required', 'exists:penduduk,id'],
+            'tanggal'           => ['required', 'date'],
+            'tanggal_meninggal' => ['required'],
+            'tempat_meninggal'  => ['required'],
+            'penyebab_meninggal'=> ['required'],
         ]);
 
-        // Find residents in the "people" table by full_name
-        $pelapor = Penduduk::where('nama', $validatedData['nama_pelapor'])->first();
-        $dilapor = Penduduk::where('nama', $validatedData['nama_dilapor'])->first();
-
-        $aktaKematian->update([
-            'tanggal'               => $validatedData['tanggal'],
-            'tanggal_meninggal'     => $validatedData['tanggal_meninggal'],
-            'tempat_meninggal'      => $validatedData['tempat_meninggal'],
-            'penyebab_meninggal'    => $validatedData['penyebab_meninggal'],
-        ]);
-
-        // Remove previous relationships
-        $aktaKematian->penduduk()->detach();
-
-        // Attach residents to pivot table if they exist
-        if ($pelapor) {
-            $aktaKematian->penduduk()->attach($pelapor->id);
-        }
-
-        if ($dilapor) {
-            $aktaKematian->penduduk()->attach($dilapor->id);
-        }
+        $aktaKematian->update($validatedData);
 
         return redirect('/admin/akta-kematian');
     }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PindahDomisili extends Model
 {
@@ -12,9 +12,12 @@ class PindahDomisili extends Model
     use HasFactory;
     protected $table = 'pindah_domisili';
     protected $guarded = [];
+    protected $casts    = [
+        'tanggal' => 'datetime',
+    ];
 
-    public function penduduk(): HasMany
+    public function penduduk(): BelongsTo
     {
-        return $this->hasMany(Penduduk::class);
+        return $this->belongsTo(Penduduk::class);
     }
 }
