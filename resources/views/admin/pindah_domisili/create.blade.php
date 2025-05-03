@@ -6,7 +6,6 @@
 
                 <x-form.container variant="label-input">
                     <x-form.label for="penduduk">Nama Penduduk</x-form.label>
-
                     <x-form.container variant="input-error">
                         <x-form.select name="penduduk_id" id="penduduk_id" required>
                             <option value="">Pilih penduduk</option>

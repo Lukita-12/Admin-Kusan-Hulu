@@ -5,18 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\DomisiliUsaha;
 use App\Models\Kartukeluarga;
-use App\Models\Penduduk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DomisiliUsahaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        abort(404);
     }
 
     public function create()

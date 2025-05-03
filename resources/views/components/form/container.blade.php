@@ -6,6 +6,7 @@
         'form'          => 'w-full flex flex-col gap-3',
         'label-input'   => 'w-full flex',
         'input-error'   => 'w-full flex flex-col gap-1',
+        'search'        => 'w-full flex gap-3',
         'button'        => 'flex justify-end gap-3 my-3',
     }
 @endphp

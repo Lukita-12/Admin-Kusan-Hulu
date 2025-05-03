@@ -1,47 +1,32 @@
 <x-layout>
 
-    <div class="flex flex-col items-center">
+    <x-form.container variant="main">
+        <x-form.form action="{{ route('login.store') }}">
+            <x-form.container variant="form">
 
-        <div>
-            <h1>SELAMAT DATANG</h1>
-        </div>
+                <x-form.container variant="label-input">
+                    <x-form.label for="email">Email</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="email" name="email" id="email" :value="old('email')" placeholder="Email..." required />
+                        <x-form.error errorFor="email" />
+                    </x-form.container>
+                </x-form.container>
 
-        <x-form.form-layout action="{{ route('login.store') }}">
+                <x-form.container variant="label-input">
+                    <x-form.label for="password">Password</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="password" name="password" id="password" :value="old('password')" placeholder="Password" required />
+                        <x-form.error errorFor="password" />
+                    </x-form.container>
+                </x-form.container>
 
-            <div>
-                <x-form.form-label for="email">
-                    Email
-                </x-form.form-label>
-                <x-form.form-input
-                    type="email"
-                    name="email"
-                    id="email"
-                    :value="old('email')"
-                    placeholder="Email"
-                    required />
-                <x-form.form-error errorFor="email" />
-            </div>
+                <div class="flex flex-col justify-center items-center gap-3 my-8">
+                    <button variant="save" type="submit" class="w-full bg-blue-400/80 font-bold text-xl text-center text-slate-100 px-4 py-1 rounded-md">MASUK</button>
+                    <a href="{{ url('register') }}" class="text-blue-500 underline italic">Belum punya akun?</a>
+                </div>
 
-            <div>
-                <x-form.form-label for="password">
-                    Password
-                </x-form.form-label>
-                <x-form.form-input
-                    type="password"
-                    name="password"
-                    id="password"
-                    :value="old('password')"
-                    placeholder="Password"
-                    required />
-                <x-form.form-error errorFor="password" />
-            </div>
-
-            <div class="flex justify-center">
-                <a href="{{ url('register') }}">Belum punya akun?</a>
-                <button type="submit" class="border px-3">MASUK</button>
-            </div>
-        </x-form.form-layout>
-
-    </div>
+            </x-form.container>
+        </x-form.form>
+    </x-form.container>
 
 </x-layout>

@@ -10,12 +10,9 @@ use Illuminate\Http\Request;
 
 class DomisiliPendudukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        abort(404);
     }
 
     public function create()
@@ -30,9 +27,9 @@ class DomisiliPendudukController extends Controller
         ]);
     
         DomisiliPenduduk::create([
-            'penduduk_id'       => $validated['penduduk_id'],
-            'tanggal_pengajuan' => now(), // otomatis tanggal saat ini
-            'nomor_surat'       => null,        // biarkan kosong dulu
+            'penduduk_id'   => $validated['penduduk_id'],
+            'tanggal'       => now(), // otomatis tanggal saat ini
+            'nomor_surat'   => null,        // biarkan kosong dulu
         ]);
 
         return redirect()->route('user.domisili_penduduk.create');

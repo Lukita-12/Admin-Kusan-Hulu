@@ -11,12 +11,9 @@ use Illuminate\Http\Request;
 
 class PenerbitanAktaKelahiranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        abort(404);
     }
 
     public function create()

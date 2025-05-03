@@ -5,6 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
 
 class AkunController extends Controller
 {
@@ -37,20 +41,46 @@ class AkunController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $user)
     {
-        //
+        return view('user.akun.edit', [
+            'user' => $user,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user)
     {
-        //
+        // Validasi input
+        $validatedData = $request->validate([
+            'name'        => ['required', 'string', 'max:255'],
+            'email'       => ['required', 'email', 'max:254', 'unique:users,email,' . $user->id],
+            'password'    => ['nullable', 'min:8'], // password opsional
+            'profile_pic' => ['nullable', 'image', 'max:2048'], // gambar opsional
+        ]);
+
+        // Jika password diisi, hash dan simpan
+        if ($request->filled('password')) {
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            unset($validatedData['password']); // Jangan update password jika kosong
+        }
+
+        // Jika ada file gambar baru
+        if ($request->hasFile('profile_pic')) {
+            // Hapus gambar lama jika ada
+            if ($user->profile_pic && Storage::exists('public/' . $user->profile_pic)) {
+                Storage::delete('public/' . $user->profile_pic);
+            }
+
+            // Simpan gambar baru
+            $path = $request->file('profile_pic')->store('profile_pics', 'public');
+            $validatedData['profile_pic'] = $path;
+        }
+
+        // Update user dengan data yang telah divalidasi
+        $user->update($validatedData);
+
+        return redirect()->route('user.akun.index')->with('success', 'Profil berhasil diperbarui.');
     }
 
     /**
