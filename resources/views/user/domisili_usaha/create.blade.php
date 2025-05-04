@@ -1,4 +1,7 @@
-<x-layout>
+<x-user-layout>
+    <x-slot:heading>
+        DOMISILI USAHA
+    </x-slot:heading>
 
     <x-form.container variant="main">
         <x-form.form action="{{ route('user.domisili_usaha.store') }}">
@@ -103,4 +106,4 @@
         });
     </script>
     
-</x-layout>
+</x-user-layout>
