@@ -1,4 +1,8 @@
-<x-layout>
+<x-user-layout>
+
+    <x-slot:heading>
+        PINDAH DOMISILI
+    </x-slot:heading>
 
     <x-form.container variant="main">
         <x-form.form action="{{ route('user.pindah_domisili.store') }}">
@@ -149,4 +153,4 @@
         });
     </script>
     
-</x-layout>
+</x-user-layout>

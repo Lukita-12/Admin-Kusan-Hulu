@@ -1,4 +1,8 @@
-<x-layout>
+<x-user-layout>
+
+    <x-slot:heading>
+        AKTA KEMATIAN
+    </x-slot:heading>
 
     <x-form.container variant="main">
         <x-form.form action="{{ route('user.akta_kematian.store') }}">
@@ -118,4 +122,4 @@
         });
     </script>
     
-</x-layout>
+</x-user-layout>

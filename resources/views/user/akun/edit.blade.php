@@ -1,11 +1,6 @@
 <x-layout>
-
-    <x-form.container variant="main">
-        <x-form.form action="{{ route('user.akun.update', $user) }}" enctype="multipart/form-data">
-            @method('PUT')
-            
-            <x-form.container variant="form">
-
+    <div class="bg-slate-200 rounded-lg shadow-md shadow-slate-500/80 px-8 py-6 mx-24 my-4">
+        <div class="w-full flex flex-col gap-3">
                 <div class="w-full flex flex-col justify-center items-center gap-3 mb-3">
                     <img id="profilePreview" 
                         src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : asset('images/Winter-Grass.jpg') }}" 
@@ -18,39 +13,41 @@
                     </label>
                 </div>
 
-                <x-form.container variant="label-input">
-                    <x-form.label for="username">Username</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" placeholder="Username..." required />
-                        <x-form.error errorFor="name" />
-                    </x-form.container>
-                </x-form.container>
+                <div class="w-full flex flex-col gap-2">
+                    <label for="username" class="block px-4 font-bold text-slate-700 text-xl">Username</label>
+                    <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" placeholder="Username..."
+                        class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required />
+                    @error ('name')
+                        <div class="px-1 italic text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <x-form.container variant="label-input">
-                    <x-form.label for="email">Email</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" placeholder="Email..." required />
-                        <x-form.error errorFor="email" />
-                    </x-form.container>
-                </x-form.container>
+                <div class="w-full flex flex-col gap-2">
+                    <label for="email" class="block px-4 font-bold text-slate-700 text-xl">Email</label>
+                    <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" placeholder="Email..."
+                        class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required />
+                    @error ('name')
+                        <div class="px-1 italic text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <x-form.container variant="label-input">
-                    <x-form.label for="Password">Password</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="password" name="password" id="password" value="{{ old('password') }}" placeholder="Isi hanya jika ingin mengganti password..." />
-                        <x-form.error errorFor="password" />
-                    </x-form.container>
-                </x-form.container>
+                <div class="w-full flex flex-col gap-2">
+                    <label for="Password" class="block px-4 font-bold text-slate-700 text-xl">Password</label>
+                    <input type="password" name="password" id="password" value="{{ old('password') }}" placeholder="Isi hanya jika ingin mengganti password..."
+                        class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" />
+                    @error ('name')
+                        <div class="px-1 italic text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <x-form.container variant="button">
-                    <x-form.button-link href="{{ route('user.akun.index') }}">Batal</x-form.button-link>
-                    <x-form.button variant="save" type="submit">Simpan</x-form.button>
-                </x-form.container>
-
-            </x-form.container>
-        </x-form.form>
-    </x-form.container>
-
+                <div class="flex justify-end gap-3 my-3">
+                    <a href="{{ route('user.akun.index') }}" class="w-1/10 inline-block bg-red-500/80 font-bold text-xl text-white text-center px-4 py-1 rounded-md">Batal</a>
+                    <button type="submit" class="w-1/10 bg-blue-400/80 font-bold text-xl text-center text-slate-100 px-4 py-1 rounded-md">Simpan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
     <script>
         document.getElementById('profile_pic').addEventListener('change', function (event) {
             const file = event.target.files[0];

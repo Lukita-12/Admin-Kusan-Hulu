@@ -1,4 +1,8 @@
-<x-layout>
+<x-user-layout>
+    
+    <x-slot:heading>
+        PENERBITAN AKTA KELAHIRAN
+    </x-slot:heading>
 
     <x-form.container variant="main">
         <x-form.form action="{{ route('user.penerbitan_akta_kelahiran.store') }}" enctype="multipart/form-data">
@@ -170,4 +174,4 @@
         });
     </script>
     
-</x-layout>
+</x-user-layout>

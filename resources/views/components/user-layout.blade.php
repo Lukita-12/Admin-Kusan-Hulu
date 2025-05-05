@@ -15,7 +15,7 @@
             <x-sidebar.span variant="line" />
 
             <x-sidebar.nav>
-                <x-sidebar.nav-link href="#">Beranda</x-sidebar.nav-link>
+                <x-sidebar.nav-link href="{{ url('/') }}">Beranda</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.domisili_usaha.create') }}">Domisili Usaha</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.domisili_penduduk.create') }}">Domisili Penduduk</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.pindah_domisili.create') }}">Pindah Domisili</x-sidebar.nav-link>
