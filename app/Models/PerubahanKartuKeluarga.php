@@ -20,4 +20,9 @@ class PerubahanKartuKeluarga extends Model
     {
         return $this->belongsTo(Penduduk::class);
     }
+
+    public function kartukeluarga():BelongsTo
+    {
+        return $this->belongsTo(Penduduk::class);
+    }
 }

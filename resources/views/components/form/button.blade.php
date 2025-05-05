@@ -3,7 +3,8 @@
     $buttonClass = match($variant) {
         default => 'w-1/10 bg-slate-500',
         'save'  => 'w-1/10 bg-blue-400/80',
-        'search'  => 'w-1/10 bg-blue-400/80',
+        'next'  => 'w-fit bg-green-500/80',
+        'search'=> 'w-1/10 bg-blue-400/80',
     }
 @endphp
 

@@ -60,17 +60,19 @@ Route::controller(AkunController::class)->group(function() {
     Route::post('/akun/update-picture', 'updateProfilePic')->name('user.akun.updatePic');
 });
 
-
-Route::controller(PendudukController::class)->group(function () {
-    Route::get('/penduduk/create', 'create')    ->name('user.penduduk.create');
-    Route::post('/penduduk', 'store')           ->name('user.penduduk.store');
-    Route::get('/penduduk/{penduduk}', 'show')  ->name('user.penduduk.show');
+Route::controller(KartuKeluargaController::class)->group(function () {
+    Route::get('/kartu-keluarga', 'index')->name('user.kartu_keluarga.index');
+    Route::get('/kartu-keluarga/create', 'create')->name('user.kartu_keluarga.create');
+    Route::post('/kartu-keluarga', 'store')->name('user.kartu_keluarga.store');
+    Route::get('/kartu-keluarga/{kartukeluarga}/edit', 'edit')->name('user.kartu_keluarga.edit');
+    Route::put('/kartu-keluarga/{kartuKeluarga}', 'update')->name('user.kartu_keluarga.update');
 });
 
-Route::controller(KartuKeluargaController::class)->group(function () {
-    Route::get('/kartu-keluarga/create', 'create')          ->name('user.kartu_keluarga.create');
-    Route::post('/kartu-keluarga', 'store')                 ->name('user.kartu_keluarga.store');
-    Route::get('/kartu-keluarga/{kartuKeluarga}', 'show')   ->name('user.kartu_keluarga.show');
+Route::controller(PendudukController::class)->group(function () {
+    Route::get('/penduduk/create', 'create')->name('user.penduduk.create');
+    Route::post('/penduduk', 'store')->name('user.penduduk.store');
+    Route::get('/penduduk/{penduduk}/edit', 'edit')->name('user.penduduk.edit');
+    Route::put('/penduduk/{penduduk}', 'update')->name('user.penduduk.update');
 });
 
 Route::controller(PerubahanKartuKeluargaController::class)->group(function () {

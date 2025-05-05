@@ -81,7 +81,9 @@ class PendudukController extends Controller
      */
     public function edit(Penduduk $penduduk)
     {
-        //
+        return view('/user.penduduk.edit', [
+            'penduduk' => $penduduk,
+        ]);
     }
 
     /**
@@ -89,7 +91,7 @@ class PendudukController extends Controller
      */
     public function update(Request $request, Penduduk $penduduk)
     {
-        //
+        dd(request()->all());
     }
 
     /**

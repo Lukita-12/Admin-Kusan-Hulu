@@ -17,4 +17,9 @@ class Kartukeluarga extends Model
     {
         return $this->hasMany(Penduduk::class);
     }
+
+    // public function perubahan_kartu_keluerga()
+    // {
+    //     return $this->hasMany(PerubahanKartuKeluarga::class);
+    // }
 }

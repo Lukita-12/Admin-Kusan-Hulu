@@ -19,7 +19,7 @@
                 <x-sidebar.nav-link href="{{ route('user.domisili_usaha.create') }}">Domisili Usaha</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.domisili_penduduk.create') }}">Domisili Penduduk</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.pindah_domisili.create') }}">Pindah Domisili</x-sidebar.nav-link>
-                <x-sidebar.nav-link href="{{ route('user.kartu_keluarga.create') }}">Kartu Keluarga</x-sidebar.nav-link>
+                <x-sidebar.nav-link href="{{ route('user.kartu_keluarga.index') }}">Kartu Keluarga</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.penerbitan_akta_kelahiran.create') }}">Akta Kelahiran</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.akta_kematian.create') }}">Akta Kematian</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.akun.index') }}">Akun</x-sidebar.nav-link>
