@@ -1,4 +1,7 @@
-<x-layout>
+<x-admin-layout>
+    <x-slot:heading>
+        KARTU KELUARGA
+    </x-slot:heading>
 
     <x-table.container variant="main">
         <x-table.container variant="header">
@@ -62,4 +65,4 @@
         </x-table.container>
     </x-table.container>
 
-</x-layout>
+</x-admin-layout>

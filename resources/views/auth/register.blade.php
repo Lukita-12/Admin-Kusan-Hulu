@@ -1,48 +1,39 @@
 <x-layout>
+    <div class="w-full min-h-screen flex justify-center items-center">
 
-    <x-form.container variant="main">
-        <x-form.form action="{{ route('register.store') }}">
-            <x-form.container variant="form">
-
-                <x-form.container variant="label-input">
-                    <x-form.label for="name">Username</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="text" name="name" id="name" :venue="old('name')" placeholder="Username..." required />
+        <div class="w-xl bg-slate-200 rounded-lg shadow-md shadow-slate-500/80 px-6 py-6">
+            <form method="POST" action="{{ route('register.store') }}">
+                @csrf
+    
+                <div class="w-full flex flex-col gap-12">
+                    <span class="font-bold text-slate-700 text-center text-2xl">REGISTER</span>
+    
+                    <div class="w-full flex flex-col gap-3">
+                        <input type="text" name="name" id="name" placeholder="Username"
+                            class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required>
                         <x-form.error errorFor="name" />
-                    </x-form.container>
-                </x-form.container>
-
-                <x-form.container variant="label-input">
-                    <x-form.label for="email">Email</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="email" name="email" id="email" :venue="old('email')" placeholder="Email..." required />
+    
+                        <input type="email" name="email" id="email" placeholder="Email"
+                            class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required>
                         <x-form.error errorFor="email" />
-                    </x-form.container>
-                </x-form.container>
-
-                <x-form.container variant="label-input">
-                    <x-form.label for="password">Password</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="password" name="password" id="password" :venue="old('password')" placeholder="Password" required />
+    
+                        <input type="password" name="password" id="password" placeholder="Password"
+                            class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required>
                         <x-form.error errorFor="password" />
-                    </x-form.container>
-                </x-form.container>
-
-                <x-form.container variant="label-input">
-                    <x-form.label for="password_confirmation">Konfirmasi password</x-form.label>
-                    <x-form.container variant="input-error">
-                        <x-form.input type="password" name="password_confirmation" id="password_confirmation" :venue="old('password_confirmation')" placeholder="Konfirmasi password" required />
+    
+                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Konfirmasi password"
+                            class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required>
                         <x-form.error errorFor="password_confirmation" />
-                    </x-form.container>
-                </x-form.container>
+    
+                    </div>
+    
+                    <div class="w-full flex flex-col items-center gap-1">
+                        <button type="submit" class="w-full bg-blue-400/80 font-bold text-xl text-center text-slate-100 px-4 py-1 rounded-md">DAFTAR</button>
+                        <a href="{{ route('login') }}" class="text-blue-500 underline italic">Sudah punya akun?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-                <x-form.container variant="button">
-                    <x-form.button-link href="{{ url('/') }}">Batal</x-form.button-link>
-                    <x-form.button variant="save" type="submit">Daftar</x-form.button>
-                </x-form.container>
-
-            </x-form.container>
-        </x-form.form>
-    </x-form.container>
-
+    </div>
 </x-layout>
