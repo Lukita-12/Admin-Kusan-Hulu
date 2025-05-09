@@ -71,6 +71,31 @@ class DomisiliPendudukController extends Controller
         //
     }
 
+    // Search
+    public function search(Request $request)
+    {
+        $domisiliPenduduks = DomisiliPenduduk::search($request->search)->latest()->simplePaginate(6);
+
+        return view('admin.domisili_penduduk.index', [
+            'domisiliPenduduks' => $domisiliPenduduks,
+        ]);
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {   
+        $status = $request->status;
+
+        $domisiliPenduduks = $status
+            ? DomisiliPenduduk::filterByStatus($status)->latest()->simplePaginate(6)
+            : DomisiliPenduduk::with('penduduk.kartukeluarga')->latest()->simplePaginate(6);
+
+        return view('admin.domisili_penduduk.index', [
+            'domisiliPenduduks' => $domisiliPenduduks,
+        ]);
+    }
+
+    // Action
     public function accept(DomisiliPenduduk $domisiliPenduduk)
     {
         $domisiliPenduduk->status = 'Diproses';

@@ -5,17 +5,28 @@
 
     <div class="bg-slate-200 w-full flex flex-col justify-center rounded-lg shadow shadow-slate-500/60">
         <div class="bg-blue-400/80 w-full flex justify-between items-center px-4 py-2 rounded-t-lg">
-            <div class="w-full flex items-center gap-3">
-                <input type="text" placeholder="Search..." class="bg-slate-100 w-1/3 px-3 py-1 rounded-lg">
-                <a href="{{ route('admin.pindah_domisili.create') }}" class="inline-block bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">+ Buat</a>
-            </div>
-            <div class="flex items-center gap-2">
-                <label for="filter_status" class="font-medium text-xl text-slate-100">Filter:</label>
-                <select name="filter_status" id="filter_status" class="outline-none tet-slate-700 text-lg">
-                    <option value="Terbaru">Terbaru</option>
-                    <option value="Terlama">Terlama</option>
-                </select>
-            </div>
+            <form method="GET" action="{{ route('admin.pindah_domisili.search') }}">
+                <div class="flex items-center gap-2">                    
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..." class="bg-slate-100 px-3 py-1 rounded-sm">
+                    <button type="submit" class="bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">Cari</button>
+                </div>
+            </form>
+
+            <form method="GET" action="{{ route('admin.pindah_domisili.filter') }}" id="filterForm">
+                <div class="w-full flex items-center gap-2">
+                    <a href="{{ route('admin.pindah_domisili.create') }}" class="inline-block bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">+ Buat</a>
+
+                    <label for="filter_status" class="font-medium text-xl text-slate-100">Filter:</label>
+                    <select name="status" id="status" class="outline-none tet-slate-700 text-lg" onchange="document.getElementById('filterForm').submit();">
+                        <option value="">None</option>
+                        <option value="">All</option>
+                        <option value="Diajukan" {{ request('status') == 'Diajukan' ? 'selected' : '' }}>Diajukan</option>
+                        <option value="Diproses" {{ request('status') == 'Diproses' ? 'selected' : '' }}>Diproses</option>
+                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                        <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                    </select>
+                </div>
+            </form>
         </div>
     
         <div class="w-full overflow-auto">
@@ -37,9 +48,9 @@
                     @foreach ($pindahDomisilis as $pindahDomisili)
                         <tr class="odd:bg-slate-200 even:bg-slate-100">
                             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $loop->iteration }}</td>
+                            <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->tanggal->format('d M Y') }}</td>
                             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->penduduk->kartukeluarga->no_kk }}</td>
                             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->penduduk->nama }}</td>
-                            <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->tanggal->format('d M Y') }}</td>
                             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->alamat_asal }}</td>
                             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->tujuan }}</td>
                             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->alasan_pindah }}</td>

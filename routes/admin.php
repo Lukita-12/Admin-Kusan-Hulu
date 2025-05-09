@@ -29,6 +29,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/kartu-keluarga/{kartukeluarga}/edit', 'edit')->name('admin.kartu_keluarga.edit');
         Route::put('/kartu-keluarga/{kartukeluarga}', 'update')->name('admin.kartu_keluarga.update');
         Route::delete('/kartu-keluarga/{kartukeluarga}', 'destroy')->name('admin.kartu_keluarga.destroy');
+
+        Route::get('/kartu-keluarga/search', 'search')->name('admin.kartu_keluarga.search');
+        Route::get('/kartu-keluarga/filter', 'filter')->name('admin.kartu_keluarga.filter');
     });
     
     Route::controller(AkunController::class)->group(function () {
@@ -47,6 +50,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/penduduk/{penduduk}/edit', 'edit')->name('admin.penduduk.edit');
         Route::put('/penduduk/{penduduk}', 'update')->name('admin.penduduk.update');
         Route::delete('/penduduk/{penduduk}', 'destroy')->name('admin.penduduk.destroy');
+
+        Route::get('/penduduk/search', 'search')->name('admin.penduduk.search');
+        Route::get('/penduduk/filter', 'filter')->name('admin.penduduk.filter');
     });
 
     Route::controller(DomisiliPendudukController::class)->group(function () {
@@ -54,6 +60,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/domisili-penduduk/{domisiliPenduduk}/edit', 'edit')->name('admin.domisili_penduduk.edit');
         Route::put('/domisili-penduduk/{domisiliPenduduk}', 'update')->name('admin.domisili_penduduk.update');
 
+        Route::get('/domisili-penduduk/search', 'search')->name('admin.domisili_penduduk.search');
+        Route::get('/domisili-penduduk/filter', 'filter')->name('admin.domisili_penduduk.filter');
+        
         Route::patch('/domisili-penduduk/{domisiliPenduduk}/accept', 'accept')->name('admin.domisili_penduduk.accept');
         Route::patch('/domisili-penduduk/{domisiliPenduduk}/reject', 'reject')->name('admin.domisili_penduduk.reject');
         Route::patch('/domisili-penduduk/{domisiliPenduduk}/complete', 'complete')->name('admin.domisili_penduduk.complete');
@@ -67,6 +76,9 @@ Route::prefix('admin')->group(function () {
         Route::post('/domisili-usaha/{domisiliUsaha}', 'update')->name('admin.domisili_usaha.update');
         Route::delete('/domisili-usaha/{domisiliUsaha}', 'destroy')->name('admin.domisili_usaha.destroy');
 
+        Route::get('/domisili-usaha/search', 'search')->name('admin.domisili_usaha.search');
+        Route::get('/domisili-usaha/filter', 'filter')->name('admin.domisili_usaha.filter');
+
         Route::patch('/domisili-usaha/{domisiliUsaha}/accept' , 'accept')->name('admin.domisili_usaha.accept');
         Route::patch('/domisili-usaha/{domisiliUsaha}/reject', 'reject')->name('admin.domisili_usaha.reject');
         Route::patch('/domisili-usaha/{domisiliUsaha}/complete' , 'complete')->name('admin.domisili_usaha.complete');
@@ -79,6 +91,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/pindah-domisili/{pindahDomisili}/edit', 'edit')->name('admin.pindah_domisili.edit');
         Route::put('/pindah-domisili/{pindahDomisili}', 'update')->name('admin.pindah_domisili.update');
         Route::delete('/pindah-domisili/{pindahDomisili}', 'destroy')->name('admin.pindah_domisili.destroy');
+
+        Route::get('/pindah-domisili/search', 'search')->name('admin.pindah_domisili.search');
+        Route::get('/pindah-domisili/filter', 'filter')->name('admin.pindah_domisili.filter');
 
         Route::patch('/pindah-domisili/{pindahDomisili}/accept' , 'accept')->name('admin.pindah_domisili.accept');
         Route::patch('/pindah-domisili/{pindahDomisili}/reject', 'reject')->name('admin.pindah_domisili.reject');
@@ -105,6 +120,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/akta-kematian/{aktaKematian}/edit', 'edit')->name('admin.akta_kematian.edit');
         Route::put('/akta-kematian/{aktaKematian}', 'update')->name('admin.akta_kematian.update');
         Route::delete('/akta-kematian/{aktaKematian}', 'destroy')->name('admin.akta_kematian.destroy');
+
+        Route::get('/akta-kematian/search', 'search')->name('admin.akta_kematian.search');
+        Route::get('/akta-kematian/filter', 'filter')->name('admin.akta_kematian.filter');
 
         Route::patch('/akta-kematian/{aktaKematian}/accept' , 'accept')->name('admin.akta_kematian.accept');
         Route::patch('/akta-kematian/{aktaKematian}/reject', 'reject')->name('admin.akta_kematian.reject');

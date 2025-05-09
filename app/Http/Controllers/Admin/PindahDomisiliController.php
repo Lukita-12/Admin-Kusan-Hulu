@@ -79,6 +79,27 @@ class PindahDomisiliController extends Controller
         return redirect('admin/pindah-domisili');
     }
 
+    // Search
+    public function search(Request $request)
+    {
+        $pindahDomisilis = PindahDomisili::search($request->search)->latest()->simplePaginate(6);
+
+        return view('admin.pindah_domisili.index', compact('pindahDomisilis'));
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {
+        $status = $request->status;
+
+        $pindahDomisilis = $status
+            ? PindahDomisili::filterByStatus($status)->latest()->simplePaginate(6)
+            : PindahDomisili::with('penduduk.kartukeluarga')->latest()->simplePaginate(6);
+
+        return view('admin.pindah_domisili.index', compact('pindahDomisilis'));
+    }
+
+    // Action
     public function accept(PindahDomisili $pindahDomisili)
     {
         $pindahDomisili->status = 'Diproses';

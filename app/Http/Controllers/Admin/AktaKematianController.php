@@ -82,6 +82,31 @@ class AktaKematianController extends Controller
         return redirect('/admin/akta-kematian');
     }
 
+    // Search
+    public function search(Request $request)
+    {
+        $aktaKematians = AktaKematian::search($request->search)->latest()->simplePaginate(6);
+
+        return view('admin.akta_kematian.index', [
+            'aktaKematians' => $aktaKematians,
+        ]);
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {   
+        $status = $request->status;
+
+        $aktaKematians = $status
+            ? AktaKematian::filterByStatus($status)->latest()->simplePaginate(6)
+            : AktaKematian::with('penduduk.kartukeluarga')->latest()->simplePaginate(6);
+
+        return view('admin.akta_kematian.index', [
+            'aktaKematians' => $aktaKematians,
+        ]);
+    }
+
+    // Action
     public function accept(AktaKematian $aktaKematian)
     {
         $aktaKematian->status = 'Diproses';

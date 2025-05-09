@@ -10,7 +10,7 @@ class KartukeluargaController extends Controller
 {
     public function index()
     {
-        $kartukeluargas = Kartukeluarga::latest()->simplePaginate(6);
+        $kartukeluargas = Kartukeluarga::with(['penduduk'])->latest()->simplePaginate(6);
 
         return view('/admin.kartu_keluarga.index', [
             'kartukeluargas' => $kartukeluargas
@@ -82,5 +82,33 @@ class KartukeluargaController extends Controller
         $kartukeluarga->delete();
 
         return redirect('/admin/kartu-keluarga');
+    }
+
+    // Search
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $kartukeluargas = Kartukeluarga::search($search)->latest()->paginate(6);
+
+        return view('admin.kartu_keluarga.index', [
+            'kartukeluargas' => $kartukeluargas,
+        ]);
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {
+        $filter = $request->filter;
+
+        if ($filter === 'Terbaru') {
+            $kartukeluargas = Kartukeluarga::filterByTanggalPenerbitan('desc')->simplePaginate(6);
+        } elseif ($filter === 'Terlama') {
+            $kartukeluargas = Kartukeluarga::filterByTanggalPenerbitan('asc')->simplePaginate(6);
+        } else {
+            $kartukeluargas = Kartukeluarga::with('penduduk')->simplePaginate(6); // default (semua data)
+        }
+
+        return view('admin.kartu_keluarga.index', compact('kartukeluargas'));
     }
 }

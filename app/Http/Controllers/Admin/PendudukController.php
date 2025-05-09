@@ -102,4 +102,28 @@ class PendudukController extends Controller
 
         return redirect('/admin/penduduk');
     }
+
+    // Search
+    public function search(Request $request)
+    {
+        $penduduks = Penduduk::search($request->search)->latest()->paginate(10);
+
+        return view('admin.penduduk.index', compact('penduduks'));
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {
+        $filter = $request->filter;
+
+        if ($filter === 'Terbaru') {
+            $penduduks = Penduduk::filterByCreatedAt('desc')->simplePaginate(6);
+        } elseif ($filter === 'Terlama') {
+            $penduduks = Penduduk::filterByCreatedAt('asc')->simplePaginate(6);
+        } else {
+            $penduduks = Penduduk::simplePaginate(6); // default (semua data)
+        }
+
+        return view('admin.penduduk.index', compact('penduduks'));
+    }
 }

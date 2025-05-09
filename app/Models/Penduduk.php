@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -58,5 +59,21 @@ class Penduduk extends Model
     public function aktaKematian(): HasMany
     {
         return $this->hasMany(AktaKematian::class);
+    }
+
+    // Search
+    public static function search($keyword): Builder
+    {
+        return self::with('kartuKeluarga')
+            ->where('nama', 'like', '%' . $keyword . '%')
+            ->orWhereHas('kartuKeluarga', function ($query) use ($keyword) {
+                $query->where('no_kk', 'like', '%' . $keyword . '%');
+            });
+    }
+
+    // Filter
+    public static function filterByCreatedAt($urutan = 'desc')
+    {
+        return self::orderBy('created_at', $urutan);
     }
 }

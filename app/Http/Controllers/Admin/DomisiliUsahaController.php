@@ -82,6 +82,30 @@ class DomisiliUsahaController extends Controller
         return redirect('/admin/domisili-usaha');
     }
 
+    // Search
+    public function search(Request $request)
+    {
+        $domisiliUsahas = DomisiliUsaha::search($request->search)->latest()->simplePaginate(6);
+
+        return view('admin.domisili_usaha.index', [
+            'domisiliUsahas' => $domisiliUsahas,
+        ]);
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {   
+        $status = $request->status;
+
+        $domisiliUsahas = $status
+            ? DomisiliUsaha::filterByStatus($status)->latest()->simplePaginate(6)
+            : DomisiliUsaha::with('penduduk.kartukeluarga')->latest()->simplePaginate(6);
+
+        return view('admin.domisili_usaha.index', [
+            'domisiliUsahas' => $domisiliUsahas,
+        ]);
+    }
+
     public function accept(DomisiliUsaha $domisiliUsaha)
     {
         $domisiliUsaha->status = 'Diproses';

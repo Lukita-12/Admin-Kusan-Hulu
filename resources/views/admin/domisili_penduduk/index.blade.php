@@ -4,13 +4,28 @@
     </x-slot:heading>
 
     <x-table.container variant="main">
-        <x-table.container variant="header">
-            <x-table.search type="text" placeholder="Cari..." />
-            <x-table.filter>
-                <option value="Terbaru">Terbaru</option>
-                <option value="Terlama">Terlama</option>
-            </x-table.filter>
-        </x-table.container>
+        <div class="bg-blue-400/80 w-full flex justify-between items-center px-4 py-2 rounded-t-lg">
+            <form method="GET" action="{{ route('admin.domisili_penduduk.search') }}">
+                <div class="flex items-center gap-2">                    
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama penduduk..." class="bg-slate-100 px-3 py-1 rounded-sm">
+                    <button type="submit" class="bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">Cari</button>
+                </div>
+            </form>
+
+            <form method="GET" action="{{ route('admin.domisili_penduduk.filter') }}" id="filterForm">
+                <div class="w-full flex items-center gap-2">
+                    <label for="filter_status" class="font-medium text-xl text-slate-100">Filter:</label>
+                    <select name="status" id="status" class="outline-none tet-slate-700 text-lg" onchange="document.getElementById('filterForm').submit();">
+                        <option value="">None</option>
+                        <option value="">All</option>
+                        <option value="Diajukan" {{ request('status') == 'Diajukan' ? 'selected' : '' }}>Diajukan</option>
+                        <option value="Diproses" {{ request('status') == 'Diproses' ? 'selected' : '' }}>Diproses</option>
+                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                        <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                    </select>
+                </div>
+            </form>
+        </div>
 
         <x-table.container variant="table">
             <x-table.table>
@@ -46,7 +61,7 @@
                                         @method('PATCH')
                                         <x-table.button variant="complete" type="submit">Selesai</x-table.button>
                                     </x-table.form>
-                                    <x-table.button-link href="{{ route('admin.domisili_penduduk.edit', $domisiliPenduduk) }}">Edit</x-table.button-link>
+                                    <x-table.button-link variant="edit" href="{{ route('admin.domisili_penduduk.edit', $domisiliPenduduk) }}">Edit</x-table.button-link>
                                 </x-table.container>
                             </x-table.td>
                         </x-table.tr>
