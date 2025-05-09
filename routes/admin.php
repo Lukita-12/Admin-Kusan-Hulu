@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\PerubahanKartuKeluargaController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(function () {
     Route::controller(DesaController::class)->group(function () {
         Route::get('/desa', 'index')->name('admin.desa.index');
         Route::get('/desa/create', 'create')->name('admin.desa.create');
