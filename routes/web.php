@@ -12,7 +12,7 @@ Route::get('/beranda', function () {
 })->name('beranda');
 
 Route::controller(DashboardController::class)->group(function () {
-    Route::get('/dashboard', 'index')->name('dashboard.index');
+    Route::get('/dashboard', 'index')->name('dashboard');
 });
 
 require __DIR__. '/auth.php';

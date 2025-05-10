@@ -44,10 +44,10 @@ class SessionController extends Controller
         // Redirect based on role
         $user = Auth::user();
         
-        if (in_array($user->role, ['admin', 'superadmin'])) {
+        if (in_array($user->role, ['admin', 'super_admin'])) {
             return redirect()->route('dashboard');
         } elseif ($user->role === 'user') {
-            return redirect()->route('home');
+            return redirect()->route('beranda');
         }
 
         // Redirect
