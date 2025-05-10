@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/beranda', function () {
+    return view('beranda');
+})->name('beranda');
+
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'index')->name('dashboard.index');
 });
