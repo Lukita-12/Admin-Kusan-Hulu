@@ -34,7 +34,7 @@
                             <x-table.td>{{ $user->password }}</x-table.td>
                             <x-table.td>
                                 <x-table.container variant="button">
-                                    <x-table.button-link href="#">Edit</x-table.button-link>
+                                    <x-table.button-link variant="edit" href="{{ route('admin.akun.edit', $user) }}">Edit</x-table.button-link>
                                     <x-table.form action="#">
                                         @method('DELETE')
                                         <x-table.button variant="delete" type="submit">Hapus</x-table.button>

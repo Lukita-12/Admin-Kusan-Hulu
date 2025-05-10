@@ -38,9 +38,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::get('/akun', 'index')->name('admin.akun.index');
         Route::get('/akun/create', 'create')->name('admin.akun.create');
         Route::post('/akun', 'store')->name('admin.akun.store');
-        Route::get('/akun/{akun}/edit', 'edit')->name('admin.akun.edit');
-        Route::put('/akun/{akun}', 'update')->name('admin.akun.update');
-        Route::delete('/akun/{akun}', 'destroy')->name('admin.akun.destroy');
+        Route::get('/akun/{user}/edit', 'edit')->name('admin.akun.edit');
+        Route::put('/akun/{user}', 'update')->name('admin.akun.update');
+        Route::delete('/akun/{user}', 'destroy')->name('admin.akun.destroy');
     });
 
     Route::controller(PendudukController::class)->group(function () {

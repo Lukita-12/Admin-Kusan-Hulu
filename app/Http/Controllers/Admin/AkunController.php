@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
 
 class AkunController extends Controller
 {
@@ -47,8 +50,9 @@ class AkunController extends Controller
      */
     public function edit(User $user)
     {
-        dd('You hit it!');
-        return view('/admin.akun.');
+        return view('/admin.akun.edit', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -56,7 +60,35 @@ class AkunController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd('You hit it!');
+        $validatedData = $request->validate([
+            'name'          => ['required'],
+            'role'          => ['required', 'in:user,admin,super_admin'],
+            'email'         => ['required', 'email'],
+            'password'      => ['nullable', 'min:8'],
+            'profile_pic'   => ['nullable', 'image', 'max:2048'],
+        ]);
+
+        if ($request->filled('password')) {
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            unset($validatedData['password']); // Jangan update password jika kosong
+        }
+
+        // Jika ada file gambar baru
+        if ($request->hasFile('profile_pic')) {
+            // Hapus gambar lama jika ada
+            if ($user->profile_pic && Storage::exists('public/' . $user->profile_pic)) {
+                Storage::delete('public/' . $user->profile_pic);
+            }
+
+            // Simpan gambar baru
+            $path = $request->file('profile_pic')->store('profile_pics', 'public');
+            $validatedData['profile_pic'] = $path;
+        }
+
+        $user->update($validatedData);
+
+        return redirect('/admin/akun');
     }
 
     /**
