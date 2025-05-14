@@ -6,17 +6,47 @@ use App\Http\Controllers\Controller;
 use App\Models\AktaKematian;
 use App\Models\Penduduk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AktaKematianController extends Controller
 {
-    public function index()
-    {
-        $aktaKematians = AktaKematian::with('penduduk')->latest()->simplePaginate(6);
+   public function index(Request $request)
+{
+    $role = auth::user()->role;
 
-        return view('/admin.akta_kematian.index', [
-            'aktaKematians' => $aktaKematians
-        ]);
+    // Buat query dasar dengan relasi penduduk
+    $query = AktaKematian::with('penduduk');
+
+    // Filter berdasarkan role
+    if ($role === 'super_admin') {
+        $query->whereIn('status', ['Diproses', 'Selesai']);
+    } elseif ($role === 'admin') {
+        $query->whereIn('status', ['Diajukan', 'Ditolak','Diproses', 'Selesai']);
     }
+
+    // Tambahkan pencarian jika ada
+    if ($request->filled('search')) {
+        $query->whereHas('penduduk', function ($q) use ($request) {
+            $q->where('nama', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    // Tambahkan filter status dari dropdown jika valid sesuai role
+    $allowedStatus = $role === 'super_admin'
+        ? ['Diproses', 'Selesai']
+        : ['Diajukan', 'Ditolak'];
+
+    if ($request->filled('status') && in_array($request->status, $allowedStatus)) {
+        $query->where('status', $request->status);
+    }
+
+    // Ambil hasil query
+    $aktaKematians = $query->orderBy('tanggal', 'desc')->paginate(10);
+
+    return view('admin.akta_kematian.index', compact('aktaKematians'));
+}
+
+
 
     public function create()
     {
@@ -128,6 +158,6 @@ class AktaKematianController extends Controller
         $aktaKematian->status = 'Selesai';
         $aktaKematian->save();
 
-        return redirect('/admin/akta-kematian');
+        return redirect()->route('admin.SuratAktaKematian.index');
     }
 }

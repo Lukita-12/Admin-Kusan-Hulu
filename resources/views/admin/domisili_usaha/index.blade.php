@@ -45,38 +45,53 @@
                 </x-table.thead>
                 <tbody>
                     @foreach ($domisiliUsahas as $domisiliUsaha)
-                        <x-table.tr variant="body">
-                            <x-table.td>{{ $loop->iteration }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->tanggal->format('d M Y') }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->penduduk->nama }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->nama_usaha }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->jenis_usaha }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->alamat_usaha }}</x-table.td>
-                            <x-table.td>{{ $domisiliUsaha->status }}</x-table.td>
-                            <x-table.td>
-                                <x-table.container variant="button">
-                                    <x-table.form action="{{ route('admin.domisili_usaha.accept', $domisiliUsaha) }}">
-                                        @method('PATCH')
-                                        <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                                    </x-table.form>
-                                    <x-table.form action="{{ route('admin.domisili_usaha.reject', $domisiliUsaha) }}">
-                                        @method('PATCH')
-                                        <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                                    </x-table.form>
-                                    <x-table.form action="{{ route('admin.domisili_usaha.complete', $domisiliUsaha) }}">
-                                        @method('PATCH')
-                                        <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                                    </x-table.form>
+    @php
+        $role = auth()->user()->role;
+        $status = $domisiliUsaha->status;
+        $tampilkan = false;
 
-                                    <x-table.button-link variant="edit" href="{{ route('admin.domisili_usaha.edit', $domisiliUsaha) }}">Edit</x-table.button-link>
-                                    <x-table.form action="{{ route('admin.domisili_usaha.destroy', $domisiliUsaha) }}">
-                                        @method('DELETE')
-                                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                    </x-table.form>
-                                </x-table.container>
-                            </x-table.td>
-                        </x-table.tr>
-                    @endforeach
+        if ($role === 'super_admin' && in_array($status, ['Diproses', 'Selesai'])) {
+            $tampilkan = true;
+        } elseif ($role === 'admin' && in_array($status, ['Diajukan', 'Ditolak','Diproses', 'Selesai'])) {
+            $tampilkan = true;
+        }
+    @endphp
+
+    @if ($tampilkan)
+        <x-table.tr variant="body">
+            <x-table.td>{{ $loop->iteration }}</x-table.td>
+            <x-table.td>{{ $domisiliUsaha->tanggal->format('d M Y') }}</x-table.td>
+            <x-table.td>{{ $domisiliUsaha->penduduk->nama }}</x-table.td>
+            <x-table.td>{{ $domisiliUsaha->nama_usaha }}</x-table.td>
+            <x-table.td>{{ $domisiliUsaha->jenis_usaha }}</x-table.td>
+            <x-table.td>{{ $domisiliUsaha->alamat_usaha }}</x-table.td>
+            <x-table.td>{{ $domisiliUsaha->status }}</x-table.td>
+            <x-table.td>
+                <x-table.container variant="button">
+                    <x-table.form action="{{ route('admin.domisili_usaha.accept', $domisiliUsaha) }}">
+                        @method('PATCH')
+                        <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                    </x-table.form>
+                    <x-table.form action="{{ route('admin.domisili_usaha.reject', $domisiliUsaha) }}">
+                        @method('PATCH')
+                        <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                    </x-table.form>
+                    <x-table.form action="{{ route('admin.domisili_usaha.complete', $domisiliUsaha) }}">
+                        @method('PATCH')
+                        <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                    </x-table.form>
+
+                    <x-table.button-link variant="edit" href="{{ route('admin.domisili_usaha.edit', $domisiliUsaha) }}">Edit</x-table.button-link>
+                    <x-table.form action="{{ route('admin.domisili_usaha.destroy', $domisiliUsaha) }}">
+                        @method('DELETE')
+                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                    </x-table.form>
+                </x-table.container>
+            </x-table.td>
+        </x-table.tr>
+    @endif
+@endforeach
+
                 </tbody>
             </x-table.table>
         </x-table.container>

@@ -6,17 +6,48 @@ use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\PenerbitanAktaKelahiran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenerbitanAktaKelahiranController extends Controller
 {
-    public function index()
-    {
-        $penerbitanAktaKelahirans = PenerbitanAktaKelahiran::latest()->simplePaginate(6);
+    public function index(Request $request)
+{
+    $role = Auth::user()->role;
 
-        return view('/admin.penerbitan_akta_kelahiran.index', [
-            'penerbitanAktaKelahirans' => $penerbitanAktaKelahirans
-        ]);
+    // Query dasar (tambahkan relasi jika ada, misal: 'penduduk')
+    $query = PenerbitanAktaKelahiran::query();
+
+    // Filter berdasarkan role
+    if ($role === 'super_admin') {
+        $query->whereIn('status', ['Diproses', 'Selesai']);
+    } elseif ($role === 'admin') {
+        $query->whereIn('status', ['Diajukan', 'Ditolak','Diproses', 'Selesai']);
     }
+
+    // Pencarian berdasarkan nama penduduk (jika ada relasi penduduk)
+    if ($request->filled('search')) {
+        $query->whereHas('penduduk', function ($q) use ($request) {
+            $q->where('nama', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    // Filter status dropdown (validasi sesuai role)
+    $allowedStatus = $role === 'super_admin'
+        ? ['Diproses', 'Selesai']
+        : ['Diajukan', 'Ditolak'];
+
+    if ($request->filled('status') && in_array($request->status, $allowedStatus)) {
+        $query->where('status', $request->status);
+    }
+
+    // Pagination akhir
+    $penerbitanAktaKelahirans = $query->orderBy('tanggal', 'desc')->paginate(10);
+
+    return view('admin.penerbitan_akta_kelahiran.index', [
+        'penerbitanAktaKelahirans' => $penerbitanAktaKelahirans,
+    ]);
+}
+
 
     public function create()
     {

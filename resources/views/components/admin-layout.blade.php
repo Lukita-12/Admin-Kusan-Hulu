@@ -11,7 +11,10 @@
 
         <x-sidebar.aside>
             <x-sidebar.container variant="sidebar">
-                <x-sidebar.span variant="logo">LOGO'S</x-sidebar.span>
+            <div class="flex flex-col items-center py-2">
+    <img src="{{ asset('images/logo_tanbu.png') }}" alt="Logo" class="h-15 w-auto object-contain mb-2">
+    <h1 class="text-white text-base font-semibold">KECAMATAN KUSAN HULU</h1>
+</div>
                 <x-sidebar.span variant="line" />
 
                 <x-sidebar.nav>

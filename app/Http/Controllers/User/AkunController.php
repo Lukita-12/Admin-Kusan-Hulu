@@ -53,7 +53,7 @@ class AkunController extends Controller
         // Validasi input
         $validatedData = $request->validate([
             'name'        => ['required', 'string', 'max:255'],
-            'email'       => ['required', 'email', 'max:254', 'unique:users,email,' . $user->id],
+            'email'       => ['required', 'email', 'max:254'],
             'password'    => ['nullable', 'min:8'], // password opsional
             'profile_pic' => ['nullable', 'image', 'max:2048'], // gambar opsional
         ]);
@@ -80,7 +80,7 @@ class AkunController extends Controller
         // Update user dengan data yang telah divalidasi
         $user->update($validatedData);
 
-        return redirect()->route('user.akun.index')->with('success', 'Profil berhasil diperbarui.');
+        return redirect()->route('beranda');
     }
 
     /**

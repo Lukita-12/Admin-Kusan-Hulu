@@ -5,19 +5,49 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DomisiliPenduduk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class DomisiliPendudukController extends Controller
 {
-    public function index()
-    {
-        $domisiliPenduduks = DomisiliPenduduk::with(['penduduk.kartukeluarga'])
-            ->latest()->simplePaginate(6);
+    public function index(Request $request)
+{
+    $role = Auth::user()->role;
 
-        return view('admin.domisili_penduduk.index', [
-            'domisiliPenduduks' => $domisiliPenduduks,
-        ]);
+    // Query dasar dengan relasi penduduk dan kartu keluarga
+    $query = DomisiliPenduduk::with(['penduduk.kartukeluarga']);
+
+    // Filter berdasarkan role
+    if ($role === 'super_admin') {
+        $query->whereIn('status', ['Diproses', 'Selesai']);
+    } elseif ($role === 'admin') {
+        $query->whereIn('status', ['Diajukan', 'Ditolak','Diproses', 'Selesai']);
     }
+
+    // Pencarian nama penduduk
+    if ($request->filled('search')) {
+        $query->whereHas('penduduk', function ($q) use ($request) {
+            $q->where('nama', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    // Filter status dropdown (sesuai role)
+    $allowedStatus = $role === 'super_admin'
+        ? ['Diproses', 'Selesai']
+        : ['Diajukan', 'Ditolak'];
+
+    if ($request->filled('status') && in_array($request->status, $allowedStatus)) {
+        $query->where('status', $request->status);
+    }
+
+    // Ambil hasil query
+    $domisiliPenduduks = $query->orderBy('tanggal', 'desc')->paginate(10);
+
+    return view('admin.domisili_penduduk.index', [
+        'domisiliPenduduks' => $domisiliPenduduks,
+    ]);
+}
+
 
     /**
      * Show the form for creating a new resource.

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PendudukController;
 use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
 use App\Http\Controllers\Admin\PerubahanKartuKeluargaController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
+use App\Http\Controllers\SuratAktaKematianController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(function () {
@@ -140,5 +141,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::patch('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/accept' , 'accept')->name('admin.perubahan_kartu_keluarga.accept');
         Route::patch('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/reject', 'reject')->name('admin.perubahan_kartu_keluarga.reject');
         Route::patch('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}/complete' , 'complete')->name('admin.perubahan_kartu_keluarga.complete');
+    });
+
+    Route::controller(SuratAktaKematianController::class)->group(function () {
+        Route::get('/SuratAktaKematian','index')->name('admin.SuratAktaKematian.index');
     });
 });

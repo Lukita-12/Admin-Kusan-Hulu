@@ -2,4 +2,66 @@
     <x-slot:heading>
         Beranda
     </x-slot:heading>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- DOMISILI USAHA -->
+        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+            <div class="flex items-center gap-4">
+                <x-heroicon-s-building-office class="w-16 h-16 text-slate-700" />
+                <div class="flex flex-col">
+                    <span class="font-semibold">DOMISILI USAHA</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- DOMISILI PENDUDUK -->
+        <a href="{{ route('admin.domisili_penduduk.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+            <div class="flex items-center gap-4">
+                <x-heroicon-s-user-group class="w-16 h-16 text-slate-700" />
+                <div class="flex flex-col">
+                    <span class="font-semibold">DOMISILI PENDUDUK</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- PINDAH DOMISILI -->
+        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+            <div class="flex items-center gap-4">
+                <x-heroicon-s-arrow-path class="w-16 h-16 text-slate-700" />
+                <div class="flex flex-col">
+                    <span class="font-semibold">PINDAH DOMISILI</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- PERUBAHAN KK -->
+        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+            <div class="flex items-center gap-4">
+                <x-heroicon-s-identification class="w-16 h-16 text-slate-700" />
+                <div class="flex flex-col">
+                    <span class="font-semibold">PERUBAHAN KARTU KELUARGA</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- AKTA KELAHIRAN -->
+        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+            <div class="flex items-center gap-4">
+                <x-heroicon-s-cake class="w-16 h-16 text-slate-700" />
+                <div class="flex flex-col">
+                    <span class="font-semibold">AKTA KELAHIRAN</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- AKTA KEMATIAN -->
+        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+            <div class="flex items-center gap-4">
+                <x-heroicon-s-exclamation-circle class="w-16 h-16 text-slate-700" />
+                <div class="flex flex-col">
+                    <span class="font-semibold">AKTA KEMATIAN</span>
+                </div>
+            </div>
+        </a>
+    </div>
 </x-user-layout>

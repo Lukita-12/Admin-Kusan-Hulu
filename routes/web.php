@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\SuratAktaKematianController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,6 +15,10 @@ Route::get('/beranda', function () {
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'index')->name('dashboard');
 });
+
+// Route::controller(SuratAktaKematianController::class)->group(function () {
+//     Route::get('SuratAkta','index')->name('SuratAKta');
+// });
 
 require __DIR__. '/auth.php';
 require __DIR__. '/user.php';
