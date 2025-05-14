@@ -1,6 +1,10 @@
 <x-layout>
     <div class="bg-slate-200 rounded-lg shadow-md shadow-slate-500/80 px-8 py-6 mx-24 my-4">
-        <div class="w-full flex flex-col gap-3">
+        <form method="POST" action="{{ route('user.akun.update', $user) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <div class="w-full flex flex-col gap-3">
                 <div class="w-full flex flex-col justify-center items-center gap-3 mb-3">
                     <img id="profilePreview" 
                         src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : asset('images/Winter-Grass.jpg') }}" 

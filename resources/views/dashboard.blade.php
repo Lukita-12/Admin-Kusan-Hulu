@@ -135,7 +135,7 @@
     
         <div class="w-1/2 bg-slate-200 flex flex-col justify-center rounded-md shadow shadow-slate-500/60">
             <div class="w-full bg-blue-400/80 flex justify-between items-center px-4 py-2 gap-3 rounded-t-md">
-                <span class="font-bold text-slate-100 text-xl">AKTA KEMATIAN</span>
+                <span class="font-bold text-slate-100 text-xl">AKTA KELAHIRAN</span>
                 <a href="{{ route('admin.kartu_keluarga.index') }}" class="font-bold text-slate-100 text-xl">></a>
             </div>
     

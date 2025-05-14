@@ -28,8 +28,8 @@
                         <x-table.td variant="head">Tempat kelahiran</x-table.td>
                         <x-table.td variant="head">Jenis kelamin</x-table.td>
                         <x-table.td variant="head">Agama</x-table.td>
-                        <x-table.td variant="head">Upload St. Bidan</x-table.td>
-                        <x-table.td variant="head">Upload St. RT</x-table.td>
+                        <x-table.td variant="head">Upload Sp. Bidan</x-table.td>
+                        <x-table.td variant="head">Upload Sp. RT</x-table.td>
                         <x-table.td variant="head">Status</x-table.td>
                         <x-table.td variant="head">Aksi</x-table.td>
                     </x-table.tr>
