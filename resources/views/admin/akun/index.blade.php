@@ -33,13 +33,15 @@
                             <x-table.td>{{ $user->email }}</x-table.td>
                             <x-table.td>{{ $user->password }}</x-table.td>
                             <x-table.td>
-                                <x-table.container variant="button">
-                                    <x-table.button-link variant="edit" href="{{ route('admin.akun.edit', $user) }}">Edit</x-table.button-link>
-                                    <x-table.form action="#">
-                                        @method('DELETE')
-                                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                    </x-table.form>
-                                </x-table.container>
+                                @can ('editOrDelete', $user)
+                                    <x-table.container variant="button">
+                                        <x-table.button-link variant="edit" href="{{ route('admin.akun.edit', $user) }}">Edit</x-table.button-link>
+                                        <x-table.form action="#">
+                                            @method('DELETE')
+                                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                        </x-table.form>
+                                    </x-table.container>
+                                @endcan
                             </x-table.td>
                         </x-table.tr>
                     @endforeach

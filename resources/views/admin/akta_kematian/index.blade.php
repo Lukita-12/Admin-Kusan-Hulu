@@ -68,24 +68,28 @@
                                 <x-table.td>{{ $aktaKematian->status }}</x-table.td>
                                 <x-table.td>
                                     <x-table.container variant="button">
-                                        <x-table.form action="{{ route('admin.akta_kematian.accept', $aktaKematian) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                                        </x-table.form>
-                                        <x-table.form action="{{ route('admin.akta_kematian.reject', $aktaKematian) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                                        </x-table.form>
-                                        <x-table.form action="{{ route('admin.akta_kematian.complete', $aktaKematian) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                                        </x-table.form>
+                                        @can ('acceptOrReject', $aktaKematian)
+                                            <x-table.form action="{{ route('admin.akta_kematian.accept', $aktaKematian) }}">
+                                                @method('PATCH')
+                                                <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                                            </x-table.form>
+                                            <x-table.form action="{{ route('admin.akta_kematian.reject', $aktaKematian) }}">
+                                                @method('PATCH')
+                                                <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                                            </x-table.form>
+                                        @endcan
+                                        @can ('completeOrEditOrDelete', $aktaKematian)
+                                            <x-table.form action="{{ route('admin.akta_kematian.complete', $aktaKematian) }}">
+                                                @method('PATCH')
+                                                <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                                            </x-table.form>
 
-                                        <x-table.button-link variant="edit" href="{{ route('admin.akta_kematian.edit', $aktaKematian) }}">Edit</x-table.button-link>
-                                        <x-table.form action="{{ route('admin.akta_kematian.destroy', $aktaKematian) }}">
-                                            @method('DELETE')
-                                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                        </x-table.form>
+                                            <x-table.button-link variant="edit" href="{{ route('admin.akta_kematian.edit', $aktaKematian) }}">Edit</x-table.button-link>
+                                            <x-table.form action="{{ route('admin.akta_kematian.destroy', $aktaKematian) }}">
+                                                @method('DELETE')
+                                                <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                            </x-table.form>
+                                        @endcan
                                     </x-table.container>
                                 </x-table.td>
                             </x-table.tr>

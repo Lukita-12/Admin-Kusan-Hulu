@@ -72,24 +72,28 @@
             <x-table.td>{{ $penerbitanAktaKelahiran->status }}</x-table.td>
             <x-table.td>
                 <x-table.container variant="button">
-                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.accept', $penerbitanAktaKelahiran) }}">
-                        @method('PATCH')
-                        <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                    </x-table.form>
-                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.reject', $penerbitanAktaKelahiran) }}">
-                        @method('PATCH')
-                        <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                    </x-table.form>
-                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.complete', $penerbitanAktaKelahiran) }}">
-                        @method('PATCH')
-                        <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                    </x-table.form> 
+                    @can ('acceptOrReject', $penerbitanAktaKelahiran)
+                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.accept', $penerbitanAktaKelahiran) }}">
+                            @method('PATCH')
+                            <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                        </x-table.form>
+                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.reject', $penerbitanAktaKelahiran) }}">
+                            @method('PATCH')
+                            <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                        </x-table.form>
+                    @endcan
+                    @can ('completeOrEditOrDelete', $penerbitanAktaKelahiran)
+                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.complete', $penerbitanAktaKelahiran) }}">
+                            @method('PATCH')
+                            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                        </x-table.form> 
 
-                    <x-table.button-link variant="edit" href="{{ route('admin.penerbitan_akta_kelahiran.edit', $penerbitanAktaKelahiran) }}">Edit</x-table.button-link>
-                    <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.destroy', $penerbitanAktaKelahiran) }}">
-                        @method('DELETE')
-                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                    </x-table.form>
+                        <x-table.button-link variant="edit" href="{{ route('admin.penerbitan_akta_kelahiran.edit', $penerbitanAktaKelahiran) }}">Edit</x-table.button-link>
+                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.destroy', $penerbitanAktaKelahiran) }}">
+                            @method('DELETE')
+                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                        </x-table.form>
+                    @endcan
                 </x-table.container>
             </x-table.td>
         </x-table.tr>

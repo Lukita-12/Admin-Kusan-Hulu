@@ -61,11 +61,13 @@
                             <x-table.td>{{ $penduduk->warga_negara }}</x-table.td>
                             <x-table.td>
                                 <x-table.container variant="button">
-                                    <x-table.button-link variant="edit" href="{{ route('admin.penduduk.edit', $penduduk) }}">Edit</x-table.button-link>
-                                    <x-table.form action="{{ route('admin.penduduk.destroy', $penduduk) }}">
-                                        @method('DELETE')
-                                        <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                    </x-table.form>
+                                    @can ('editOrDelete', $penduduk)
+                                        <x-table.button-link variant="edit" href="{{ route('admin.penduduk.edit', $penduduk) }}">Edit</x-table.button-link>
+                                        <x-table.form action="{{ route('admin.penduduk.destroy', $penduduk) }}">
+                                            @method('DELETE')
+                                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                        </x-table.form>
+                                    @endcan
                                 </x-table.container>
                             </x-table.td>
                         </x-table.tr>
