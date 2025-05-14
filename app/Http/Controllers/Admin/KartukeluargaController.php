@@ -9,43 +9,54 @@ use Illuminate\Support\Facades\Auth;
 
 class KartukeluargaController extends Controller
 {
+
+    public function index()
+    {
+        $kartukeluargas = Kartukeluarga::with('penduduk')->latest()->simplePaginate(6);
+
+        return view('admin.kartu_keluarga.index', [
+            'kartukeluargas' => $kartukeluargas,
+        ]);
+    }
+    /*
     public function index(Request $request)
-{
-    $role = Auth::user()->role;
+    {
+        $role = Auth::user()->role;
 
-    // Query dasar dengan relasi penduduk
-    $query = Kartukeluarga::with('penduduk');
+        // Query dasar dengan relasi penduduk
+        $query = Kartukeluarga::with('penduduk');
 
-    // Filter berdasarkan role
-    if ($role === 'super_admin') {
-        $query->whereIn('status', ['Diproses', 'Selesai']);
-    } elseif ($role === 'admin') {
-        $query->whereIn('status', ['Diajukan', 'Ditolak','Diproses', 'Selesai']);
+        // Filter berdasarkan role
+        if ($role === 'super_admin') {
+            $query->whereIn('status', ['Diproses', 'Selesai']);
+        } elseif ($role === 'admin') {
+            $query->whereIn('status', ['Diajukan', 'Ditolak','Diproses', 'Selesai']);
+        }
+
+        // Pencarian berdasarkan nama penduduk
+        if ($request->filled('search')) {
+            $query->whereHas('penduduk', function ($q) use ($request) {
+                $q->where('nama', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Filter status dari dropdown (dalam batas role yang valid)
+        $allowedStatus = $role === 'super_admin'
+            ? ['Diproses', 'Selesai']
+            : ['Diajukan', 'Ditolak'];
+
+        if ($request->filled('status') && in_array($request->status, $allowedStatus)) {
+            $query->where('status', $request->status);
+        }
+
+        // Pagination hasil akhir
+        $kartukeluargas = $query->orderBy('tanggal', 'desc')->paginate(10);
+
+        return view('admin.kartu_keluarga.index', [
+            'kartukeluargas' => $kartukeluargas,
+        ]);
     }
-
-    // Pencarian berdasarkan nama penduduk
-    if ($request->filled('search')) {
-        $query->whereHas('penduduk', function ($q) use ($request) {
-            $q->where('nama', 'like', '%' . $request->search . '%');
-        });
-    }
-
-    // Filter status dari dropdown (dalam batas role yang valid)
-    $allowedStatus = $role === 'super_admin'
-        ? ['Diproses', 'Selesai']
-        : ['Diajukan', 'Ditolak'];
-
-    if ($request->filled('status') && in_array($request->status, $allowedStatus)) {
-        $query->where('status', $request->status);
-    }
-
-    // Pagination hasil akhir
-    $kartukeluargas = $query->orderBy('tanggal', 'desc')->paginate(10);
-
-    return view('admin.kartu_keluarga.index', [
-        'kartukeluargas' => $kartukeluargas,
-    ]);
-}
+    */
 
 
     public function create()

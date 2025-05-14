@@ -70,28 +70,32 @@
             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->status }}</td>
             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">
                 <div class="flex items-center gap-2">
-                    <form method="POST" action="{{ route('admin.pindah_domisili.accept', $pindahDomisili) }}">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="bg-cyan-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Terima</button>
-                    </form>
-                    <form method="POST" action="{{ route('admin.pindah_domisili.reject', $pindahDomisili) }}">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="bg-orange-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Tolak</button>
-                    </form>
-                    <form method="POST" action="{{ route('admin.pindah_domisili.complete', $pindahDomisili) }}">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="bg-blue-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Selesai</button>
-                    </form>
+                    @can ('acceptOrReject', $pindahDomisili)
+                        <form method="POST" action="{{ route('admin.pindah_domisili.accept', $pindahDomisili) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="bg-cyan-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Terima</button>
+                        </form>
+                        <form method="POST" action="{{ route('admin.pindah_domisili.reject', $pindahDomisili) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="bg-orange-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Tolak</button>
+                        </form>
+                    @endcan
+                    @can ('completeOrEditOrDelete', $pindahDomisili)
+                        <form method="POST" action="{{ route('admin.pindah_domisili.complete', $pindahDomisili) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="bg-blue-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Selesai</button>
+                        </form>
 
-                    <a href="{{ route('admin.pindah_domisili.edit', $pindahDomisili) }}" class="inline-block bg-green-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Edit</a>
-                    <form method="POST" action="{{ route('admin.pindah_domisili.destroy', $pindahDomisili) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="bg-red-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Hapus</button>
-                    </form>
+                        <a href="{{ route('admin.pindah_domisili.edit', $pindahDomisili) }}" class="inline-block bg-green-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Edit</a>
+                        <form method="POST" action="{{ route('admin.pindah_domisili.destroy', $pindahDomisili) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Hapus</button>
+                        </form>
+                    @endcan
                 </div>
             </td>
         </tr>

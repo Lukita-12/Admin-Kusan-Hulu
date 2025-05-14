@@ -62,11 +62,13 @@
                                 <x-table.td>{{ $kartukeluarga->tanggal_penerbitan }}</x-table.td>
                                 <x-table.td>
                                     <x-table.container variant="button">
-                                        <x-table.button-link variant="edit" href="{{ route('admin.kartu_keluarga.edit', $kartukeluarga) }}">Edit</x-table.button-link>
-                                        <x-table.form action="{{ route('admin.kartu_keluarga.destroy', $kartukeluarga) }}">
-                                            @method('DELETE')
-                                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                        </x-table.form>
+                                        @can ('editOrDelete', $kartukeluarga)
+                                            <x-table.button-link variant="edit" href="{{ route('admin.kartu_keluarga.edit', $kartukeluarga) }}">Edit</x-table.button-link>
+                                            <x-table.form action="{{ route('admin.kartu_keluarga.destroy', $kartukeluarga) }}">
+                                                @method('DELETE')
+                                                <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                            </x-table.form>
+                                        @endcan
                                     </x-table.container>
                                 </x-table.td>
                             @endforeach
