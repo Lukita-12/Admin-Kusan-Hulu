@@ -142,7 +142,7 @@
                 </x-form.container>
 
                 <x-form.container variant="button">
-                    <x-form.button-link href="{{ url('/') }}">Batal</x-form.button-link>
+                    <x-form.button-link href="{{ route('beranda') }}">Batal</x-form.button-link>
                     <x-form.button variant="save" type="submit">Simpan</x-form.button>
                 </x-form.container>
 

@@ -12,7 +12,7 @@ class AktaKematianController extends Controller
 {
    public function index(Request $request)
 {
-    $role = auth::user()->role;
+    $role = Auth::user()->role;
 
     // Buat query dasar dengan relasi penduduk
     $query = AktaKematian::with('penduduk');
@@ -41,7 +41,13 @@ class AktaKematianController extends Controller
     }
 
     // Ambil hasil query
-    $aktaKematians = $query->orderBy('tanggal', 'desc')->paginate(10);
+    // Urutkan: Status Diajukan → Diproses → lainnya, lalu created_at (terlama ke terbaru)
+    $query->orderByRaw("
+        FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')
+    ")->orderBy('created_at', 'asc');
+
+    $aktaKematians = $query->simplePaginate(6);
+
 
     return view('admin.akta_kematian.index', compact('aktaKematians'));
 }
@@ -152,12 +158,15 @@ class AktaKematianController extends Controller
 
         return redirect('/admin/akta-kematian');
     }
-
     public function complete(AktaKematian $aktaKematian)
-    {
-        $aktaKematian->status = 'Selesai';
-        $aktaKematian->save();
+{
+    // Ubah status menjadi 'selesai'
+    $aktaKematian->status = 'Selesai';
+    $aktaKematian->save();
 
-        return redirect()->route('admin.SuratAktaKematian.index');
-    }
+    // Redirect langsung ke halaman surat berdasarkan ID
+    return redirect()->route('akta_kematian.surat', $aktaKematian->id);
+}
+
+
 }

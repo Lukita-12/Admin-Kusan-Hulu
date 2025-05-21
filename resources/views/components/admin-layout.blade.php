@@ -9,7 +9,8 @@
     </head>
     <body class="bg-slate-100 flex min-h-screen">
 
-        <x-sidebar.aside>
+        <x-sidebar.aside class="bg-slate-800">
+
             <x-sidebar.container variant="sidebar">
             <div class="flex flex-col items-center py-2">
     <img src="{{ asset('images/logo_tanbu.png') }}" alt="Logo" class="h-15 w-auto object-contain mb-2">

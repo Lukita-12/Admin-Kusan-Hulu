@@ -39,7 +39,7 @@ class AktaKematianController extends Controller
             
             AktaKematian::create($validatedData);
     
-            return redirect('/');
+            return redirect('/beranda');
         }
     }
 

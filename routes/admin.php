@@ -145,5 +145,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
 
     Route::controller(SuratAktaKematianController::class)->group(function () {
         Route::get('/SuratAktaKematian','index')->name('admin.SuratAktaKematian.index');
+        Route::get('/akta-kematian/surat/{id}', 'show')->name('akta_kematian.surat');
+    //    Route::patch('/admin/akta-kematian/{aktaKematian}/complete', [AktaKematianController::class, 'complete'])->name('admin.akta_kematian.complete');
     });
 });

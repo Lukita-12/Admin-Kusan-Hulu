@@ -118,7 +118,7 @@
         
         <!-- Informasi Umum -->
         <div>
-            <h3 class="text-lg font-semibold mb-2">Tentang Aplikasi</h3>
+            <h3 class="text-lg font-semibold mb-2">KECAMATAN KUSAN HULU</h3>
             <p class="text-sm">
                 Aplikasi ini dibuat untuk mendukung pelayanan administrasi digital Kecamatan Kusan Hulu,
                 seperti pengajuan surat dan pendataan penduduk.

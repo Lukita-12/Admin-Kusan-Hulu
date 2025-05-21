@@ -76,4 +76,6 @@ class Penduduk extends Model
     {
         return self::orderBy('created_at', $urutan);
     }
+      
+
 }

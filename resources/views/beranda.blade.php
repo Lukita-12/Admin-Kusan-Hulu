@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- DOMISILI USAHA -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('user.domisili_usaha.create') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-building-office class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -15,7 +15,7 @@
         </a>
 
         <!-- DOMISILI PENDUDUK -->
-        <a href="{{ route('admin.domisili_penduduk.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('user.domisili_penduduk.create') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-user-group class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -25,7 +25,7 @@
         </a>
 
         <!-- PINDAH DOMISILI -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('user.domisili_usaha.create') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-arrow-path class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -35,7 +35,7 @@
         </a>
 
         <!-- PERUBAHAN KK -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('user.kartu_keluarga.create') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-identification class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -45,7 +45,7 @@
         </a>
 
         <!-- AKTA KELAHIRAN -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('user.penerbitan_akta_kelahiran.create') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-cake class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -55,7 +55,7 @@
         </a>
 
         <!-- AKTA KEMATIAN -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('user.akta_kematian.create') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-exclamation-circle class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">

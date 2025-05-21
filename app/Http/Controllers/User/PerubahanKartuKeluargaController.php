@@ -47,7 +47,7 @@ class PerubahanKartuKeluargaController extends Controller
         
         PerubahanKartuKeluarga::create($validatedData);
 
-        return redirect('/');
+        return redirect('/beranda');
     }
 
     public function show(PerubahanKartuKeluarga $perubahanKartuKeluarga)

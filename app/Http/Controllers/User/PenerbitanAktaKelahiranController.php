@@ -51,7 +51,7 @@ class PenerbitanAktaKelahiranController extends Controller
         
         PenerbitanAktaKelahiran::create($validatedData);
 
-        return redirect('/');
+        return redirect('/beranda');
     }
 
     public function show(PenerbitanAktaKelahiran $penerbitanAktaKelahiran)

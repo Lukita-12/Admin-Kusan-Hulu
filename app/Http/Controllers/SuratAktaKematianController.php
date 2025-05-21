@@ -12,7 +12,7 @@ class SuratAktaKematianController extends Controller
      */
     public function index()
     {
-        dd('Hi!');
+        
     }
 
     /**
@@ -34,10 +34,12 @@ class SuratAktaKematianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AktaKematian $aktaKematian)
+     public function show($id)
     {
-        //
+       $akta = AktaKematian::with('penduduk')->findOrFail($id);
+    return view('admin.akta_kematian.surat', compact('akta'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

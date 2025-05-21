@@ -25,7 +25,7 @@
         </a>
 
         <!-- PINDAH DOMISILI -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('admin.pindah_domisili.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-arrow-path class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -35,17 +35,17 @@
         </a>
 
         <!-- PERUBAHAN KK -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('admin.kartu_keluarga.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-identification class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
-                    <span class="font-semibold">PERUBAHAN KARTU KELUARGA</span>
+                    <span class="font-semibold">KARTU KELUARGA</span>
                 </div>
             </div>
         </a>
 
         <!-- AKTA KELAHIRAN -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('admin.penerbitan_akta_kelahiran.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-cake class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -55,7 +55,7 @@
         </a>
 
         <!-- AKTA KEMATIAN -->
-        <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
+        <a href="{{ route('admin.akta_kematian.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">
                 <x-heroicon-s-exclamation-circle class="w-16 h-16 text-slate-700" />
                 <div class="flex flex-col">
@@ -196,6 +196,7 @@
                     </tbody>
                 </x-table.table>
             </x-table.container>
+
 
             <div class="w-full flex justify-center py-4 px-2">
                 <a href="{{ route('admin.penerbitan_akta_kelahiran.index') }}" class="text-blue-500 italic underline">Lebih banyak...</a>

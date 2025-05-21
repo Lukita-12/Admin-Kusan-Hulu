@@ -9,7 +9,9 @@
 </head>
 <body class="bg-slate-100 flex min-h-screen">
     
-    <x-sidebar.aside>
+    <x-sidebar.aside class="bg-blue-700">
+
+
         <x-sidebar.container variant="sidebar">
              <div class="flex flex-col items-center py-2">
     <img src="{{ asset('images/logo_tanbu.png') }}" alt="Logo" class="h-15 w-auto object-contain mb-2">
@@ -25,7 +27,7 @@
                 <x-sidebar.nav-link href="{{ route('user.kartu_keluarga.index') }}">Kartu Keluarga</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.penerbitan_akta_kelahiran.create') }}">Akta Kelahiran</x-sidebar.nav-link>
                 <x-sidebar.nav-link href="{{ route('user.akta_kematian.create') }}">Akta Kematian</x-sidebar.nav-link>
-                <x-sidebar.nav-link href="{{ route('user.akun.index') }}">Akun</x-sidebar.nav-link>
+                <x-sidebar.nav-link href="{{ route('user.akun.edit',Auth::user()->id) }}">Akun</x-sidebar.nav-link>
             </x-sidebar.nav>
         </x-sidebar.container>
         @auth
@@ -49,7 +51,7 @@
                     <x-heading.link href="{{ url('/login') }}" variant="login">Log In</x-heading.link>
                 @endguest
                 @auth
-                    <x-heading.link href="{{ route('user.akun.index') }}" variant="image">
+                    <x-heading.link href="{{ route('user.akun.edit',Auth::user()->id) }}" variant="image">
                         <x-heading.image variant="profile" src="{{ asset('storage/' . Auth::user()->profile_pic) }}" alt="{{ Auth::user()->name }}" />
                     </x-heading.link>
                 @endauth

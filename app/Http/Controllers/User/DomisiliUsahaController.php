@@ -34,7 +34,7 @@ class DomisiliUsahaController extends Controller
         // Create domaint
         DomisiliUsaha::create($validatedData);
 
-        return redirect('/');
+        return redirect('/beranda');
     }
 
     public function show(DomisiliUsaha $domisiliUsaha)

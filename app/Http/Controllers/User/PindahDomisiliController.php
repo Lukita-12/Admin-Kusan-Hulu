@@ -35,7 +35,7 @@ class PindahDomisiliController extends Controller
 
         PindahDomisili::create($validatedData);
 
-        return redirect('/');
+        return redirect('/beranda');
     }
 
     public function show(PindahDomisili $pindahDomisili)

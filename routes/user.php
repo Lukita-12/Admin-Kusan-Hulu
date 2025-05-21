@@ -54,11 +54,11 @@ Route::controller(AktaKematianController::class)->group(function () {
 
 Route::controller(AkunController::class)->group(function() {
     Route::get('/akun', 'index')->name('user.akun.index');
-    
+
     Route::get('/akun/{user}/edit', 'edit')->name('user.akun.edit');
     Route::put('/akun/{user}', 'update')->name('user.akun.update');
 
-    // Route::post('/akun/update-picture', 'updateProfilePic')->name('user.akun.updatePic');
+    Route::post('/akun/update-picture', 'updateProfilePic')->name('user.akun.updatePic');
 });
 
 Route::controller(KartuKeluargaController::class)->group(function () {
