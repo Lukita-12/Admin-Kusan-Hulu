@@ -8,6 +8,7 @@ use App\Models\DomisiliUsaha;
 use App\Models\Kartukeluarga;
 use App\Models\Penduduk;
 use App\Models\PenerbitanAktaKelahiran;
+use App\Models\PengajuanPerubahanKK;
 use App\Models\PindahDomisili;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\User;
@@ -18,6 +19,7 @@ use App\Policies\DomisiliUsahaPolicy;
 use App\Policies\KartukeluargaPolicy;
 use App\Policies\PendudukPolicy;
 use App\Policies\PenerbitanAktaKelahiranPolicy;
+use App\Policies\PengajuanPerubahanKKPolicy;
 use App\Policies\PindahDomisiliPolicy;
 use App\Policies\UserPolicy;
 
@@ -37,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         DomisiliPenduduk::class => DomisiliPendudukPolicy::class,
         PindahDomisili::class   => PindahDomisiliPolicy::class,
         Kartukeluarga::class    => KartukeluargaPolicy::class,
+        PengajuanPerubahanKK::class     => PengajuanPerubahanKKPolicy::class,
         PenerbitanAktaKelahiran::class  => PenerbitanAktaKelahiranPolicy::class,
         AktaKematian::class     => AktaKematianPolicy::class,
         Penduduk::class         => PendudukPolicy::class,

@@ -112,8 +112,8 @@
         </div>
     </x-table.container>
 
-    <div class="w-full flex gap-4">
-        <div class="w-1/2 bg-slate-200 flex flex-col justify-center rounded-md shadow shadow-slate-500/60">
+    <div class="grid grid-cols-2 gap-3">
+        <div class="bg-slate-200 flex flex-col justify-center rounded-md shadow shadow-slate-500/60">
             <div class="w-full bg-blue-400/80 flex justify-between items-center px-4 py-2 gap-3 rounded-t-md">
                 <span class="font-bold text-slate-100 text-xl">AKTA KEMATIAN</span>
                 <a href="{{ route('admin.kartu_keluarga.index') }}" class="font-bold text-slate-100 text-xl">></a>
@@ -148,13 +148,13 @@
                     </tbody>
                 </x-table.table>
             </x-table.container>
-
+    
             <div class="w-full flex justify-center py-4 px-2">
                 <a href="{{ route('admin.akta_kematian.index') }}" class="text-blue-500 italic underline">Lebih banyak...</a>
             </div>
         </div>
     
-        <div class="w-1/2 bg-slate-200 flex flex-col justify-center rounded-md shadow shadow-slate-500/60">
+        <div class="bg-slate-200 flex flex-col justify-center rounded-md shadow shadow-slate-500/60">
             <div class="w-full bg-blue-400/80 flex justify-between items-center px-4 py-2 gap-3 rounded-t-md">
                 <span class="font-bold text-slate-100 text-xl">AKTA KELAHIRAN</span>
                 <a href="{{ route('admin.kartu_keluarga.index') }}" class="font-bold text-slate-100 text-xl">></a>
@@ -196,12 +196,11 @@
                     </tbody>
                 </x-table.table>
             </x-table.container>
-
-
+    
+    
             <div class="w-full flex justify-center py-4 px-2">
                 <a href="{{ route('admin.penerbitan_akta_kelahiran.index') }}" class="text-blue-500 italic underline">Lebih banyak...</a>
             </div>
         </div>
     </div>
-
 </x-admin-layout>

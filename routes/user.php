@@ -7,6 +7,7 @@ use App\Http\Controllers\User\DomisiliUsahaController;
 use App\Http\Controllers\User\KartuKeluargaController;
 use App\Http\Controllers\User\PendudukController;
 use App\Http\Controllers\User\PenerbitanAktaKelahiranController;
+use App\Http\Controllers\User\PengajuanPerubahanKKController;
 use App\Http\Controllers\User\PerubahanKartuKeluargaController;
 use App\Http\Controllers\User\PindahDomisiliController;
 use Illuminate\Support\Facades\Route;
@@ -80,4 +81,9 @@ Route::controller(PerubahanKartuKeluargaController::class)->group(function () {
     Route::get('/perubahan-kartu-keluarga/create', 'create')                    ->name('user.perubahan_kartu_keluarga.create');
     Route::post('/perubahan-kartu-keluarga', 'store')                           ->name('user.perubahan_kartu_keluarga.store');
     Route::get('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'show')    ->name('user.perubahan_kartu_keluarga.show');
+});
+
+Route::controller(PengajuanPerubahanKKController::class)->group(function () {
+    Route::get('/pengajuan-perubahan-kk/create', 'create')->name('user.pengajuan_perubahan_kk.create');
+    Route::post('/pengajuan-perubahan-kk/', 'store')->name('user.pengajuan_perubahan_kk.store');
 });

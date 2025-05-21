@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kartukeluarga;
+use App\Models\PengajuanPerubahanKK;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,10 +13,20 @@ class KartukeluargaController extends Controller
 
     public function index()
     {
+        $user           = Auth::user();
         $kartukeluargas = Kartukeluarga::with('penduduk')->latest()->simplePaginate(6);
 
+        if($user->role === 'admin') {
+            $pengajuanPerubahanKKs = PengajuanPerubahanKK::whereIn('status', ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'])
+                ->latest()->simplePaginate(6);
+        } elseif ($user->role === 'super_admin') {
+            $pengajuanPerubahanKKs = PengajuanPerubahanKK::whereIn('status', ['Diproses', 'Selesai'])
+                ->latest()->simplePaginate(6);
+        }
+
         return view('admin.kartu_keluarga.index', [
-            'kartukeluargas' => $kartukeluargas,
+            'kartukeluargas'        => $kartukeluargas,
+            'pengajuanPerubahanKKs' => $pengajuanPerubahanKKs,
         ]);
     }
     /*

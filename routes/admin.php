@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DomisiliUsahaController;
 use App\Http\Controllers\Admin\KartukeluargaController;
 use App\Http\Controllers\Admin\PendudukController;
 use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
+use App\Http\Controllers\Admin\PengajuanPerubahanKKController;
 use App\Http\Controllers\Admin\PerubahanKartuKeluargaController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
 use App\Http\Controllers\SuratAktaKematianController;
@@ -147,5 +148,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::get('/SuratAktaKematian','index')->name('admin.SuratAktaKematian.index');
         Route::get('/akta-kematian/surat/{id}', 'show')->name('akta_kematian.surat');
     //    Route::patch('/admin/akta-kematian/{aktaKematian}/complete', [AktaKematianController::class, 'complete'])->name('admin.akta_kematian.complete');
+    });
+
+    Route::controller(PengajuanPerubahanKKController::class)->group(function () {
+        Route::delete('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}', 'destroy')->name('admin.pengajuan_perubahan_kk.destroy');
+
+        Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/accept', 'accept')->name('admin.pengajuan_perubahan_kk.accept');
+        Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/reject', 'reject')->name('admin.pengajuan_perubahan_kk.reject');
+        Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/complete', 'complete')->name('admin.pengajuan_perubahan_kk.complete');
     });
 });
