@@ -70,32 +70,58 @@
             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">{{ $pindahDomisili->status }}</td>
             <td class="px-12 py-4 text-slate-700 text-lg text-center whitespace-nowrap">
                 <div class="flex items-center gap-2">
-                    @can ('acceptOrReject', $pindahDomisili)
-                        <form method="POST" action="{{ route('admin.pindah_domisili.accept', $pindahDomisili) }}">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="bg-cyan-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Terima</button>
-                        </form>
-                        <form method="POST" action="{{ route('admin.pindah_domisili.reject', $pindahDomisili) }}">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="bg-orange-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Tolak</button>
-                        </form>
-                    @endcan
-                    @can ('completeOrEditOrDelete', $pindahDomisili)
-                        <form method="POST" action="{{ route('admin.pindah_domisili.complete', $pindahDomisili) }}">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="bg-blue-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Selesai</button>
-                        </form>
-
-                        <a href="{{ route('admin.pindah_domisili.edit', $pindahDomisili) }}" class="inline-block bg-green-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Edit</a>
-                        <form method="POST" action="{{ route('admin.pindah_domisili.destroy', $pindahDomisili) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">Hapus</button>
-                        </form>
-                    @endcan
+                    @if ($pindahDomisilis->currentPage() === 1 && $loop->first)
+                        @can('acceptOrReject', $pindahDomisili)
+                            <form method="POST" action="{{ route('admin.pindah_domisili.accept', $pindahDomisili) }}">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-cyan-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">
+                                    Terima
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ route('admin.pindah_domisili.reject', $pindahDomisili) }}">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-orange-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">
+                                    Tolak
+                                </button>
+                            </form>
+                        @endcan
+                    @else
+                        {{-- Untuk role admin: tampilkan "Menunggu" jika status Diajukan, dan "-" untuk status lain --}}
+                        @if ($pindahDomisili->status === 'Diajukan' && Auth::user()->role === 'admin')
+                            <span class="text-black-500 font-semibold">Menunggu</span>
+                        @elseif (in_array($pindahDomisili->status, ['Diproses', 'Selesai', 'Ditolak', 'Dihapus']) && Auth::user()->role === 'admin')
+                            <span>-</span>
+                        @endif
+                    @endif
+                    @if ($pindahDomisilis->currentPage() === 1 && $loop->first)
+                        @can('completeOrEditOrDelete', $pindahDomisili)
+                            <form method="POST" action="{{ route('admin.pindah_domisili.complete', $pindahDomisili) }}">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-blue-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">
+                                    Selesai
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ route('admin.pindah_domisili.destroy', $pindahDomisili) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 font-semibold text-sm text-white text-center px-3 py-1 rounded-sm">
+                                    Hapus
+                                </button>
+                            </form>
+                        @endcan
+                    @else
+                        {{-- Untuk role super_admin: tampilkan Menunggu jika status Diproses, dan "-" jika tidak --}}
+                        @if (Auth::user()->role === 'super_admin')
+                            @if ($pindahDomisili->status === 'Diproses')
+                                <span class="text-black-600 font-semibold">Menunggu</span>
+                            @else
+                                <span>-</span>
+                            @endif
+                        @endif
+                    @endif
                 </div>
             </td>
         </tr>

@@ -72,28 +72,46 @@
             <x-table.td>{{ $penerbitanAktaKelahiran->status }}</x-table.td>
             <x-table.td>
                 <x-table.container variant="button">
-                    @can ('acceptOrReject', $penerbitanAktaKelahiran)
-                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.accept', $penerbitanAktaKelahiran) }}">
-                            @method('PATCH')
-                            <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                        </x-table.form>
-                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.reject', $penerbitanAktaKelahiran) }}">
-                            @method('PATCH')
-                            <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                        </x-table.form>
-                    @endcan
-                    @can ('completeOrEditOrDelete', $penerbitanAktaKelahiran)
-                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.complete', $penerbitanAktaKelahiran) }}">
-                            @method('PATCH')
-                            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                        </x-table.form> 
+                    @if ($penerbitanAktaKelahirans->currentPage() === 1 && $loop->first)
+    @can ('acceptOrReject', $penerbitanAktaKelahiran)
+        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.accept', $penerbitanAktaKelahiran) }}">
+            @method('PATCH')
+            <x-table.button variant="accept" type="submit">Terima</x-table.button>
+        </x-table.form>
+        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.reject', $penerbitanAktaKelahiran) }}">
+            @method('PATCH')
+            <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+        </x-table.form>
+    @endcan
+@else
+    @if ($penerbitanAktaKelahiran->status === 'Diajukan' && Auth::user()->role === 'admin')
+        <span class="text-black-500 font-semibold">Menunggu</span>
+    @elseif (in_array($penerbitanAktaKelahiran->status, ['Diproses', 'Selesai', 'Ditolak', 'Dihapus']) && Auth::user()->role === 'admin')
+        <span>-</span>
+    @endif
+@endif
 
-                        <x-table.button-link variant="edit" href="{{ route('admin.penerbitan_akta_kelahiran.edit', $penerbitanAktaKelahiran) }}">Edit</x-table.button-link>
-                        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.destroy', $penerbitanAktaKelahiran) }}">
-                            @method('DELETE')
-                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                        </x-table.form>
-                    @endcan
+@if ($penerbitanAktaKelahirans->currentPage() === 1 && $loop->first)
+    @can ('completeOrEditOrDelete', $penerbitanAktaKelahiran)
+        <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.complete', $penerbitanAktaKelahiran) }}">
+            @method('PATCH')
+            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+        </x-table.form> 
+                <x-table.form action="{{ route('admin.penerbitan_akta_kelahiran.destroy', $penerbitanAktaKelahiran) }}">
+            @method('DELETE')
+            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+        </x-table.form>
+    @endcan
+@else
+    @if (Auth::user()->role === 'super_admin')
+        @if ($penerbitanAktaKelahiran->status === 'Diproses')
+            <span class="text-black-600 font-semibold">Menunggu</span>
+        @else
+            <span>-</span>
+        @endif
+    @endif
+@endif
+
                 </x-table.container>
             </x-table.td>
         </x-table.tr>

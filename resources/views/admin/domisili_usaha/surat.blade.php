@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title>Surat Domisili Usaha</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body class="bg-white text-black p-10">
-    <div class="max-w-3xl mx-auto border p-8 shadow-md rounded-xl">
+    <!-- Tombol download -->
+    <div class="max-w-3xl mx-auto mb-4 text-right">
+        <button onclick="downloadPDF()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
+            Download PDF
+        </button>
+    </div>
+
+    <!-- Konten surat -->
+    <div id="surat" class="max-w-3xl mx-auto border p-8 shadow-md rounded-xl">
         <!-- Header -->
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold uppercase">Surat Keterangan Domisili Usaha</h1>
@@ -31,7 +41,7 @@
             </ul>
 
             <p class="mt-6">
-                Benar yang bersangkutan berdomisili dan melakukan kegiatan usaha di wilayah {{ $domisiliUsaha->kelurahan }}, Kecamatan {{ $domisiliUsaha->kecamatan }}, Kota Banjarmasin.
+                Benar bahwa yang bersangkutan berdomisili dan melakukan kegiatan usaha di wilayah {{ $domisiliUsaha->kelurahan }}, Kecamatan {{ $domisiliUsaha->kecamatan }}, Kota Banjarmasin.
             </p>
 
             <p class="mt-4">
@@ -46,5 +56,20 @@
             <p class="mt-16 underline">{{ $domisiliUsaha->nama_lurah }}</p>
         </div>
     </div>
+
+    <!-- Script untuk download -->
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById("surat");
+            const opt = {
+                margin:       0.5,
+                filename:     'surat_domisili_usaha.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
 </body>
 </html>

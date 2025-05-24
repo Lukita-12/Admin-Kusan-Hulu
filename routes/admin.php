@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PengajuanPerubahanKKController;
 use App\Http\Controllers\Admin\PerubahanKartuKeluargaController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
 use App\Http\Controllers\SuratAktaKematianController;
+use App\Http\Controllers\SuratDomisiliUsahaController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(function () {
@@ -65,6 +66,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::get('/domisili-penduduk/search', 'search')->name('admin.domisili_penduduk.search');
         Route::get('/domisili-penduduk/filter', 'filter')->name('admin.domisili_penduduk.filter');
         
+        Route::delete('/domisili-penduduk/{domisiliPenduduk}', 'destroy')->name('admin.domisili_penduduk.destroy');
         Route::patch('/domisili-penduduk/{domisiliPenduduk}/accept', 'accept')->name('admin.domisili_penduduk.accept');
         Route::patch('/domisili-penduduk/{domisiliPenduduk}/reject', 'reject')->name('admin.domisili_penduduk.reject');
         Route::patch('/domisili-penduduk/{domisiliPenduduk}/complete', 'complete')->name('admin.domisili_penduduk.complete');
@@ -156,5 +158,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/accept', 'accept')->name('admin.pengajuan_perubahan_kk.accept');
         Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/reject', 'reject')->name('admin.pengajuan_perubahan_kk.reject');
         Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/complete', 'complete')->name('admin.pengajuan_perubahan_kk.complete');
+    });
+
+    Route::controller(SuratDomisiliUsahaController::class)->group(function(){
+        Route::get('/SuratDomisiliUsaha','index')->name('admin.SuratDomisiliUsaha.index');
+        Route::get('/domisili-usaha/surat/{id}','show')->name('domisili-usaha.surat');
     });
 });

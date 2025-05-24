@@ -40,8 +40,12 @@ class DomisiliUsahaController extends Controller
         $query->where('status', $request->status);
     }
 
+    $query->orderByRaw("
+    FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')
+    ")->orderBy('created_at', 'asc');
+
     // Eksekusi query dengan pagination
-    $domisiliUsahas = $query->orderBy('tanggal', 'desc')->paginate(10);
+    $domisiliUsahas = $query->simplePaginate(6);
 
     return view('admin.domisili_usaha.index', [
         'domisiliUsahas' => $domisiliUsahas,
@@ -158,6 +162,6 @@ class DomisiliUsahaController extends Controller
         $domisiliUsaha->status = 'Selesai';
         $domisiliUsaha->save();
 
-        return redirect('/admin/domisili-usaha');
+        return redirect()->route('domisili-usaha.surat', $domisiliUsaha->id);
     }
 }

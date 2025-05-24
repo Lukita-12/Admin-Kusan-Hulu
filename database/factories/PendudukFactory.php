@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Desa;
 use App\Models\Kartukeluarga;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class PendudukFactory extends Factory
     {
         return [
             'desa_id'                   => Desa::factory(),
+            'user_id'                   => User::factory(),
             'kartukeluarga_id'          => Kartukeluarga::factory(),
             'nama'                      => fake()->name(),
             'jenis_kelamin'             => fake()->randomElement(['Laki-laki', 'Perempuan']),

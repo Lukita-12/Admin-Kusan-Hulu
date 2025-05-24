@@ -18,11 +18,18 @@ class KartukeluargaController extends Controller
 
         if($user->role === 'admin') {
             $pengajuanPerubahanKKs = PengajuanPerubahanKK::whereIn('status', ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'])
-                ->latest()->simplePaginate(6);
+                ->orderByRaw("FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')")
+                ->orderBy('created_at', 'asc') // asc = terlama ke terbaru
+                ->simplePaginate(6);
+
         } elseif ($user->role === 'super_admin') {
             $pengajuanPerubahanKKs = PengajuanPerubahanKK::whereIn('status', ['Diproses', 'Selesai'])
-                ->latest()->simplePaginate(6);
+                ->orderByRaw("FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')")
+                ->orderBy('created_at', 'asc') // asc = terlama ke terbaru
+                ->simplePaginate(6);
+
         }
+        
 
         return view('admin.kartu_keluarga.index', [
             'kartukeluargas'        => $kartukeluargas,

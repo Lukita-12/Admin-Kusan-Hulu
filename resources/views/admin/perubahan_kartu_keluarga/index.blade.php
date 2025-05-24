@@ -43,8 +43,6 @@
                                         @method('PATCH')
                                         <x-table.button variant="complete" type="submit">Selesai</x-table.button>
                                     </x-table.form>
-    
-                                    <x-table.button-link href="{{ route('admin.perubahan_kartu_keluarga.edit', $perubahanKartuKeluarga) }}">Edit</x-table.button-link>
                                     <x-table.form action="{{ route('admin.perubahan_kartu_keluarga.destroy', $perubahanKartuKeluarga) }}">
                                         @method('DELETE')
                                         <x-table.button variant="delete" type="submit">Hapus</x-table.button>
@@ -56,7 +54,6 @@
                 </tbody>
             </x-table.table>
         </x-table.container>
-
         <x-table.container variant="footer">
             {{ $perubahanKartuKeluargas->links() }}
         </x-table.container>

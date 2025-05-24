@@ -40,8 +40,11 @@ class PindahDomisiliController extends Controller
         $query->where('status', $request->status);
     }
 
+    $query->orderByRaw("
+    FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')
+    ")->orderBy('created_at', 'asc');
     // Eksekusi query dengan paginate
-    $pindahDomisilis = $query->orderBy('tanggal', 'desc')->paginate(10);
+    $pindahDomisilis = $query->simplePaginate(6);
 
     return view('admin.pindah_domisili.index', [
         'pindahDomisilis' => $pindahDomisilis,

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
+use function Pest\Laravel\delete;
+
 class DomisiliPendudukController extends Controller
 {
     public function index(Request $request)
@@ -40,8 +42,11 @@ class DomisiliPendudukController extends Controller
         $query->where('status', $request->status);
     }
 
+    $query->orderByRaw("
+    FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')
+    ")->orderBy('created_at', 'asc');
     // Ambil hasil query
-    $domisiliPenduduks = $query->orderBy('tanggal', 'desc')->paginate(10);
+    $domisiliPenduduks = $query->simplePaginate(6);
 
     return view('admin.domisili_penduduk.index', [
         'domisiliPenduduks' => $domisiliPenduduks,
@@ -98,7 +103,9 @@ class DomisiliPendudukController extends Controller
      */
     public function destroy(DomisiliPenduduk $domisiliPenduduk)
     {
-        //
+       $domisiliPenduduk -> delete();
+
+       return redirect() -> route('admin.domisili_penduduk.index');
     }
 
     // Search

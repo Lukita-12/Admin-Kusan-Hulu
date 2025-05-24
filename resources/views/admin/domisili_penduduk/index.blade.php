@@ -62,23 +62,59 @@
             <x-table.td>{{ $domisiliPenduduk->status }}</x-table.td>
             <x-table.td>
                 <x-table.container variant="button">
-                    @can ('acceptOrReject', $domisiliPenduduk)
-                        <x-table.form action="{{ route('admin.domisili_penduduk.accept', $domisiliPenduduk) }}">
-                            @method('PATCH')
-                            <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                        </x-table.form>
-                        <x-table.form action="{{ route('admin.domisili_penduduk.reject', $domisiliPenduduk) }}">
-                            @method('PATCH')
-                            <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                        </x-table.form>
-                    @endcan
-                    @can ('completeOrEditOrDelete', $domisiliPenduduk)
-                        <x-table.form action="{{ route('admin.domisili_penduduk.complete', $domisiliPenduduk) }}">
-                            @method('PATCH')
-                            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                        </x-table.form>
-                        <x-table.button-link variant="edit" href="{{ route('admin.domisili_penduduk.edit', $domisiliPenduduk) }}">Edit</x-table.button-link>
-                    @endcan
+                       @if ($domisiliPenduduks->currentPage() === 1 && $loop->first)
+    @if (in_array($domisiliPenduduk->status, ['Diproses', 'Selesai']))
+        <span>-</span>
+    @else
+        @can('acceptOrReject', $domisiliPenduduk)
+            <x-table.form action="{{ route('admin.domisili_penduduk.accept', $domisiliPenduduk) }}">
+                @method('PATCH')
+                <x-table.button variant="accept" type="submit">Terima</x-table.button>
+            </x-table.form>
+
+            <x-table.form action="{{ route('admin.domisili_penduduk.reject', $domisiliPenduduk) }}">
+                @method('PATCH')
+                <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+            </x-table.form>
+        @endcan
+    @endif
+@else
+    @if ($domisiliPenduduk->status === 'Diajukan')
+        <span class="text-black-500 font-semibold">Menunggu</span>
+    @else
+        @if (Auth::user()->role === 'admin')
+            <span>-</span>
+        @endif
+    @endif
+@endif
+
+
+@if ($domisiliPenduduks->currentPage() === 1 && $loop->first)
+    @can('completeOrEditOrDelete', $domisiliPenduduk)
+        @if ($domisiliPenduduk->status !== 'Selesai')
+            <x-table.form action="{{ route('admin.domisili_penduduk.complete', $domisiliPenduduk) }}">
+                @method('PATCH')
+                <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+            </x-table.form>
+
+            <x-table.form action="{{ route('admin.domisili_penduduk.destroy', $domisiliPenduduk) }}">
+                @method('DELETE')
+                <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+            </x-table.form>
+        @else
+            <span>-</span>
+        @endif
+    @endcan
+@else
+    @if (Auth::user()->role === 'super_admin')
+        @if ($domisiliPenduduk->status === 'Diproses')
+            <span class="text-black-600 font-semibold">Menunggu</span>
+        @else
+            <span>-</span>
+        @endif
+    @endif
+@endif
+
                 </x-table.container>
             </x-table.td>
         </x-table.tr>

@@ -39,9 +39,12 @@ class PenerbitanAktaKelahiranController extends Controller
     if ($request->filled('status') && in_array($request->status, $allowedStatus)) {
         $query->where('status', $request->status);
     }
-
+    
+    $query->orderByRaw("
+    FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')
+    ")->orderBy('created_at', 'asc');
     // Pagination akhir
-    $penerbitanAktaKelahirans = $query->orderBy('tanggal', 'desc')->paginate(10);
+    $penerbitanAktaKelahirans = $query->simplePaginate(6);
 
     return view('admin.penerbitan_akta_kelahiran.index', [
         'penerbitanAktaKelahirans' => $penerbitanAktaKelahirans,

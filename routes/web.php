@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\SuratAktaKematianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AktaKematianController;
+use App\Http\Controllers\UserNotifikasiController;
 
 Route::get('/', function () {
     return view('home');
@@ -23,6 +24,7 @@ Route::controller(DashboardController::class)->group(function () {
 // Route::get('/admin/akta_kematian/surat/{aktaKematian}', [AktaKematianController::class, 'showSurat'])->name('admin.SuratAktaKematian.show');
 // Rute untuk melihat Surat Akta Kematian
 
+Route::get('/user-notifikasi', [UserNotifikasiController::class, 'index'])->name('user-notifikasi');
 
 require __DIR__. '/auth.php';
 require __DIR__. '/user.php';

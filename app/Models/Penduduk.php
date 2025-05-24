@@ -61,6 +61,11 @@ class Penduduk extends Model
         return $this->hasMany(AktaKematian::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     // Search
     public static function search($keyword): Builder
     {
