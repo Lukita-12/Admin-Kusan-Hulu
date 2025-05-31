@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\AktaKematianController;
 use App\Http\Controllers\User\AkunController;
+use App\Http\Controllers\User\DataPendudukController;
 use App\Http\Controllers\User\DomisiliPendudukController;
 use App\Http\Controllers\User\DomisiliUsahaController;
 use App\Http\Controllers\User\KartuKeluargaController;
@@ -86,4 +87,9 @@ Route::controller(PerubahanKartuKeluargaController::class)->group(function () {
 Route::controller(PengajuanPerubahanKKController::class)->group(function () {
     Route::get('/pengajuan-perubahan-kk/create', 'create')->name('user.pengajuan_perubahan_kk.create');
     Route::post('/pengajuan-perubahan-kk/', 'store')->name('user.pengajuan_perubahan_kk.store');
+});
+
+Route::controller(DataPendudukController::class)->group(function(){
+    Route::get('/data-penduduk/create','create')->name('user.data_penduduk.create');
+    Route::post('/data-penduduk','store')->name('user.data_penduduk.store');
 });

@@ -14,6 +14,9 @@
         
                         <input type="password" name="password" id="password" :value="old('password')" placeholder="Password..."
                             class="bg-slate-100 w-full px-4 py-1 text-xl text-slate-700 rounded-lg" required>
+                            @error ('password')
+                            <span class="text-red-500 text-sm italic">{{ $message }}</span>
+                            @enderror
                     </div>
     
                     <div class="w-full flex flex-col items-center">

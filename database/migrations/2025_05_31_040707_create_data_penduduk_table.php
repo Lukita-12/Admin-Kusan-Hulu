@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Desa;
-use App\Models\Kartukeluarga;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penduduk', function (Blueprint $table) {
+        Schema::create('data_penduduk', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Desa::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Kartukeluarga::class)->constrained()->cascadeOnDelete();
             $table->string('nama');
             $table->string('nik');
+            $table->string('no_kk');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->default('Laki-laki');
             $table->string('status_perkawinan');
             $table->string('tempat_lahir');
@@ -40,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penduduk');
+        Schema::dropIfExists('data_penduduk');
     }
 };
