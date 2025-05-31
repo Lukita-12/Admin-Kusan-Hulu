@@ -41,7 +41,7 @@
         
         <!-- Gambar Kiri -->
         <div class="md:w-1/2 w-full">
-            <img src="{{ asset('images/kantor kecamatan.jpeg') }}"
+            <img src="{{ asset('images/panenpadi.jpeg') }}"
                  alt="Kantor Kecamatan"
                  class="w-full h-auto rounded shadow">
         </div>
@@ -49,13 +49,13 @@
         <!-- Tulisan Kanan -->
         <div class="md:w-1/2 w-full">
             <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">
-                Sekilas Informasi
+                PANEN PADI PERDANA DESA SUNGAI RUKAM
             </h2>
             <p class="text-gray-700 leading-relaxed">
-                Kecamatan Kusan Hulu adalah salah satu kecamatan di Kabupaten Tanah Bumbu
-                yang memiliki berbagai layanan administrasi masyarakat. Aplikasi ini bertujuan
-                untuk mempermudah pelayanan seperti pembuatan surat, pendataan warga,
-                dan informasi umum secara online dan efisien.
+                Kusan Hulu – Dalam rangka mendukung Ketahanan Pangan Nasional, Kelompok tani Tunas Raihan Desa Sungai Rukam Kecamatan Kusan Hulu melakukan panen Padi Perdana di Desa Sungai Rukam RT 04  Kecamatan Kusan Hulu. Senin (01/4/2024).
+                Panen Padi Perdana ini dihadiri oleh Dinas Pertanian dan Ketahanan Pangan Kabupaten Tanah Bumbu.
+                Dalam Panen Padi Perdana Tersebut juga dihadiri Langsung oleh Bapak Camat Kusan Hulu, Kepala BPP dan PPL Pertanian Kusan Hulu, Babinsa Desa Sungai rukam, Kepala Desa Sungai Rukam, Ketua Gapoktan, serta kelompok tani di Desa Sungai Rukam.
+                Kegiatan Panen Padi Perdana di lahan sawah yang berda di Desa Sungai Rukam RT 04 Kecamatan Kusan Hulu. Panen Padi Perdana ditandai dengan pemotongan batang padi secara simbolis oleh Camat Kusan Hulu.
             </p>
         </div>
 
@@ -66,7 +66,7 @@
         
         <!-- Gambar Kiri -->
         <div class="md:w-1/2 w-full">
-            <img src="{{ asset('images/kantor kecamatan.jpeg') }}"
+            <img src="{{ asset('images/Ramadhan.jpeg') }}"
                  alt="Kantor Kecamatan"
                  class="w-full h-auto rounded shadow">
         </div>
@@ -74,13 +74,13 @@
         <!-- Tulisan Kanan -->
         <div class="md:w-1/2 w-full">
             <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">
-                Sekilas Informasi
+                Kegiatan Safari Ramadhan dan Kegiatan Cuci Kaki Ibu di Kecamatan Kusan Hulu
             </h2>
             <p class="text-gray-700 leading-relaxed">
-                Kecamatan Kusan Hulu adalah salah satu kecamatan di Kabupaten Tanah Bumbu
-                yang memiliki berbagai layanan administrasi masyarakat. Aplikasi ini bertujuan
-                untuk mempermudah pelayanan seperti pembuatan surat, pendataan warga,
-                dan informasi umum secara online dan efisien.
+                Kegiatan Safari Ramadhan hari Minggu, 04 Maret 2024, 1445 H yang dilaksanakan di Kecamatan Kusan Hulu, di pimpin langsung oleh Bapak Camat Kusan Hulu ( H. Abdul Jabar, S.AP) dan perangkatnya,
+                didukung oleh aparat desa setempat, kegiatan Safari Ramadhan ini juga diawali dengan buka puasa bersama di Masjid Miftahul Huda Desa Harapan Jaya, Shalat Tarawih dilaksanakan di Masjid Nurul Huda
+                Desa Karang Mulya dan Shlat Witir di Masjid Al-Istiqamah Desa Binawara yang dihadiri langsung oleh Bupati Tanah Bumbu ( Abah Zairullah Azhar), selain buka puasa bersama, juga ada acara Gerakan Cuci
+                Kaki Ibu yang diharapkan program ini akan terus berjalan pada bulan-bulan berikutnya, kegiatan mencuci Kaki Ibu yaitu mengharapkan Ridha Orang Tua, Karena hal ini sangat luar biasa.
             </p>
         </div>
 
@@ -91,7 +91,7 @@
         
         <!-- Gambar Kiri -->
         <div class="md:w-1/2 w-full">
-            <img src="{{ asset('images/kantor kecamatan.jpeg') }}"
+            <img src="{{ asset('images/7feb.jpeg') }}"
                  alt="Kantor Kecamatan"
                  class="w-full h-auto rounded shadow">
         </div>
@@ -99,13 +99,12 @@
         <!-- Tulisan Kanan -->
         <div class="md:w-1/2 w-full">
             <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">
-                Sekilas Informasi
+                UPACARA PERINGATAN HARI PAHLAWAN 7 FEBRUARI DI KECAMATAN KUSAN HULU
             </h2>
             <p class="text-gray-700 leading-relaxed">
-                Kecamatan Kusan Hulu adalah salah satu kecamatan di Kabupaten Tanah Bumbu
-                yang memiliki berbagai layanan administrasi masyarakat. Aplikasi ini bertujuan
-                untuk mempermudah pelayanan seperti pembuatan surat, pendataan warga,
-                dan informasi umum secara online dan efisien.
+                KUSAN HULU - Upacara peringatan Hari Pahlawan 7 Februari dilaksanakan di Halaman Kantor Camat Kusan Hulu pada Rabu (7/2/2024).
+                Camat Kusan Hulu H.Abdul Jabar, S.AP bertindak selaku inspektur upacara peringatan hari pahlawan tersebut. Upacara digelar pukul 09.00 Wita berlangsung dengan khidmat yang diawali dengan pembacaan sejarah perjuangan pahlawan rakyat Pagatan tanggal 7 Februari 1946 oleh Kasi Pemerintahan Kecamatan Kusan Hulu Amrullah, S,AP.
+                Dalam amanat Bupati Tanah Bumbu Abah  Zairullah Azhar yang dibacakan oleh Camat Kusan Hulu menyampaikan hari pahlawan bukan hanya masa lalu tapi juga menatap masa depan. dan dalam amanat beliau juga berpesan kepada genersasi muda, "Jadilah pahlawan masa kini dengan mengisi kemerdekaan dengan hal-hal positif, belajarlah dengan tekun tingkatkan prestasi dan berkontribusilah untuk kemajuan bangsa.
             </p>
         </div>
 

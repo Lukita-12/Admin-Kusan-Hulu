@@ -77,36 +77,44 @@
                             <x-table.container variant="button">
                                @if ($domisiliUsahas->currentPage() === 1 && $loop->first)
                                     @can('acceptOrReject', $domisiliUsaha)
-                                        <x-table.form action="{{ route('admin.domisili_usaha.accept', $domisiliUsaha) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                                        </x-table.form>
+                                        @if ($domisiliUsaha->status === 'Diajukan')
+                                            <x-table.form action="{{ route('admin.domisili_usaha.accept', $domisiliUsaha) }}">
+                                                @method('PATCH')
+                                                <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                                            </x-table.form>
 
-                                        <x-table.form action="{{ route('admin.domisili_usaha.reject', $domisiliUsaha) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                                        </x-table.form>
+                                            <x-table.form action="{{ route('admin.domisili_usaha.reject', $domisiliUsaha) }}">
+                                                @method('PATCH')
+                                                <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                                            </x-table.form>
+                                        @else
+                                            @if (Auth::user()->role === 'admin' && in_array($domisiliUsaha->status, ['Diproses', 'Selesai']))
+                                                <span>-</span>
+                                            @endif
+                                        @endif
                                     @endcan
                                 @else
                                     @if ($domisiliUsaha->status === 'Diajukan')
                                         <span class="text-black-500 font-semibold">Menunggu</span>
-                                    @else (in_array($domisiliUsaha->status, ['Diproses', 'Selesai', 'Ditolak', 'Dihapus']))
-                                        @if (Auth::user()->role === 'admin')
-                                            <span>-</span>
-                                        @endif
+                                    @elseif (Auth::user()->role === 'admin' && in_array($domisiliUsaha->status, ['Diproses', 'Selesai']))
+                                        <span>-</span>
                                     @endif
                                 @endif
                                 @if ($domisiliUsahas->currentPage() === 1 && $loop->first)
                                     @can('completeOrEditOrDelete', $domisiliUsaha)
-                                        <x-table.form action="{{ route('admin.domisili_usaha.complete', $domisiliUsaha) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                                        </x-table.form>
+                                        @if ($domisiliUsaha->status !== 'Selesai')
+                                            <x-table.form action="{{ route('admin.domisili_usaha.complete', $domisiliUsaha) }}">
+                                                @method('PATCH')
+                                                <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                                            </x-table.form>
 
-                                        <x-table.form action="{{ route('admin.domisili_usaha.destroy', $domisiliUsaha) }}">
-                                            @method('DELETE')
-                                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                        </x-table.form>
+                                            <x-table.form action="{{ route('admin.domisili_usaha.destroy', $domisiliUsaha) }}">
+                                                @method('DELETE')
+                                                <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                            </x-table.form>
+                                        @else
+                                            <span>-</span>
+                                        @endif
                                     @endcan
                                 @else
                                     @if (Auth::user()->role === 'super_admin')
@@ -117,6 +125,7 @@
                                         @endif
                                     @endif
                                 @endif
+
                             </x-table.container>
                         </x-table.td>
                     </x-table.tr>

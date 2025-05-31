@@ -154,6 +154,6 @@ class DomisiliPendudukController extends Controller
         $domisiliPenduduk->status = 'Selesai';
         $domisiliPenduduk->save();
 
-        return redirect('/admin/domisili-penduduk');
+        return redirect()->route('domisili-penduduk.surat', $domisiliPenduduk->id);
     }
 }

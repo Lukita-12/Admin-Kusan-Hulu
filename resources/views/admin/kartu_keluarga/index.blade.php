@@ -66,35 +66,53 @@
                             <x-table.td>
                                 <x-table.container variant="button">
                                    @if ($pengajuanPerubahanKKs->currentPage() === 1 && $loop->first)
-                                        @can ('acceptOrReject', $pengajuanPerubahanKK)
-                                            <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.accept', $pengajuanPerubahanKK) }}">
-                                                @method('PATCH')
-                                                <x-table.button variant="accept" type="submit">Terima</x-table.button>
-                                            </x-table.form>
-                                            <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.reject', $pengajuanPerubahanKK) }}">
-                                                @method('PATCH')
-                                                <x-table.button variant="reject" type="submit">Tolak</x-table.button>
-                                            </x-table.form>
+                                        @can('acceptOrReject', $pengajuanPerubahanKK)
+                                            @if ($pengajuanPerubahanKK->status === 'Diajukan')
+                                                <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.accept', $pengajuanPerubahanKK) }}">
+                                                    @method('PATCH')
+                                                    <x-table.button variant="accept" type="submit">Terima</x-table.button>
+                                                </x-table.form>
+                                                <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.reject', $pengajuanPerubahanKK) }}">
+                                                    @method('PATCH')
+                                                    <x-table.button variant="reject" type="submit">Tolak</x-table.button>
+                                                </x-table.form>
+                                            @else
+                                                <span>-</span>
+                                            @endif
+                                        @endcan
+
+                                        @can('completeOrEditOrDelete', $pengajuanPerubahanKK)
+                                            @if ($pengajuanPerubahanKK->status !== 'Selesai')
+                                                <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.complete', $pengajuanPerubahanKK) }}">
+                                                    @method('PATCH')
+                                                    <x-table.button variant="complete" type="submit">Selesai</x-table.button>
+                                                </x-table.form>
+                                                <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.destroy', $pengajuanPerubahanKK) }}">
+                                                    @method('DELETE')
+                                                    <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                                </x-table.form>
+                                            @else
+                                                <span>-</span>
+                                            @endif
                                         @endcan
                                     @else
-                                        @if ($pengajuanPerubahanKK->status === 'Diajukan')
-                                            <span class="text-Black-500 font-semibold">Menunggu</span>
+                                        @if (Auth::user()->role === 'super_admin')
+                                            @if ($pengajuanPerubahanKK->status === 'Diproses')
+                                                <span class="text-black-600 font-semibold">Menunggu</span>
+                                            @else
+                                                <span>-</span>
+                                            @endif
+                                        @elseif (Auth::user()->role === 'admin')
+                                            @if ($pengajuanPerubahanKK->status === 'Diajukan')
+                                                <span class="text-black-500 font-semibold">Menunggu</span>
+                                            @else
+                                                <span>-</span>
+                                            @endif
                                         @else
-                                            <span>-</span>
+                                            <span>-</span> {{-- Default fallback supaya pasti hanya satu tanda '-' muncul --}}
                                         @endif
                                     @endif
 
-
-                                    @can ('completeOrEditOrDelete', $pengajuanPerubahanKK)
-                                        <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.complete', $pengajuanPerubahanKK) }}">
-                                            @method('PATCH')
-                                            <x-table.button variant="complete" type="submit">Selesai</x-table.button>
-                                        </x-table.form>
-                                        <x-table.form action="{{ route('admin.pengajuan_perubahan_kk.destroy', $pengajuanPerubahanKK) }}">
-                                            @method('DELETE')
-                                            <x-table.button variant="delete" type="submit">Hapus</x-table.button>
-                                        </x-table.form>
-                                    @endcan
                                 </x-table.container>
                             </x-table.td>
                         </x-table.tr>

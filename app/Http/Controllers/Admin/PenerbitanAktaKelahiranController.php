@@ -172,6 +172,6 @@ class PenerbitanAktaKelahiranController extends Controller
         $penerbitanAktaKelahiran->status = 'Selesai';
         $penerbitanAktaKelahiran->save();
 
-        return redirect('/admin/penerbitan-akta-kelahiran');
+        return redirect()->route('penerbitan-akta-kelahiran.surat', $penerbitanAktaKelahiran->id);
     }
 }

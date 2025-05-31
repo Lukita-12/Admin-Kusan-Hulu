@@ -13,6 +13,7 @@ class PendudukSeeder extends Seeder
      */
     public function run(): void
     {
+        // Penduduk::create()
         Penduduk::factory(10)->create();
     }
 }

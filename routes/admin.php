@@ -11,9 +11,14 @@ use App\Http\Controllers\Admin\PenerbitanAktaKelahiranController;
 use App\Http\Controllers\Admin\PengajuanPerubahanKKController;
 use App\Http\Controllers\Admin\PerubahanKartuKeluargaController;
 use App\Http\Controllers\Admin\PindahDomisiliController;
+use App\Http\Controllers\SuratAktaKelahiranController;
 use App\Http\Controllers\SuratAktaKematianController;
+use App\Http\Controllers\SuratDomisiliPendudukController;
 use App\Http\Controllers\SuratDomisiliUsahaController;
+use App\Http\Controllers\SuratKartuKeluargaController;
+use App\Http\Controllers\SuratPindahDomisiliController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\FuncCall;
 
 Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(function () {
     Route::controller(DesaController::class)->group(function () {
@@ -163,5 +168,25 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
     Route::controller(SuratDomisiliUsahaController::class)->group(function(){
         Route::get('/SuratDomisiliUsaha','index')->name('admin.SuratDomisiliUsaha.index');
         Route::get('/domisili-usaha/surat/{id}','show')->name('domisili-usaha.surat');
+    });
+    
+    Route::controller(SuratDomisiliPendudukController::class)->group(function(){
+        Route::get('/SuratDomisiliPenduduk', 'index')->name('admin.SuratDomisiliPenduduk.index');
+        Route::get('/domisili-penduduk/surat/{id}', 'show')->name('domisili-penduduk.surat');
+    });
+
+    Route::controller(SuratKartuKeluargaController::class)->group(function(){
+        Route::get('/SuratKartuKeluarga', 'index')->name('admin.SuratKartuKeluarga.index');
+        Route::get('/kartu-keluarga/surat/{id}','show')->name('kartu-keluarga.surat');
+    });
+
+    Route::controller(SuratAktaKelahiranController::class)->group(function(){
+        Route::get('/SuratAktaKelahiran','index')->name('admin.SuratAktaKelahiran.index');
+        Route::get('/penerbitan_akta_kelahiran/surat/{id}','show')->name('penerbitan-akta-kelahiran.surat');
+    });
+
+    Route::controller(SuratPindahDomisiliController::class)->group(function(){
+        Route::get('/SuratPindahDomisili','index')->name('admin.SuratPindahDomisili.index');
+        Route::get('/pindah_domisili/surat/{id}','show')->name('pindah-domisili.surat');
     });
 });

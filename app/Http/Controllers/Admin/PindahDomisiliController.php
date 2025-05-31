@@ -155,6 +155,6 @@ class PindahDomisiliController extends Controller
         $pindahDomisili->status = 'Selesai';
         $pindahDomisili->save();
 
-        return redirect('/admin/pindah-domisili');
+        return redirect()->route('pindah-domisili.surat', $pindahDomisili->id);
     }
 }

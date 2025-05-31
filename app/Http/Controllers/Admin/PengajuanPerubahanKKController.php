@@ -74,6 +74,6 @@ class PengajuanPerubahanKKController extends Controller
             ]);
         });
 
-        return redirect()->route('admin.kartu_keluarga.index');
+        return redirect()->route('kartu-keluarga.surat', $pengajuanPerubahanKK->id);
     }
 }

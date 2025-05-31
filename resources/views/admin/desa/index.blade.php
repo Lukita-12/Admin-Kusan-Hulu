@@ -17,6 +17,9 @@
                 <x-table.tr>
                     <x-table.td>No.</x-table.td>
                     <x-table.td>Nama desa</x-table.td>
+                    <x-table.td>Penduduk</x-table.td>
+                    <!-- <x-table.td>Usaha</x-table.td> -->
+
                     <x-table.td>Aksi</x-table.td>
                 </x-table.tr>
             </x-table.thead>
@@ -25,6 +28,9 @@
                     <x-table.tr variant="body">
                         <x-table.td>{{ $loop->iteration }}</x-table.td>
                         <x-table.td>{{ $desa->nama_desa }}</x-table.td>
+                         <x-table.td>{{ $desa->penduduk->count() }}</x-table.td>
+                         <!-- <x-table.td>{{ $desa->penduduk->domisiliUsaha->count() }}</x-table.td> -->
+
                         <x-table.td>
                             <x-table.container variant="button">
                                 <x-table.button-link variant="edit" href="{{ route('admin.desa.edit', $desa) }}">Edit</x-table.button-link>
