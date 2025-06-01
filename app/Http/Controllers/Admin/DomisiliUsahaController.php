@@ -40,6 +40,7 @@ class DomisiliUsahaController extends Controller
         $query->where('status', $request->status);
     }
 
+
     $query->orderByRaw("
     FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')
     ")->orderBy('created_at', 'asc');

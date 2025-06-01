@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('tempat_kelahiran');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->default('Laki-laki');
             $table->string('agama');
+            $table->string('anak_ke');
             $table->string('upload_sp_bidan');
             $table->string('upload_sp_rt');
             $table->string('status')->default('Diajukan');

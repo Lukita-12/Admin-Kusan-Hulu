@@ -19,6 +19,7 @@
                     <a href="{{ route('admin.domisili_usaha.create') }}"
                         class="inline-block bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">+
                         Buat</a>
+                   
 
                     <label for="filter_status" class="font-medium text-xl text-slate-100">Filter:</label>
                     <select name="status" id="status" class="outline-none tet-slate-700 text-lg"
@@ -131,6 +132,8 @@
                     </x-table.tr>
                     @endif
                     @endforeach
+
+                    
 
                 </tbody>
             </x-table.table>

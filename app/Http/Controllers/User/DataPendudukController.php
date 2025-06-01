@@ -48,10 +48,11 @@ class DataPendudukController extends Controller
         $user = Auth::user();
         $validatedData = $request->validate([
            
-            'nama'                      => ['required', 'exists:desa,id'],
+            'desa_id'                   => ['required', 'exists:desa,id'],
+            'nama'                      => ['required'],
             'nik'                       => ['required'],
             'no_kk'                     => ['required'],
-            'desa_id'                   => ['required'],
+            
             'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
             'status_perkawinan'         => ['required'],
             'tempat_lahir'              => ['required'],
