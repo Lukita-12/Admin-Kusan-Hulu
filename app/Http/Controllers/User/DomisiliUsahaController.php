@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\DomisiliUsaha;
 use App\Models\Kartukeluarga;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DomisiliUsahaController extends Controller
 {
@@ -17,7 +19,11 @@ class DomisiliUsahaController extends Controller
 
     public function create()
     {
-        return view('/user/domisili_usaha.create');
+        $user = Auth::user();
+        
+        return view('/user/domisili_usaha.create',[
+            'user'=>$user,
+        ]);
     }
 
     public function store(Request $request)
@@ -35,6 +41,8 @@ class DomisiliUsahaController extends Controller
         DomisiliUsaha::create($validatedData);
 
         return redirect('/beranda');
+         return redirect()->route('user.domisili_usaha.create')
+                     ->with('success', 'Data berhasil dikirim.');
     }
 
     public function show(DomisiliUsaha $domisiliUsaha)

@@ -8,13 +8,10 @@
             <x-form.container variant="form">
 
                 <x-form.container variant="label-input">
-                    <x-form.label for="nik">NIK</x-form.label>
-                    <x-form.container variant="search">
-                        <x-form.container variant="input-error">
-                            <x-form.input type="text" name="no_kk" id="no_kk" :value="old('no_kk')" placeholder="NIK..." required />
-                            <x-form.error errorFor="no_kk" />
-                        </x-form.container>
-                        <x-form.button variant="search" type="button" id="btn-cari" class="min-w-1/4">Cari</x-form.button>
+                    <x-form.label for="nik">Nik</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nik" id="nik" :value="old('nik', $user->dataPenduduk->nik)" placeholder="nik" readonly onfocus="this.blur();" required/>
+                        <x-form.error errorFor="nik" />
                     </x-form.container>
                 </x-form.container>
 
@@ -24,24 +21,32 @@
                 <x-form.container variant="label-input">
                     <x-form.label for="nama">Nama</x-form.label>
                     <x-form.container variant="input-error">
-                        <x-form.input type="text" name="nama" id="nama" :value="old('nama')" placeholder="Nama" readonly onfocus="this.blur();" required/>
+                        <x-form.input type="text" name="nama" id="nama" :value="old('nama', $user->dataPenduduk->nama)" placeholder="Nama" readonly onfocus="this.blur();" required/>
                         <x-form.error errorFor="nama" />
                     </x-form.container>
                 </x-form.container>
     
                 <x-form.container variant="label-input">
-                    <x-form.label for="ttl">Tempat Tanggal Lahir</x-form.label>
+                    <x-form.label for="tempat_lahir">Tempat Lahir</x-form.label>
                     <x-form.container variant="input-error">
-                        <x-form.input type="text" name="ttl" id="ttl" :value="old('ttl')" placeholder="Tempat tanggal lahir..." readonly onfocus="this.blur();" required/>
-                        <x-form.error errorFor="ttl" />
+                        <x-form.input type="text" name="tempat_lahir" id="tempat_lahir" :value="old('tempat_lahir', $user->dataPenduduk->tempat_lahir)" placeholder="Tempat tanggal lahir..." readonly onfocus="this.blur();" required/>
+                        <x-form.error errorFor="tempat_lahir" />
+                    </x-form.container>
+                </x-form.container>
+
+                 <x-form.container variant="label-input">
+                    <x-form.label for="tanggal_lahir">Tempat Tanggal Lahir</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="tanggal_lahir" id="tanggal_lahir" :value="old('tanggal_lahir', $user->dataPenduduk->tanggal_lahir)" placeholder="Tempat tanggal lahir..." readonly onfocus="this.blur();" required/>
+                        <x-form.error errorFor="tanggal_lahir" />
                     </x-form.container>
                 </x-form.container>
 
                 <x-form.container variant="label-input">
-                    <x-form.label for="alamat">Alamat</x-form.label>
+                    <x-form.label for="alamat_lengkap">alamat_lengkap</x-form.label>
                     <x-form.container variant="input-error">
-                        <x-form.textarea type="text" name="alamat" id="alamat" placeholder="Alamat..." readonly onfocus="this.blur();" required>
-                            {{ old('alamat') }}
+                        <x-form.textarea type="text" name="alamat_lengkap" id="alamat_lengkap" placeholder="alamat_lengkap..." readonly onfocus="this.blur();" required>
+                            {{ old('alamat_lengkap', $user->dataPenduduk->alamat_lengkap) }}
                         </x-form.textarea>
                     </x-form.container>
                     <x-form.error errorFor="alamat" />

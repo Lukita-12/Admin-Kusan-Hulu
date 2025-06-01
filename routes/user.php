@@ -90,6 +90,9 @@ Route::controller(PengajuanPerubahanKKController::class)->group(function () {
 });
 
 Route::controller(DataPendudukController::class)->group(function(){
-    Route::get('/data-penduduk/create','create')->name('user.data_penduduk.create');
+    Route::get('/data-penduduk','index')->name('user.data_penduduk.index')->middleware('auth');
+    Route::get('/data-penduduk/create','create')->name('user.data_penduduk.create')->middleware('auth');
     Route::post('/data-penduduk','store')->name('user.data_penduduk.store');
+    Route::get('/data-penduduk/{dataPenduduk}/edit','edit')->name('user.data_penduduk.edit')->middleware('auth');
+    Route::put('/data-penduduk/{dataPenduduk}','update')->name('user.data_penduduk.update')->middleware('auth');
 });

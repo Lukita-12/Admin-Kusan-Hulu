@@ -23,16 +23,64 @@
 
             <x-sidebar.nav>
                 <x-sidebar.nav-link href="{{ url('/beranda') }}">Beranda</x-sidebar.nav-link>
+                <x-sidebar.nav-link href="{{ route('user.data_penduduk.index') }}">Data Penduduk</x-sidebar.nav-link>
+
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.domisili_usaha.create') }}">Domisili Usaha</x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Domisili Usaha
+                </x-sidebar.nav-link>
+                @endif
+
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.domisili_penduduk.create') }}">Domisili Penduduk
                 </x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Domisili Penduduk
+                </x-sidebar.nav-link>
+                @endif
+
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.pindah_domisili.create') }}">Pindah Domisili
                 </x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Pindah Domisili
+                </x-sidebar.nav-link>
+                @endif
+
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.kartu_keluarga.index') }}">Kartu Keluarga</x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Kartu Keluarga
+                </x-sidebar.nav-link>
+                @endif
+
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.penerbitan_akta_kelahiran.create') }}">Akta Kelahiran
                 </x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Akta Kelahiran
+                </x-sidebar.nav-link>
+                @endif
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.akta_kematian.create') }}">Akta Kematian</x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Akta Kematian
+                </x-sidebar.nav-link>
+                @endif
+                @if (Auth::user()->dataPenduduk)
                 <x-sidebar.nav-link href="{{ route('user.akun.edit',Auth::user()->id) }}">Akun</x-sidebar.nav-link>
+                @else
+                <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
+                    Akun
+                </x-sidebar.nav-link>
+                @endif
             </x-sidebar.nav>
         </x-sidebar.container>
         @auth
@@ -53,16 +101,16 @@
 
             <div class="flex items-center gap-3">
                 <a href="{{ route('user-notifikasi') }}">
-                <div class="relative cursor-pointer">
-                    <!-- Ikon Lonceng -->
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C8.67 6.165 8 7.388 8 8.75V14.158c0 .538-.214 1.055-.595 1.437L6 17h5m0 0v1a3 3 0 006 0v-1m-6 0h6" />
-                    </svg>
-                    <!-- Badge Notifikasi -->
-                    
-                </div>
+                    <div class="relative cursor-pointer">
+                        <!-- Ikon Lonceng -->
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C8.67 6.165 8 7.388 8 8.75V14.158c0 .538-.214 1.055-.595 1.437L6 17h5m0 0v1a3 3 0 006 0v-1m-6 0h6" />
+                        </svg>
+                        <!-- Badge Notifikasi -->
+
+                    </div>
                 </a>
                 <x-heading.container variant="button">
                     @guest

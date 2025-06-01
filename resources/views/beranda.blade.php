@@ -2,6 +2,15 @@
     <x-slot:heading>
         Beranda
     </x-slot:heading>
+    @if(Auth::user()->dataPenduduk)
+    
+    @else
+    <div class="bg-gray-300 px-4 py-2"> 
+        <span class="text-lg text-gray-950 font-bold">
+        SILAHKAN ISI DATA ANDA PADA DATA PENDUDUK TERLEBIH DAHULU!   
+        </span>
+    </div>
+    @endif
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- DOMISILI USAHA -->

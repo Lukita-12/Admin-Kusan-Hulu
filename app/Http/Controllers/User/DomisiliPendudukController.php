@@ -7,6 +7,7 @@ use App\Models\DomisiliPenduduk;
 use App\Models\Kartukeluarga;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DomisiliPendudukController extends Controller
 {
@@ -17,7 +18,11 @@ class DomisiliPendudukController extends Controller
 
     public function create()
     {
-        return view('user.domisili_penduduk.create');
+        $user = Auth::user();
+        
+        return view('/user/domisili_penduduk.create',[
+            'user'=>$user,
+        ]);
     }
 
     public function store(Request $request)
@@ -32,9 +37,10 @@ class DomisiliPendudukController extends Controller
             'nomor_surat'   => null,        // biarkan kosong dulu
         ]);
 
-        return redirect()->route('user.domisili_penduduk.create');
+        return redirect()->route('user.domisili_penduduk.create')
+                     ->with('success', 'Data berhasil dikirim.');
     }
-
+    
     /**
      * Display the specified resource.
      */
