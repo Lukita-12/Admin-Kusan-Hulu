@@ -36,7 +36,7 @@ class SuratDomisiliUsahaController extends Controller
      */
     public function show($id)
     {
-        $domisiliUsaha = DomisiliUsaha::with('penduduk')->findOrFail($id);
+        $domisiliUsaha = DomisiliUsaha::with('dataPenduduk')->findOrFail($id);
     return view('admin.domisili_usaha.surat', compact('domisiliUsaha'));
     }
 

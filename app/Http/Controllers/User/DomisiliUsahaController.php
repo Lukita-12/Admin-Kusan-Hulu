@@ -29,7 +29,7 @@ class DomisiliUsahaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'penduduk_id'   => ['required', 'exists:penduduk,id'],
+            'data_penduduk_id'   => ['required', 'exists:data_penduduk,id'],
             'nama_usaha'    => ['required'],
             'jenis_usaha'   => ['required'],
             'alamat_usaha'  => ['required'],

@@ -16,7 +16,7 @@
                 </x-form.container>
 
                 <!-- Penduduk id -->
-                <x-form.input type="hidden" id="penduduk_id" name="penduduk_id" />
+                <x-form.input type="hidden" id="data_penduduk_id" name="data_penduduk_id" :value="old('nik', $user->dataPenduduk->id)"/>
                 
                 <x-form.container variant="label-input">
                     <x-form.label for="nama">Nama</x-form.label>

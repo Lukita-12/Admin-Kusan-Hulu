@@ -68,7 +68,7 @@
                     <x-table.tr variant="body">
                         <x-table.td>{{ $loop->iteration }}</x-table.td>
                         <x-table.td>{{ $domisiliUsaha->tanggal->format('d M Y') }}</x-table.td>
-                        <x-table.td>{{ $domisiliUsaha->penduduk->nama }}</x-table.td>
+                        <x-table.td>{{ $domisiliUsaha->dataPenduduk->nama }}</x-table.td>
                         <x-table.td>{{ $domisiliUsaha->nama_usaha }}</x-table.td>
                         <x-table.td>{{ $domisiliUsaha->jenis_usaha }}</x-table.td>
                         <x-table.td>{{ $domisiliUsaha->alamat_usaha }}</x-table.td>

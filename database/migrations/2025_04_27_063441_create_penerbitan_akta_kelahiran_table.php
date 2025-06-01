@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Penduduk;
+use App\Models\DataPenduduk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('penerbitan_akta_kelahiran', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Penduduk::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(DataPenduduk::class)->constrained()->cascadeOnDelete();
             $table->date('tanggal');
             $table->string('nomor_akta')->nullable();
             $table->string('nama_anak');

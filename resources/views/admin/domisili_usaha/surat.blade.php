@@ -33,8 +33,8 @@
 
             <p class="mt-6 mb-2">Dengan ini menerangkan bahwa:</p>
             <ul class="space-y-2">
-                <li><strong>Nama:</strong> {{ $domisiliUsaha->penduduk->nama }}</li>
-                <li><strong>Alamat:</strong> {{ $domisiliUsaha->penduduk->alamat_lengkap }}</li>
+                <li><strong>Nama:</strong> {{ $domisiliUsaha->dataPenduduk->nama }}</li>
+                <li><strong>Alamat:</strong> {{ $domisiliUsaha->dataPenduduk->alamat_lengkap }}</li>
                 <li><strong>Jenis Usaha:</strong> {{ $domisiliUsaha->jenis_usaha }}</li>
                 <li><strong>Nama Usaha:</strong> {{ $domisiliUsaha->nama_usaha }}</li>
                 <li><strong>Alamat Usaha:</strong> {{ $domisiliUsaha->alamat_usaha }}</li>

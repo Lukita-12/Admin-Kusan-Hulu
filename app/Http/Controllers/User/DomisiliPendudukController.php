@@ -28,16 +28,16 @@ class DomisiliPendudukController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'penduduk_id' => 'required|exists:penduduk,id',
+            'data_penduduk_id' => 'required|exists:data_penduduk,id',
         ]);
     
         DomisiliPenduduk::create([
-            'penduduk_id'   => $validated['penduduk_id'],
+            'data_penduduk_id'   => $validated['data_penduduk_id'],
             'tanggal'       => now(), // otomatis tanggal saat ini
             'nomor_surat'   => null,        // biarkan kosong dulu
         ]);
 
-        return redirect()->route('user.domisili_penduduk.create')
+        return redirect()->route('beranda')
                      ->with('success', 'Data berhasil dikirim.');
     }
     

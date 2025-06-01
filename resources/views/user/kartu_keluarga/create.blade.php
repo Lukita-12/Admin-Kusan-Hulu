@@ -19,7 +19,7 @@
 
             <div>
                 <x-form.form-label for="kepala_keluarga">
-                    Kepala keluarga
+                    Kepala keluarg
                 </x-form.form-label>
                 <x-form.form-input
                     type="text"

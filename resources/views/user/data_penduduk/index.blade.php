@@ -5,14 +5,12 @@
     
     <div class="h-screen flex flex-col items-center gap-6">
         <div>
-            @if($dataPenduduk == null)
+            @if($dataPenduduk->isEmpty())
             <a href="{{route('user.data_penduduk.create')}}"
                 class="inline-block bg-green-500 font-semibold text-lg text-white text-center px-3 py-1 rounded-md">Tambah</a>
             @else
-                @foreach($dataPenduduk as $penduduk)
             <a href="{{route('user.data_penduduk.edit',$dataPenduduk)}}"
                 class="inline-block bg-red-500 font-semibold text-lg text-white text-center px-3 py-1 rounded-md">Edit</a>
-                @endforeach
             @endif
         </div>
 

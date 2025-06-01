@@ -36,4 +36,9 @@ class DomisiliUsaha extends Model
         return self::with('penduduk.kartukeluarga')
             ->where('status', $status);
     }
+
+    public function dataPenduduk()
+    {
+        return $this->belongsTo(DataPenduduk::class);
+    }
 }

@@ -31,6 +31,22 @@
                 </x-form.container>
 
                 <x-form.container variant="label-input">
+                <x-form.label for="desa_id">Desa</x-form.label>
+
+                <x-form.container variant="input-error">
+                    <x-form.select name="desa_id" id="desa_id" :value="old('desa_id')" required>
+                        <option value="">-- Pilih Desa --</option>
+                        @foreach($desa as $item)
+                            <option value="{{ $item->id }}" {{ old('desa_id') == $item->id ? 'selected' : '' }}>
+                                {{ $item->nama_desa }}
+                            </option>
+                        @endforeach
+                    </x-form.select>
+                    <x-form.error errorFor="desa_id" />
+                </x-form.container>
+            </x-form.container>
+
+                <x-form.container variant="label-input">
                     <x-form.label for="jenis_kelamin">Jenis kelamin</x-form.label>
 
                     <x-form.container variant="input-error">

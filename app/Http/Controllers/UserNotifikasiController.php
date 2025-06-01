@@ -16,8 +16,8 @@ class UserNotifikasiController extends Controller
         $user = Auth::user();
 
         // Ambil data domisili usaha milik user yang sedang login
-        $domisiliUsahas = DomisiliUsaha::with('penduduk')
-            ->whereHas('penduduk', function ($query) use ($user) {
+        $domisiliUsahas = DomisiliUsaha::with('dataPenduduk')
+            ->whereHas('dataPenduduk', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
             })->latest()->get();
 

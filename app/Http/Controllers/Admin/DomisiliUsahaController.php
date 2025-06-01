@@ -15,7 +15,7 @@ class DomisiliUsahaController extends Controller
     $role = Auth::user()->role;
 
     // Query dasar dengan relasi penduduk
-    $query = DomisiliUsaha::with('penduduk');
+    $query = DomisiliUsaha::with('dataPenduduk');
 
     // Filter berdasarkan role
     if ($role === 'super_admin') {

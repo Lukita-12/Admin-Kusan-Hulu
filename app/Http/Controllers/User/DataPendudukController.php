@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPenduduk;
+use App\Models\Desa;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,11 @@ class DataPendudukController extends Controller
      */
     public function create()
     {
-        return view ('user.data_penduduk.create');
+        $desa = Desa::orderBy('nama_desa')->get(); // Sesuaikan nama kolom 'nama_desa' atau 'nama'
+
+    return view('user.data_penduduk.create', [
+        'desa' => $desa
+    ]);
     }
 
     /**
@@ -43,9 +48,10 @@ class DataPendudukController extends Controller
         $user = Auth::user();
         $validatedData = $request->validate([
            
-            'nama'                      => ['required'],
+            'nama'                      => ['required', 'exists:desa,id'],
             'nik'                       => ['required'],
             'no_kk'                     => ['required'],
+            'desa_id'                   => ['required'],
             'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
             'status_perkawinan'         => ['required'],
             'tempat_lahir'              => ['required'],
