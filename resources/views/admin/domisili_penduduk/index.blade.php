@@ -57,8 +57,8 @@
         <x-table.tr variant="body">
             <x-table.td>{{ $loop->iteration }}</x-table.td>
             <x-table.td>{{ $domisiliPenduduk->tanggal->format('d M Y') }}</x-table.td>
-            <x-table.td>{{ $domisiliPenduduk->penduduk->nama }}</x-table.td>
-            <x-table.td>{{ $domisiliPenduduk->penduduk->jenis_kelamin }}</x-table.td>
+            <x-table.td>{{ $domisiliPenduduk->dataPenduduk->nama }}</x-table.td>
+            <x-table.td>{{ $domisiliPenduduk->dataPenduduk->jenis_kelamin }}</x-table.td>
             <x-table.td>{{ $domisiliPenduduk->status }}</x-table.td>
             <x-table.td>
                 <x-table.container variant="button">

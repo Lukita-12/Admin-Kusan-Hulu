@@ -40,8 +40,7 @@ class DomisiliUsahaController extends Controller
         // Create domaint
         DomisiliUsaha::create($validatedData);
 
-        return redirect('/beranda');
-         return redirect()->route('user.domisili_usaha.create')
+        return redirect()->route('beranda')
                      ->with('success', 'Data berhasil dikirim.');
     }
 

@@ -15,7 +15,7 @@ class PindahDomisiliController extends Controller
     $role = Auth::user()->role;
 
     // Query dasar dengan eager loading relasi
-    $query = PindahDomisili::with('penduduk.kartukeluarga');
+    $query = PindahDomisili::with('penduduk.kartukeluarga', 'dataPenduduk');
 
     // Filter berdasarkan role
     if ($role === 'super_admin') {

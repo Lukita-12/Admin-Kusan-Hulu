@@ -27,16 +27,16 @@
         <div class="mb-6">
             <p class="mb-2">Yang bertanda tangan di bawah ini menerangkan bahwa:</p>
             <ul class="space-y-2">
-                <li><strong>Nama:</strong> {{ $pindahDomisili->penduduk->nama }}</li>
-                <li><strong>NIK:</strong> {{ $pindahDomisili->penduduk->nik }}</li>
-                <li><strong>Tempat, Tanggal Lahir:</strong> {{ $pindahDomisili->penduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($pindahDomisili->penduduk->tanggal_lahir)->format('d-m-Y') }}</li>
-                <li><strong>Jenis Kelamin:</strong> {{ $pindahDomisili->penduduk->jenis_kelamin }}</li>
+                <li><strong>Nama:</strong> {{ $pindahDomisili->dataPenduduk->nama }}</li>
+                <li><strong>NIK:</strong> {{ $pindahDomisili->dataPenduduk->nik }}</li>
+                <li><strong>Tempat, Tanggal Lahir:</strong> {{ $pindahDomisili->dataPenduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($pindahDomisili->dataPenduduk->tanggal_lahir)->format('d-m-Y') }}</li>
+                <li><strong>Jenis Kelamin:</strong> {{ $pindahDomisili->dataPenduduk->jenis_kelamin }}</li>
                 <li><strong>Alamat Lama:</strong> {{ $pindahDomisili->alamat_lama }}</li>
             </ul>
 
             <p class="mt-6 mb-2">Telah pindah domisili ke alamat:</p>
             <ul class="space-y-2">
-                <li><strong>Alamat Baru:</strong> {{ $pindahDomisili->alamat_baru }}</li>
+                <li><strong>Alamat Baru:</strong> {{ $pindahDomisili->tujuan }}</li>
                 <li><strong>Tanggal Pindah:</strong> {{ \Carbon\Carbon::parse($pindahDomisili->tanggal_pindah)->translatedFormat('d F Y') }}</li>
                 <li><strong>Alasan Pindah:</strong> {{ $pindahDomisili->alasan_pindah }}</li>
             </ul>

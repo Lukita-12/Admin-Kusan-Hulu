@@ -18,7 +18,7 @@
     <div id="surat" class="max-w-3xl mx-auto border p-8 shadow-md rounded-xl">
         <!-- Header -->
         <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold uppercase">Surat Keterangan Domisili Penduduk</h1>
+            <h1 class="text-2xl font-bold uppercase">Surat Keterangan Domisili dataPenduduk</h1>
             <p class="text-sm text-gray-600">Nomor: {{ '470/'.$domisiliPenduduk->id.'/SKD/'.date('Y') }}</p>
         </div>
 
@@ -32,11 +32,11 @@
 
             <p class="mt-6 mb-2">Dengan ini menerangkan bahwa:</p>
             <ul class="space-y-2">
-                <li><strong>Nama:</strong> {{ $domisiliPenduduk->penduduk->nama }}</li>
-                <li><strong>Tempat/Tanggal Lahir:</strong> {{ $domisiliPenduduk->penduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($domisiliPenduduk->tanggal_lahir)->translatedFormat('d F Y') }}</li>
-                <li><strong>Jenis Kelamin:</strong> {{ ucfirst($domisiliPenduduk->penduduk->jenis_kelamin) }}</li>
-                <li><strong>Pekerjaan:</strong> {{ $domisiliPenduduk->penduduk->pekerjaan }}</li>
-                <li><strong>Alamat:</strong> {{ $domisiliPenduduk->penduduk->alamat }}</li>
+                <li><strong>Nama:</strong> {{ $domisiliPenduduk->dataPenduduk->nama }}</li>
+                <li><strong>Tempat/Tanggal Lahir:</strong> {{ $domisiliPenduduk->dataPenduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($domisiliPenduduk->tanggal_lahir)->translatedFormat('d F Y') }}</li>
+                <li><strong>Jenis Kelamin:</strong> {{ ucfirst($domisiliPenduduk->dataPenduduk->jenis_kelamin) }}</li>
+                <li><strong>Pekerjaan:</strong> {{ $domisiliPenduduk->dataPenduduk->pekerjaan }}</li>
+                <li><strong>Alamat:</strong> {{ $domisiliPenduduk->dataPenduduk->alamat_lengkap }}</li>
             </ul>
 
             <p class="mt-6">

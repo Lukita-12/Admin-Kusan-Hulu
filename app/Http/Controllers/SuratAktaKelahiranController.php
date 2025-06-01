@@ -36,7 +36,7 @@ class SuratAktaKelahiranController extends Controller
      */
     public function show($id)
     {
-        $penerbitanAktaKelahiran = PenerbitanAktaKelahiran::with('penduduk')->findOrFail($id);
+        $penerbitanAktaKelahiran = PenerbitanAktaKelahiran::with('dataPenduduk')->findOrFail($id);
     return view('admin.penerbitan_akta_kelahiran.surat', compact('penerbitanAktaKelahiran'));
     }
 

@@ -36,7 +36,7 @@ class SuratPindahDomisiliController extends Controller
      */
     public function show($id)
     {
-         $pindahDomisili = PindahDomisili::with('penduduk')->findOrFail($id);
+         $pindahDomisili = PindahDomisili::with('dataPenduduk')->findOrFail($id);
 
     return view('admin.pindah_domisili.surat', compact('pindahDomisili'));
     }

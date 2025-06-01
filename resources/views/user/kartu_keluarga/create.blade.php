@@ -128,6 +128,7 @@
                 <a href="{{ url('/') }}">Batal</a>
                 <button type="submit">Simpan</button>
             </div>
+            
 
         </x-form.form-layout>
     </div>

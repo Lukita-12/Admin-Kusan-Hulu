@@ -21,6 +21,11 @@ class DomisiliPenduduk extends Model
     {
         return $this->belongsTo(Penduduk::class);
     }
+       public function dataPenduduk():BelongsTo
+    {
+        return $this->belongsTo(dataPenduduk::class);
+    }
+
 
     // Search
     public static function search($keyword): Builder

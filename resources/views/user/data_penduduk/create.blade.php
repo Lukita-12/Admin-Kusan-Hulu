@@ -12,7 +12,7 @@
                         <x-form.error errorFor="nama" />
                     </x-form.container>
                 </x-form.container>
-<x-form.container variant="label-input">
+                <x-form.container variant="label-input">
                     <x-form.label for="nik">Nik</x-form.label>
 
                     <x-form.container variant="input-error">

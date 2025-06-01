@@ -8,6 +8,7 @@ use App\Models\Penduduk;
 use App\Models\PenerbitanAktaKelahiran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenerbitanAktaKelahiranController extends Controller
 {
@@ -18,13 +19,17 @@ class PenerbitanAktaKelahiranController extends Controller
 
     public function create()
     {
-        return view('/user.penerbitan_akta_kelahiran.create');
+        $user = Auth::user();
+        
+        return view('/user/penerbitan_akta_kelahiran.create',[
+            'user'=>$user,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'penduduk_id'       => ['required', 'exists:penduduk,id'],
+            'data_penduduk_id'       => ['required', 'exists:data_penduduk,id'],
             'nama_anak'         => ['required'],
             'tempat_kelahiran'  => ['required'],
             'nama_ayah'         => ['required'],
@@ -51,7 +56,8 @@ class PenerbitanAktaKelahiranController extends Controller
         
         PenerbitanAktaKelahiran::create($validatedData);
 
-        return redirect('/beranda');
+         return redirect()->route('beranda')
+                     ->with('success', 'Data berhasil dikirim.');
     }
 
     public function show(PenerbitanAktaKelahiran $penerbitanAktaKelahiran)

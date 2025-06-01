@@ -8,6 +8,7 @@ use App\Models\Kartukeluarga;
 use App\Models\Penduduk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AktaKematianController extends Controller
 {
@@ -21,14 +22,18 @@ class AktaKematianController extends Controller
      */
     public function create()
     {
-        return view('/user.akta_kematian.create');
+        $user = Auth::user();
+        
+        return view('/user/akta_kematian.create',[
+            'user'=>$user,
+        ]);
     }
 
     public function store(Request $request)
     {
         {
             $validatedData = $request->validate([
-                'penduduk_id'       => ['required', 'exists:penduduk,id'],
+                'data_penduduk_id'       => ['required', 'exists:data_penduduk,id'],
                 'tanggal_meninggal' => ['required'],
                 'tempat_meninggal'  => ['required'],
                 'penyebab_meninggal'=> ['required'],
@@ -39,7 +44,8 @@ class AktaKematianController extends Controller
             
             AktaKematian::create($validatedData);
     
-            return redirect('/beranda');
+             return redirect()->route('beranda')
+                     ->with('success', 'Data berhasil dikirim.');
         }
     }
 

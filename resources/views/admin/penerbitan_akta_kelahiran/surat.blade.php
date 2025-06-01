@@ -37,7 +37,6 @@
             <ul class="space-y-2">
                 <li><strong>Nama Ayah:</strong> {{ $penerbitanAktaKelahiran->nama_ayah }}</li>
                 <li><strong>Nama Ibu:</strong> {{ $penerbitanAktaKelahiran->nama_ibu }}</li>
-                <li><strong>Alamat:</strong> {{ $penerbitanAktaKelahiran->alamat }}</li>
             </ul>
 
             <p class="mt-6">

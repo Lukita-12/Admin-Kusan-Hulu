@@ -36,7 +36,7 @@ class SuratAktaKematianController extends Controller
      */
      public function show($id)
     {
-       $akta = AktaKematian::with('penduduk')->findOrFail($id);
+       $akta = AktaKematian::with('dataPenduduk')->findOrFail($id);
     return view('admin.akta_kematian.surat', compact('akta'));
     }
 

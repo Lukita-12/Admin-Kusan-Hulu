@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $kartukeluargas             = Kartukeluarga::latest()->simplepaginate(5);
-        $aktaKematians              = AktaKematian::with('penduduk')->simplePaginate(5);
+        $aktaKematians              = AktaKematian::with('dataPenduduk')->simplePaginate(5);
         $penerbitanAktaKelahirans   = PenerbitanAktaKelahiran::latest()->simplePaginate(5); 
 
         return view('dashboard', [

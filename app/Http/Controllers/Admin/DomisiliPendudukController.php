@@ -17,7 +17,7 @@ class DomisiliPendudukController extends Controller
     $role = Auth::user()->role;
 
     // Query dasar dengan relasi penduduk dan kartu keluarga
-    $query = DomisiliPenduduk::with(['penduduk.kartukeluarga']);
+    $query = DomisiliPenduduk::with(['penduduk.kartukeluarga', 'dataPenduduk']);
 
     // Filter berdasarkan role
     if ($role === 'super_admin') {

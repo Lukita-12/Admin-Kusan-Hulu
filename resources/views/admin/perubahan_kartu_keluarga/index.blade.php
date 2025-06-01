@@ -26,7 +26,7 @@
                         <x-table.tr variant="body">
                             <x-table.td>{{ $loop->iteration }}</x-table.td>
                             <x-table.td>{{ $perubahanKartuKeluarga->tanggal->format('d M Y') }}</x-table.td>
-                            <x-table.td>{{ $perubahanKartuKeluarga->penduduk->nama }}</x-table.td>
+                            <x-table.td>{{ $perubahanKartuKeluarga->dataPenduduk->nama }}</x-table.td>
                             <x-table.td>{{ $perubahanKartuKeluarga->deskripsi_perubahan }}</x-table.td>
                             <x-table.td>{{ $perubahanKartuKeluarga->status }}</x-table.td>
                             <x-table.td>

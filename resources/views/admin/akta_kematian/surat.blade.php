@@ -27,11 +27,11 @@
         <div class="mb-6">
             <p class="mb-2">Yang bertanda tangan di bawah ini menerangkan bahwa:</p>
             <ul class="space-y-2">
-                <li><strong>Nama:</strong> {{ $akta->penduduk->nama }}</li>
-                <li><strong>NIK:</strong> {{ $akta->penduduk->nik }}</li>
-                <li><strong>Tempat, Tanggal Lahir:</strong> {{ $akta->penduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($akta->penduduk->tanggal_lahir)->format('d-m-Y') }}</li>
-                <li><strong>Jenis Kelamin:</strong> {{ $akta->penduduk->jenis_kelamin }}</li>
-                <li><strong>Alamat:</strong> {{ $akta->penduduk->alamat }}</li>
+                <li><strong>Nama:</strong> {{ $akta->dataPenduduk->nama }}</li>
+                <li><strong>NIK:</strong> {{ $akta->dataPenduduk->nik }}</li>
+                <li><strong>Tempat, Tanggal Lahir:</strong> {{ $akta->dataPenduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($akta->dataPenduduk->tanggal_lahir)->format('d-m-Y') }}</li>
+                <li><strong>Jenis Kelamin:</strong> {{ $akta->dataPenduduk->jenis_kelamin }}</li>
+                <li><strong>Alamat:</strong> {{ $akta->dataPenduduk->alamat_lengkap }}</li>
             </ul>
 
             <p class="mt-6 mb-2">Telah meninggal dunia pada:</p>

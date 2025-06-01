@@ -15,7 +15,7 @@ class AktaKematianController extends Controller
     $role = Auth::user()->role;
 
     // Buat query dasar dengan relasi penduduk
-    $query = AktaKematian::with('penduduk');
+    $query = AktaKematian::with('dataPenduduk');
 
     // Filter berdasarkan role
     if ($role === 'super_admin') {

@@ -8,6 +8,7 @@ use App\Models\Penduduk;
 use App\Models\PindahDomisili;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PindahDomisiliController extends Controller
 {
@@ -18,13 +19,17 @@ class PindahDomisiliController extends Controller
 
     public function create()
     {
-        return view('user.pindah_domisili.create');
+       $user = Auth::user();
+        
+        return view('/user/pindah_domisili.create',[
+            'user'=>$user,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'penduduk_id'   => ['required', 'exists:penduduk,id'],
+            'data_penduduk_id'   => ['required', 'exists:data_penduduk,id'],
             'alamat_asal'   => ['required'],
             'tujuan'        => ['required'],
             'alasan_pindah' => ['required'],
@@ -35,7 +40,8 @@ class PindahDomisiliController extends Controller
 
         PindahDomisili::create($validatedData);
 
-        return redirect('/beranda');
+         return redirect()->route('beranda')
+                     ->with('success', 'Data berhasil dikirim.');
     }
 
     public function show(PindahDomisili $pindahDomisili)

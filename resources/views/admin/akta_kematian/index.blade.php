@@ -68,7 +68,7 @@
                     <x-table.tr variant="body">
                         <x-table.td>{{ $loop->iteration }}</x-table.td>
                         <x-table.td>{{ $aktaKematian->tanggal->format('d M Y') }}</x-table.td>
-                        <x-table.td>{{ $aktaKematian->penduduk->nama }}</x-table.td>
+                        <x-table.td>{{ $aktaKematian->dataPenduduk->nama }}</x-table.td>
                         <x-table.td>{{ $aktaKematian->tanggal_meninggal }}</x-table.td>
                         <x-table.td>{{ $aktaKematian->tempat_meninggal }}</x-table.td>
                         <x-table.td>{{ $aktaKematian->penyebab_meninggal }}</x-table.td>

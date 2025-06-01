@@ -85,6 +85,11 @@
                     <x-form.button-link href="{{ route('beranda') }}">Batal</x-form.button-link>
                     <x-form.button variant="save" type="submit">Simpan</x-form.button>
                 </x-form.container>
+                  @if (session('success'))
+                    <div class="mt-2 p-2 rounded bg-green-100 text-green-800 border border-green-300">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
             </x-form.container>
         </x-form.form>
