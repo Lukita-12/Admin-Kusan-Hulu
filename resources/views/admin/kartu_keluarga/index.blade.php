@@ -29,6 +29,7 @@
             </form>
         </div>
         
+        <!-- pengajuan -->
         <x-table.container variant="table">
             <x-table.table>
                 <x-table.thead>
@@ -36,6 +37,7 @@
                         <x-table.td variant="head">No.</x-table.td>
                         <x-table.td variant="head">Nama Penduduk</x-table.td>
                         <x-table.td variant="head">No. Kartu Keluarga</x-table.td>
+                        <x-table.td variant="head">NIK</x-table.td>
                         <x-table.td variant="head">Kepala keluarga</x-table.td>
                         <x-table.td variant="head">Alamat</x-table.td>
                         <x-table.td variant="head">Kelurahan/Desa</x-table.td>
@@ -54,6 +56,7 @@
                         <x-table.td>{{ $loop->iteration }}</x-table.td>
                             <x-table.td>{{ $pengajuanPerubahanKK->nama }}</x-table.td>
                             <x-table.td>{{ $pengajuanPerubahanKK->no_kk }}</x-table.td>
+                             <x-table.td>{{ $pengajuanPerubahanKK->nik }}</x-table.td>
                             <x-table.td>{{ $pengajuanPerubahanKK->kepala_keluarga }}</x-table.td>
                             <x-table.td>{{ $pengajuanPerubahanKK->alamat }}</x-table.td>
                             <x-table.td>{{ $pengajuanPerubahanKK->kelurahan_desa }}</x-table.td>
@@ -151,6 +154,7 @@
             </form>
         </div>
         
+        <!-- kartukeluarga -->
         <x-table.container variant="table">
             <x-table.table>
                 <x-table.thead>
@@ -158,6 +162,7 @@
                         <x-table.td variant="head">No.</x-table.td>
                         <x-table.td variant="head">Nama Penduduk</x-table.td>
                         <x-table.td variant="head">No. Kartu Keluarga</x-table.td>
+                        <x-table.td variant="head">NIK</x-table.td>
                         <x-table.td variant="head">Kepala keluarga</x-table.td>
                         <x-table.td variant="head">Alamat</x-table.td>
                         <x-table.td variant="head">Kelurahan/Desa</x-table.td>
@@ -165,7 +170,11 @@
                         <x-table.td variant="head">Kabupaten</x-table.td>
                         <x-table.td variant="head">Provinsi</x-table.td>
                         <x-table.td variant="head">Kode Pos</x-table.td>
-                        <x-table.td variant="head">Tanggal penerbitan</x-table.td>
+                        <x-table.td variant="head">Status Hubungan Dalam Keluarga</x-table.td>
+                        <x-table.td variant="head">No Paspor</x-table.td>
+                        <x-table.td variant="head">No Kitas / Kitap</x-table.td>
+                        <x-table.td variant="head">Ayah</x-table.td>
+                        <x-table.td variant="head">Ibu</x-table.td>
                         <x-table.td variant="head">Aksi</x-table.td>
                     </x-table.tr>
                 </x-table.thead>
@@ -176,6 +185,7 @@
                             @foreach ($kartukeluarga->penduduk as $penduduk)
                                 <x-table.td>{{ $penduduk->nama }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->no_kk }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->nik }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->kepala_keluarga }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->alamat }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->kelurahan_desa }}</x-table.td>
@@ -183,6 +193,11 @@
                                 <x-table.td>{{ $kartukeluarga->kabupaten }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->provinsi }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->kode_pos }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->status_hubungan_dalam_keluarga }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->no_paspor }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->no_kitas_kitap }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->ayah }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->ibu }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->tanggal_penerbitan }}</x-table.td>
                                 <x-table.td>
                                     <x-table.container variant="button">

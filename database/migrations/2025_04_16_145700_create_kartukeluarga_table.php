@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kartukeluarga', function (Blueprint $table) {
             $table->id();
             $table->string('no_kk');
+            $table->string('nik');
             $table->string('kepala_keluarga');
             $table->text('alamat');
             $table->string('kelurahan_desa');
@@ -21,6 +22,11 @@ return new class extends Migration
             $table->string('kabupaten');
             $table->string('provinsi');
             $table->string('kode_pos');
+            $table->string('status_hubungan_dalam_keluarga');
+            $table->string('no_paspor');
+            $table->string('no_kitas_kitap');
+            $table->string('ayah');
+            $table->string('ibu');
             $table->date('tanggal_penerbitan');
             $table->timestamps();
         });
