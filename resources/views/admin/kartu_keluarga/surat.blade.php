@@ -32,9 +32,9 @@
 
             <p class="mt-6 mb-2">Dengan ini menerangkan bahwa:</p>
             <ul class="space-y-2">
-                <li><strong>Nama Kepala Keluarga:</strong> {{ $pengajuanPerubahanKK->kartukeluarga->kepala_keluarga }}</li>
-                <li><strong>No. KK Lama:</strong> {{ $pengajuanPerubahanKK->kartukeluarga->no_kk }}</li>
-                <li><strong>Alamat:</strong> {{ $pengajuanPerubahanKK->kartukeluarga->alamat }}</li>
+                <li><strong>Nama Kepala Keluarga:</strong> {{ $pengajuanPerubahanKK->kartukeluarga->kepala_keluarga ??'-'}}</li>
+                <li><strong>No. KK Lama:</strong> {{ $pengajuanPerubahanKK->kartukeluarga->no_kk ??'-'}}</li>
+                <li><strong>Alamat:</strong> {{ $pengajuanPerubahanKK->kartukeluarga->alamat ??'-'}}</li>
             </ul>
 
             <p class="mt-6 mb-2">Telah mengajukan perubahan data Kartu Keluarga berupa:</p>

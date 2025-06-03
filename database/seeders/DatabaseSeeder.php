@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Desa;
 use App\Models\Penduduk;
+use App\Models\PengajuanPerubahanKK;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
         // Penduduk::factory(5)->create();
         $this->call([
             UserSeeder::class,
-
+            PengajuanPerubahanKKSeeder::class,
         ]);
     }
 

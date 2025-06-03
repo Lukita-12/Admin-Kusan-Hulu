@@ -6,7 +6,7 @@ use App\Models\PengajuanPerubahanKK;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DataPendudukSeeder extends Seeder
+class PengajuanPerubahanKKSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,8 +17,8 @@ class DataPendudukSeeder extends Seeder
             ['1', '1', '083314393323','09876543356', 'deni','jalan','karang sari','kusan hulu','tanah bumbu','kalsel','735','2002-07-08','user','perempuan','belum kawin','pasnsd','2001-09-08','islam','smk','tani','gsujcfbskcn','anak ke 1','indonesia'],
         ])->each(function ($item) {
             PengajuanPerubahanKK::factory()->create([
-                'data_penduduk' => $item[0],
-                'penduduk' => $item[1],
+                'data_penduduk_id' => $item[0],
+                'penduduk_id' => $item[1],
     
                 // kk
                 'no_kk' => $item[2],

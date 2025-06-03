@@ -37,10 +37,11 @@ class PengajuanPerubahanKKController extends Controller
     {
         $validatedData = $request->validate([
             'data_penduduk_id'  => ['required', 'exists:data_penduduk,id'],
-            'kartukeluarga_id' => ['nullable', 'exists:data_penduduk,id'],
+            'penduduk_id' => ['nullable', 'exists:penduduk,id'],
 
             // Kartu keluarga
             'no_kk'             => ['required'],
+            'nik'               => ['required'],
             'kepala_keluarga'   => ['required'],
             'alamat'            => ['required'],
             'kelurahan_desa'    => ['required'],
