@@ -52,7 +52,7 @@
                 @endif
 
                 @if (Auth::user()->dataPenduduk)
-                <x-sidebar.nav-link href="{{ route('user.kartu_keluarga.create') }}">Kartu Keluarga</x-sidebar.nav-link>
+                <x-sidebar.nav-link href="{{ route('user.pengajuan_kk.create') }}">Kartu Keluarga</x-sidebar.nav-link>
                 @else
                 <x-sidebar.nav-link href="#" class="pointer-events-none opacity-50" aria-disabled="true">
                     Kartu Keluarga

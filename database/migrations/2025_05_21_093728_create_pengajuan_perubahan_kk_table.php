@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\DataPenduduk;
 use App\Models\Kartukeluarga;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pengajuan_perubahan_kk', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Kartukeluarga::class)->constrained()->cascadeOnDelete();
-            
+            $table->foreignIdFor(Kartukeluarga::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(DataPenduduk::class)->constrained()->cascadeOnDelete();
             // kartu keluarga
             $table->string('no_kk');
             $table->string('kepala_keluarga');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kartukeluarga;
 use App\Models\PengajuanPerubahanKK;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PengajuanPerubahanKKController extends Controller
 {
@@ -20,10 +21,12 @@ class PengajuanPerubahanKKController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Kartukeluarga $kartukeluarga)
+    public function create()
     {
-        return view('user.kartu_keluarga.create', [
-            'kartukeluarga' => $kartukeluarga,
+         $user = Auth::user();
+        
+        return view('user.pengajuan_kk.create',[
+            'user' => $user,
         ]);
     }
 
@@ -33,7 +36,8 @@ class PengajuanPerubahanKKController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kartukeluarga_id'  => ['required', 'exists:kartukeluarga,id'],
+            'data_penduduk_id'  => ['required', 'exists:data_penduduk,id'],
+            'kartukeluarga_id' => ['nullable', 'exists:data_penduduk,id'],
 
             // Kartu keluarga
             'no_kk'             => ['required'],

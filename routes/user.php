@@ -78,16 +78,16 @@ Route::controller(PendudukController::class)->group(function () {
     Route::put('/penduduk/{penduduk}', 'update')->name('user.penduduk.update');
 });
 
-Route::controller(PerubahanKartuKeluargaController::class)->group(function () {
-    Route::get('/perubahan-kartu-keluarga/create', 'create')                    ->name('user.perubahan_kartu_keluarga.create');
-    Route::post('/perubahan-kartu-keluarga', 'store')                           ->name('user.perubahan_kartu_keluarga.store');
+Route::controller(PengajuanPerubahanKKController::class)->group(function () {
+    Route::get('/pengajuan-kk/create', 'create')                    ->name('user.pengajuan_kk.create');
+    Route::post('/pengajuan-kk', 'store')                           ->name('user.pengajuan_kk.store');
     Route::get('/perubahan-kartu-keluarga/{perubahanKartuKeluarga}', 'show')    ->name('user.perubahan_kartu_keluarga.show');
 });
 
-Route::controller(PengajuanPerubahanKKController::class)->group(function () {
-    Route::get('/pengajuan-perubahan-kk/create', 'create')->name('user.pengajuan_perubahan_kk.create');
-    Route::post('/pengajuan-perubahan-kk/', 'store')->name('user.pengajuan_perubahan_kk.store');
-});
+// Route::controller(PengajuanPerubahanKKController::class)->group(function () {
+//     Route::get('/pengajuan-perubahan-kk/create', 'create')->name('user.pengajuan_perubahan_kk.create');
+//     Route::post('/pengajuan-perubahan-kk/', 'store')->name('user.pengajuan_perubahan_kk.store');
+// });
 
 Route::controller(DataPendudukController::class)->group(function(){
     Route::get('/data-penduduk','index')->name('user.data_penduduk.index')->middleware('auth');

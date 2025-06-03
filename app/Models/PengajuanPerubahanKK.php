@@ -22,4 +22,9 @@ class PengajuanPerubahanKK extends Model
     {
         return $this->belongsTo(Penduduk::class, 'penduduk_id'); // pastikan kolom penduduk_id ada di DB
     }
+
+     public function dataPenduduk(): BelongsTo
+    {
+        return $this->belongsTo(DataPenduduk::class); // pastikan kolom penduduk_id ada di DB
+    }
 }

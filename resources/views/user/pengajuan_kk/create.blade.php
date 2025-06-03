@@ -4,18 +4,26 @@
     </x-slot:heading>
 
     <x-form.container variant="main">
-        <x-form.form action="{{ route('user.pengajuan_perubahan_kk.store') }}">
+        <x-form.form action="{{ route('user.pengajuan_kk.store') }}">
             <x-form.container variant="form">
                 <span class="font-bold text-blue-500/80 text-center text-4xl my-3">- KARTU KELUARGA -</span>
 
                 <!-- Penduduk id -->
-                <x-form.input type="text" id="data_penduduk_id" name="data_penduduk_id" :value="old( $user->dataPenduduk->id)"/>
+                <x-form.input type="hidden" id="data_penduduk_id" name="data_penduduk_id" :value="old( 'nik',$user->dataPenduduk->id)"/>
                 
                 <x-form.container variant="label-input">
                     <x-form.label for="no_kk">No. Kartu Keluarga</x-form.label>
                     <x-form.container variant="input-error">
-                        <x-form.input type="text" name="no_kk" id="no_kk" value="{{ old('no_kk', $user->dataPenduduk->no_kk) }}" placeholder="No. Kartu Keluarga..." required />
+                        <x-form.input type="text" name="no_kk" id="no_kk" value="{{ old('no_kk', $user->dataPenduduk->no_kk) }}" placeholder="No. Kartu Keluarga..."  readonly onfocus="this.blur();" required />
                         <x-form.error errorFor="no_kk" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="nik">Nik</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nik" id="nik" value="{{ old('nik', $user->dataPenduduk->nik) }}" placeholder="Nik..."  readonly onfocus="this.blur();" required />
+                        <x-form.error errorFor="nik" />
                     </x-form.container>
                 </x-form.container>
 
@@ -31,7 +39,7 @@
                     <x-form.label for="alamat">Alamat</x-form.label>
                     <x-form.container variant="input-error">
                         <x-form.textarea type="text" name="alamat" id="alamat" placeholder="Alamat..." required>
-                            {{ old('alamat', $user->dataPenduduk->alamat_lengkap) }}
+                            {{ old('alamat') }}
                         </x-form.textarea>
                         <x-form.error errorFor="alamat" />
                     </x-form.container>
@@ -106,8 +114,8 @@
 
                     <x-form.container variant="input-error">
                         <x-form.select name="jenis_kelamin" id="jenis_kelamin" value="old('jenis_kelamin')" required>
-                            <option value="Laki-laki" {{ old('jenis_kelamin', $dataPenduduk->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                            <option value="Perempuan" {{ old('jenis_kelamin', $dataPenduduk->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                            <option value="Laki-laki" {{ old('jenis_kelamin', $user->dataPenduduk->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="Perempuan" {{ old('jenis_kelamin', $user->dataPenduduk->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </x-form.select>
                         <x-form.error errorFor="jenis_kelamin" />
                     </x-form.container>
@@ -118,11 +126,11 @@
 
                     <x-form.container variant="input-error">
                         <x-form.select name="status_perkawinan" id="status_perkawinan" value="old('status_perkawinan')" required>
-                            <option value="Belum kawin" {{ old('status_perkawinan', $dataPenduduk->status_perkawinan) == 'Belum kawin' ? 'selected' : '' }}>Belum kawin</option>
-                            <option value="Kawin belum tercatat" {{ old('status_perkawinan', $dataPenduduk->status_perkawinan) == 'Kawin belum tercatat' ? 'selected' : '' }}>Kawin belum tercatat</option>
-                            <option value="Kawin tercatat" {{ old('status_perkawinan', $dataPenduduk->status_perkawinan) == 'Kawin tercatat' ? 'selected' : '' }}>Kawin tercatat</option>
-                            <option value="Cerai hidup" {{ old('status_perkawinan', $dataPenduduk->status_perkawinan) == 'Cerai hidup' ? 'selected' : '' }}>Cerai hidup</option>
-                            <option value="Cerai mati" {{ old('status_perkawinan', $dataPenduduk->status_perkawinan) == 'Cerai mati' ? 'selected' : '' }}>Cerai mati</option>
+                            <option value="Belum kawin" {{ old('status_perkawinan', $user->dataPenduduk->status_perkawinan) == 'Belum kawin' ? 'selected' : '' }}>Belum kawin</option>
+                            <option value="Kawin belum tercatat" {{ old('status_perkawinan', $user->dataPenduduk->status_perkawinan) == 'Kawin belum tercatat' ? 'selected' : '' }}>Kawin belum tercatat</option>
+                            <option value="Kawin tercatat" {{ old('status_perkawinan', $user->dataPenduduk->status_perkawinan) == 'Kawin tercatat' ? 'selected' : '' }}>Kawin tercatat</option>
+                            <option value="Cerai hidup" {{ old('status_perkawinan', $user->dataPenduduk->status_perkawinan) == 'Cerai hidup' ? 'selected' : '' }}>Cerai hidup</option>
+                            <option value="Cerai mati" {{ old('status_perkawinan', $user->dataPenduduk->status_perkawinan) == 'Cerai mati' ? 'selected' : '' }}>Cerai mati</option>
                         </x-form.select>
                         <x-form.error errorFor="status_perkawinan" />
                     </x-form.container>
@@ -141,7 +149,7 @@
                     <x-form.label for="tanggal_lahir">Tanggal lahir</x-form.label>
 
                     <x-form.container variant="input-error">
-                        <x-form.input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir', $user->dataPenduduk->tanggal_lahir->format('Y-m-d')) }}" placeholder="Tanggal lahir..." required />
+                        <x-form.input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir', $user->dataPenduduk->tanggal_lahir) }}" placeholder="Tanggal lahir..." required />
                         <x-form.error errorFor="tanggal_lahir" />
                     </x-form.container>
                 </x-form.container>
