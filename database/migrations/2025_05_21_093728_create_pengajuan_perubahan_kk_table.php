@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pengajuan_perubahan_kk', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Penduduk::class)->nullable()->constrained()->cascadeOnDelete();
+            
             $table->foreignIdFor(DataPenduduk::class)->constrained()->cascadeOnDelete();
 
             // kartu keluarga
