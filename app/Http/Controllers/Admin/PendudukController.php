@@ -35,6 +35,7 @@ class PendudukController extends Controller
         $validatedData = $request->validate([
             'desa_id'                   => ['required', 'exists:desa,id'],
             'kartukeluarga_id'          => ['required', 'exists:kartukeluarga,id'],
+            'nik'                       => ['required'],
             'nama'                      => ['required'],
             'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
             'status_perkawinan'         => ['required'],

@@ -36,6 +36,7 @@ class PenerbitanAktaKelahiranController extends Controller
             'nama_ibu'          => ['required'],
             'jenis_kelamin'     => ['required', 'in:Laki-laki,Perempuan'],
             'agama'             => ['required'],
+            'anak_ke'           => ['required'],
             'upload_sp_bidan'   => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
             'upload_sp_rt'      => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
         ]);

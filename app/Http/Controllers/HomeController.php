@@ -11,6 +11,7 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $user = Auth::user();
@@ -67,4 +68,5 @@ class HomeController extends Controller
     {
         //
     }
+    
 }

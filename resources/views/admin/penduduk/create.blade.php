@@ -38,6 +38,15 @@
                     </x-form.container>
                 </x-form.container>
     
+                 <x-form.container variant="label-input">
+                    <x-form.label for="nik">Nik</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nik" id="nik" placeholder="nik ..." :value="old('nik')" required />
+                        <x-form.error errorFor="nik" />
+                    </x-form.container>
+                </x-form.container>
+
                 <x-form.container variant="label-input">
                     <x-form.label for="nama">Nama</x-form.label>
 

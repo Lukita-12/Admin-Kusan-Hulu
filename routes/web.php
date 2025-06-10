@@ -30,6 +30,7 @@ Route::get('/user-notifikasi', [UserNotifikasiController::class, 'index'])->name
 Route::get('/domisili_usaha', [DomisiliUsahaController::class, 'index'])->name('domisili-usaha.index');
 
 
+
 require __DIR__. '/auth.php';
 require __DIR__. '/user.php';
 require __DIR__. '/admin.php';

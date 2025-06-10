@@ -123,6 +123,14 @@
                 </x-form.container>
 
                 <x-form.container variant="label-input">
+                    <x-form.label for="anak ke">Anak Ke</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="anak_ke" id="anak_ke" :value="old('anak_ke')" placeholder="anak_ke..." required />
+                        <x-form.error errorFor="anak_ke" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
                     <x-form.label for="upload_sp_bidan">Surat keterangan dari bidan</x-form.label>
                     <x-form.container variant="input-error">
                         <x-form.input type="file" name="upload_sp_bidan" id="upload_sp_bidan" accept="image/*" :value="old('upload_sp_bidan')" />

@@ -175,6 +175,7 @@
                         <x-table.td variant="head">No Kitas / Kitap</x-table.td>
                         <x-table.td variant="head">Ayah</x-table.td>
                         <x-table.td variant="head">Ibu</x-table.td>
+                        <x-table.td variant="head">Tanggal Terbit</x-table.td>
                         <x-table.td variant="head">Aksi</x-table.td>
                     </x-table.tr>
                 </x-table.thead>

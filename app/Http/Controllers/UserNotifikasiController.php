@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AktaKematian;
+use App\Models\DomisiliPenduduk;
 use App\Models\DomisiliUsaha;
+use App\Models\PenerbitanAktaKelahiran;
+use App\Models\PengajuanPerubahanKK;
+use App\Models\PindahDomisili;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,15 +20,55 @@ class UserNotifikasiController extends Controller
     {
         $user = Auth::user();
 
-        // Ambil data domisili usaha milik user yang sedang login
-        $domisiliUsahas = DomisiliUsaha::with('dataPenduduk')
-            ->whereHas('dataPenduduk', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            })->latest()->get();
+    // Domisili Usaha
+    $domisiliUsahas = DomisiliUsaha::with('dataPenduduk')
+        ->whereHas('dataPenduduk', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
 
-        return view('components.user-notifikasi', [
-            'domisiliUsahas' => $domisiliUsahas,
-            ]);
+    // Domisili Penduduk
+    $domisiliPenduduks = DomisiliPenduduk::with('dataPenduduk')
+        ->whereHas('dataPenduduk', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+    // Pindah Domisili
+    $pindahDomisilis = PindahDomisili::with('dataPenduduk')
+        ->whereHas('dataPenduduk', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+    // Perubahan KK
+    $perubahanKks = PengajuanPerubahanKK::with('dataPenduduk')
+        ->whereHas('dataPenduduk', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+    // Akta Kelahiran
+    $aktaKelahirans = PenerbitanAktaKelahiran::with('dataPenduduk')
+        ->whereHas('dataPenduduk', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+    // Akta Kematian
+    $aktaKematian = AktaKematian::with('dataPenduduk')
+        ->whereHas('dataPenduduk', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+    // Gabungkan semua surat menjadi satu collection
+    $surats = collect()
+        ->merge($domisiliUsahas)
+        ->merge($domisiliPenduduks)
+        ->merge($pindahDomisilis)
+        ->merge($perubahanKks)
+        ->merge($aktaKelahirans)
+        ->merge($aktaKematian)
+        ->sortByDesc('created_at'); // supaya yang terbaru di atas
+
+    return view('components.user-notifikasi', [
+        'surats' => $surats,
+    ]);
     }
 
     /**

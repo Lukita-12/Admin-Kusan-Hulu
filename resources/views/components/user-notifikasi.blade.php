@@ -1,10 +1,18 @@
 <x-layout>
     <div class="space-y-4">
-        @foreach($domisiliUsahas as $domisiliUsaha)
+        @foreach($surats as $surat)
         <div class="flex flex-col bg-white p-4 rounded-md shadow">
             <div class="flex items-center justify-between mb-2">
-                <span class="font-bold">{{ $domisiliUsaha->dataPenduduk->nama }}</span>
-                <span class="font-semibold capitalize">{{ $domisiliUsaha->status }}</span>
+                {{-- Nama Penduduk --}}
+                <span class="font-bold">{{ $surat->dataPenduduk->nama }}</span>
+
+                {{-- Status --}}
+                <span class="font-semibold capitalize">{{ $surat->status }}</span>
+            </div>
+
+            {{-- Info Jenis Surat --}}
+            <div class="mb-2 text-sm text-gray-500 italic">
+                {{ class_basename($surat) }}
             </div>
 
             <!-- Stepper Progress -->
@@ -12,55 +20,83 @@
                 {{-- Step 1: Diajukan --}}
                 <div class="flex items-center">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center
-                        {{ in_array($domisiliUsaha->status, ['Diajukan', 'Diproses', 'Selesai']) ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600' }}">
+                        {{ in_array($surat->status, ['Diajukan', 'Diproses', 'Selesai', 'Ditolak']) ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600' }}">
                         1
                     </div>
                     <span class="ml-2 text-sm">Diajukan</span>
                 </div>
 
-                <div class="flex-1 border-t-2
-                    {{ in_array($domisiliUsaha->status, ['Diproses', 'Selesai']) ? 'border-green-500' : 'border-gray-300' }}">
-                </div>
+                {{-- Divider Step 1-2 --}}
+                @if($surat->status == 'Ditolak')
+                    <div class="flex-1 border-t-2 border-green-500"></div>
+                @elseif(in_array($surat->status, ['Diproses', 'Selesai']))
+                    <div class="flex-1 border-t-2 border-green-500"></div>
+                @else
+                    <div class="flex-1 border-t-2 border-gray-300"></div>
+                @endif
 
-                {{-- Step 2: Diproses --}}
+                {{-- Step 2: Ditolak (jika status == Ditolak) --}}
+                @if($surat->status == 'Ditolak')
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-red-500 text-white">
+                        2
+                    </div>
+                    <span class="ml-2 text-sm">Ditolak</span>
+                </div>
+                @endif
+
+                {{-- Divider Step 2-3 --}}
+                @if($surat->status == 'Ditolak')
+                    <div class="flex-1 border-t-2 border-gray-300"></div>
+                @elseif(in_array($surat->status, ['Diproses', 'Selesai']))
+                    <div class="flex-1 border-t-2 border-green-500"></div>
+                @else
+                    <div class="flex-1 border-t-2 border-gray-300"></div>
+                @endif
+
+                {{-- Step 3: Diproses --}}
                 <div class="flex items-center">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center
-                        @if($domisiliUsaha->status == 'Ditolak')
-                            bg-red-500 text-white
-                        @elseif(in_array($domisiliUsaha->status, ['Diproses', 'Selesai']))
-                            bg-green-500 text-white
-                        @else
-                            bg-gray-300 text-gray-600
-                        @endif">
-                        2
+                        {{ in_array($surat->status, ['Diproses', 'Selesai']) ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600' }}">
+                        {{ $surat->status == 'Ditolak' ? '3' : ($surat->status == 'Selesai' ? '3' : '2') }}
                     </div>
                     <span class="ml-2 text-sm">Diproses</span>
                 </div>
 
+                {{-- Divider Step 3-4 --}}
                 <div class="flex-1 border-t-2
-                    {{ $domisiliUsaha->status == 'Selesai' ? 'border-green-500' : 'border-gray-300' }}">
+                    {{ $surat->status == 'Selesai' ? 'border-green-500' : 'border-gray-300' }}">
                 </div>
 
-                {{-- Step 3: Selesai --}}
+                {{-- Step 4: Selesai --}}
                 <div class="flex items-center">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center
-                        {{ $domisiliUsaha->status == 'Selesai' ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600' }}">
-                        3
+                        {{ $surat->status == 'Selesai' ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600' }}">
+                        {{ $surat->status == 'Ditolak' ? '4' : ($surat->status == 'Selesai' ? '4' : '3') }}
                     </div>
                     <span class="ml-2 text-sm">Selesai</span>
                 </div>
             </div>
 
             {{-- Keterangan Tambahan --}}
-            @if($domisiliUsaha->status == 'Ditolak')
+            @if($surat->status == 'Ditolak')
                 <div class="mt-2 p-2 bg-red-100 text-red-700 rounded">
-                    Silahkan isi ulang data Anda.
+                    Permohonan Anda ditolak. Silakan isi ulang data Anda.
                 </div>
-            @elseif($domisiliUsaha->status == 'Selesai')
+            @elseif($surat->status == 'Diajukan')
+                <div class="mt-2 p-2 bg-yellow-100 text-yellow-700 rounded">
+                    Permohonan Anda sedang diajukan. Mohon tunggu verifikasi.
+                </div>
+            @elseif($surat->status == 'Diproses')
+                <div class="mt-2 p-2 bg-blue-100 text-blue-700 rounded">
+                    Permohonan Anda sedang diproses. Mohon tunggu.
+                </div>
+            @elseif($surat->status == 'Selesai')
                 <div class="mt-2 p-2 bg-green-100 text-green-700 rounded">
-                    Silahkan ambil surat Anda di Kecamatan Kusan Hulu.
+                    Permohonan Anda selesai. Silakan ambil surat Anda di Kecamatan Kusan Hulu.
                 </div>
             @endif
+
         </div>
         @endforeach
     </div>
