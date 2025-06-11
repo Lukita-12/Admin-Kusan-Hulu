@@ -11,6 +11,19 @@
                     <button type="submit" class="bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">Cari</button>
                 </div>
             </form>
+        <form method="GET" action="{{ route('admin.domisili_penduduk.print') }}" target="_blank" class="flex items-center gap-2">
+                <input type="date" name="start_date" id="start_date"
+                    class="bg-slate-100 px-3 py-1 rounded-sm"
+                    value="{{ request('start_date') }}">
+                <span class="text-white font-semibold">s/d</span>
+                <input type="date" name="end_date" id="end_date"
+                    class="bg-slate-100 px-3 py-1 rounded-sm"
+                    value="{{ request('end_date') }}">
+                <button type="submit"
+                        class="bg-green-600 hover:bg-green-700 text-white font-semibold px-3 py-1 rounded-sm">
+                    Print
+                </button>
+            </form>
 
             <form method="GET" action="{{ route('admin.domisili_penduduk.filter') }}" id="filterForm">
                 <div class="w-full flex items-center gap-2">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Data Usaha</title>
+    <title>Laporan Data Penduduk</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,30 +91,33 @@
 
     <div class="line"></div>
 
-    <h2>Laporan Pengajuan Domisili Usaha</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>NO</th>
-                <th>Nama</th>
-                <th>Tanggal</th>
-                <th>Nama Usaha</th>
-                <th>Jenis Usaha</th>
-                <th>Alamat Usaha</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data_penduduk as $item)
-            <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->data_penduduk_id->nama }}</td>
-                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-                <td>{{ $item->nama_usaha }}</td>
-                <td>{{ $item->jenis_usaha }}</td>
-                <td>{{ $item->alamat_usaha }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <h2>Laporan Data Penduduk Pengajuan Domisili Penduduk</h2>
+
+{{-- Tambahkan periode tanggal di bawah judul --}}
+<p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Jenis Kelamin</th>
+            <th>Pekerjaan</th>
+            <th>Alamat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($domisiliPenduduk as $item)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $item->dataPenduduk->nama }}</td>
+            <td>{{ $item->dataPenduduk->jenis_kelamin }}</td>
+            <td>{{ $item->dataPenduduk->pekerjaan }}</td>
+            <td>{{ $item->dataPenduduk->alamat_lengkap }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
 </body>
 </html>

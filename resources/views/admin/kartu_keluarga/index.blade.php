@@ -14,6 +14,20 @@
                 </div>
             </form>
 
+            <form method="GET" action="{{ route('admin.kartu_keluarga.print') }}" target="_blank" class="flex items-center gap-2">
+                <input type="date" name="start_date" id="start_date"
+                    class="bg-slate-100 px-3 py-1 rounded-sm"
+                    value="{{ request('start_date') }}">
+                <span class="text-white font-semibold">s/d</span>
+                <input type="date" name="end_date" id="end_date"
+                    class="bg-slate-100 px-3 py-1 rounded-sm"
+                    value="{{ request('end_date') }}">
+                <button type="submit"
+                        class="bg-green-600 hover:bg-green-700 text-white font-semibold px-3 py-1 rounded-sm">
+                    Print
+                </button>
+            </form>
+
             <form method="GET" action="{{ route('admin.kartu_keluarga.filter') }}" id="filterForm">
                 <div class="w-full flex items-center gap-2">
                     <a href="{{ route('admin.kartu_keluarga.create') }}" class="inline-block bg-slate-700 font-semibold text-slate-100 text-center px-3 py-1 rounded-sm">+ Buat</a>
@@ -159,7 +173,7 @@
             <x-table.table>
                 <x-table.thead>
                     <x-table.tr>
-                        <x-table.td variant="head">No.</x-table.td>
+                        <x-table.td variant="head">ID</x-table.td>
                         <x-table.td variant="head">Nama Penduduk</x-table.td>
                         <x-table.td variant="head">No. Kartu Keluarga</x-table.td>
                         <x-table.td variant="head">NIK</x-table.td>
@@ -181,9 +195,9 @@
                 </x-table.thead>
                 <tbody>
                     @foreach ($kartukeluargas as $kartukeluarga)
-                    <x-table.tr variant="body">
-                        <x-table.td>{{ $loop->iteration }}</x-table.td>
-                            @foreach ($kartukeluarga->penduduk as $penduduk)
+                        @forelse ($kartukeluarga->penduduk as $penduduk)
+                            <x-table.tr variant="body">
+                                <x-table.td>{{ $kartukeluarga->id }}</x-table.td>
                                 <x-table.td>{{ $penduduk->nama }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->no_kk }}</x-table.td>
                                 <x-table.td>{{ $kartukeluarga->nik }}</x-table.td>
@@ -211,8 +225,39 @@
                                         @endcan
                                     </x-table.container>
                                 </x-table.td>
-                            @endforeach
-                        </x-table.tr>
+                            </x-table.tr>
+                        @empty
+                            <x-table.tr variant="body">
+                                <x-table.td>{{ $kartukeluarga->id }}</x-table.td>
+                                <x-table.td>-</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->no_kk }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->nik }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->kepala_keluarga }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->alamat }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->kelurahan_desa }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->kecamatan }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->kabupaten }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->provinsi }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->kode_pos }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->status_hubungan_dalam_keluarga }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->no_paspor }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->no_kitas_kitap }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->ayah }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->ibu }}</x-table.td>
+                                <x-table.td>{{ $kartukeluarga->tanggal_penerbitan }}</x-table.td>
+                                <x-table.td>
+                                    <x-table.container variant="button">
+                                        @can ('editOrDelete', $kartukeluarga)
+                                            <x-table.button-link variant="edit" href="{{ route('admin.kartu_keluarga.edit', $kartukeluarga) }}">Edit</x-table.button-link>
+                                            <x-table.form action="{{ route('admin.kartu_keluarga.destroy', $kartukeluarga) }}">
+                                                @method('DELETE')
+                                                <x-table.button variant="delete" type="submit">Hapus</x-table.button>
+                                            </x-table.form>
+                                        @endcan
+                                    </x-table.container>
+                                </x-table.td>
+                            </x-table.tr>
+                        @endforelse
                     @endforeach
                 </tbody>
             </x-table.table>

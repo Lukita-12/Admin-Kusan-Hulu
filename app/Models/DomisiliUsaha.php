@@ -20,7 +20,11 @@ class DomisiliUsaha extends Model
     {
         return $this->belongsTo(Penduduk::class);
     }
-
+    
+     public function dataPenduduk()
+    {
+        return $this->belongsTo(DataPenduduk::class, 'data_penduduk_id');
+    }
     // Search
     public static function search($keyword): Builder
     {
@@ -37,8 +41,5 @@ class DomisiliUsaha extends Model
             ->where('status', $status);
     }
 
-    public function dataPenduduk()
-    {
-        return $this->belongsTo(DataPenduduk::class);
-    }
+   
 }

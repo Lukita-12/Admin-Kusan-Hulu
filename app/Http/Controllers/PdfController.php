@@ -14,7 +14,7 @@ class PdfController extends Controller
         $domisiliUsaha = DomisiliUsaha::all(); // Ambil semua data penduduk
 
         return view('pdf.template', [
-            'penduduk' => $domisiliUsaha
+            'data_penduduk' => $domisiliUsaha
         ]);
     }
 

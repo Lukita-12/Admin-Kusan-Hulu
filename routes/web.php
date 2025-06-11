@@ -24,6 +24,8 @@ Route::controller(DashboardController::class)->group(function () {
 
 Route::get('/pdf', [PdfController::class, 'generate']);
 Route::get('/pdf/preview', [PdfController::class, 'preview']);
+// 
+
 
 Route::get('/user-notifikasi', [UserNotifikasiController::class, 'index'])->name('user-notifikasi');
 // Route::get('/beranda',[HomeController::class,'index'])->name('beranda');

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataPenduduk;
 use App\Models\DomisiliUsaha;
 use App\Models\Penduduk;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Browsershot\Browsershot;
 
 class DomisiliUsahaController extends Controller
 {
@@ -51,6 +54,8 @@ class DomisiliUsahaController extends Controller
     return view('admin.domisili_usaha.index', [
         'domisiliUsahas' => $domisiliUsahas,
     ]);
+
+    
 }
 
 
@@ -164,5 +169,43 @@ class DomisiliUsahaController extends Controller
         $domisiliUsaha->save();
 
         return redirect()->route('domisili-usaha.surat', $domisiliUsaha->id);
+    }
+
+    public function preview()
+    {
+        $domisiliUsaha = DomisiliUsaha::with('dataPenduduk')->get();
+        
+        return view('admin.domisili_usaha.print', [
+        'domisiliUsaha' => $domisiliUsaha,
+    ]);
+    }
+
+    public function print(Request $request)
+    {   // Validasi input date (format Y-m-d karena <input type="date">)
+        $request->validate([
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d',
+        ]);
+
+        // Parsing tanggal (untuk keperluan query dan display)
+        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+        // Query data sesuai rentang tanggal dan status Diproses atau Selesai
+        $domisiliUsaha = DomisiliUsaha::with('dataPenduduk')
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereIn('status', ['Diproses', 'Selesai'])
+            ->get();
+
+        // Buat view HTML
+        $html = view('admin.domisili_usaha.print', compact('domisiliUsaha', 'startDate', 'endDate'))->render();
+
+        // Generate PDF pakai Browsershot
+        return response()->streamDownload(function () use ($html) {
+            echo Browsershot::html($html)
+                ->format('A4')
+                ->margins(10, 10, 10, 10)
+                ->pdf();
+        }, 'domisili_usaha_' . date('Ymd') . '.pdf');
     }
 }

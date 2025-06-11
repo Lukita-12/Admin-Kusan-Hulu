@@ -8,7 +8,7 @@
             <x-form.container variant="form">
                 <span class="font-bold text-blue-500/80 text-center text-4xl my-3">- KARTU KELUARGA -</span>
 
-                <!-- Penduduk id -->
+                <!-- Data Penduduk id -->
                 <x-form.input type="text" id="data_penduduk_id" name="data_penduduk_id" :value="old( $user->dataPenduduk->id)"/>
                 
                 <x-form.container variant="label-input">

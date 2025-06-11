@@ -69,6 +69,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::put('/domisili-penduduk/{domisiliPenduduk}', 'update')->name('admin.domisili_penduduk.update');
 
         Route::get('/domisili-penduduk/search', 'search')->name('admin.domisili_penduduk.search');
+        Route::get('/domisili-penduduk/print','print')->name('admin.domisili_penduduk.print');
         Route::get('/domisili-penduduk/filter', 'filter')->name('admin.domisili_penduduk.filter');
         
         Route::delete('/domisili-penduduk/{domisiliPenduduk}', 'destroy')->name('admin.domisili_penduduk.destroy');
@@ -86,6 +87,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::delete('/domisili-usaha/{domisiliUsaha}', 'destroy')->name('admin.domisili_usaha.destroy');
 
         Route::get('/domisili-usaha/search', 'search')->name('admin.domisili_usaha.search');
+        Route::get('/domisili-usaha/preview','preview')->name('admin.domisili_usaha.preview');
+        Route::get('/domisili-usaha/print','print')->name('admin.domisili_usaha.print');
         Route::get('/domisili-usaha/filter', 'filter')->name('admin.domisili_usaha.filter');
 
         Route::patch('/domisili-usaha/{domisiliUsaha}/accept' , 'accept')->name('admin.domisili_usaha.accept');
@@ -102,6 +105,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::delete('/pindah-domisili/{pindahDomisili}', 'destroy')->name('admin.pindah_domisili.destroy');
 
         Route::get('/pindah-domisili/search', 'search')->name('admin.pindah_domisili.search');
+        Route::get('/pindah-domisili/print','print')->name('admin.pindah_domisili.print');
         Route::get('/pindah-domisili/filter', 'filter')->name('admin.pindah_domisili.filter');
 
         Route::patch('/pindah-domisili/{pindahDomisili}/accept' , 'accept')->name('admin.pindah_domisili.accept');
@@ -163,6 +167,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/accept', 'accept')->name('admin.pengajuan_perubahan_kk.accept');
         Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/reject', 'reject')->name('admin.pengajuan_perubahan_kk.reject');
         Route::patch('/pengajuan-perubahan-kk/{pengajuanPerubahanKK}/complete', 'complete')->name('admin.pengajuan_perubahan_kk.complete');
+        Route::get('/kartu-keluarga/print','print')->name('admin.kartu_keluarga.print');
     });
 
     Route::controller(SuratDomisiliUsahaController::class)->group(function(){
@@ -189,4 +194,5 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::get('/SuratPindahDomisili','index')->name('admin.SuratPindahDomisili.index');
         Route::get('/pindah_domisili/surat/{id}','show')->name('pindah-domisili.surat');
     });
+    
 });

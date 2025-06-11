@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\PindahDomisili;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Browsershot\Browsershot;
 
 class PindahDomisiliController extends Controller
 {
@@ -156,5 +158,34 @@ class PindahDomisiliController extends Controller
         $pindahDomisili->save();
 
         return redirect()->route('pindah-domisili.surat', $pindahDomisili->id);
+    }
+
+    public function print(Request $request)
+    {   // Validasi input date (format Y-m-d karena <input type="date">)
+        $request->validate([
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d',
+        ]);
+
+        // Parsing tanggal (untuk keperluan query dan display)
+        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+        // Query data sesuai rentang tanggal dan status Diproses atau Selesai
+        $pindahDomisili = PindahDomisili::with('dataPenduduk')
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereIn('status', ['Diproses', 'Selesai'])
+            ->get();
+
+        // Buat view HTML
+        $html = view('admin.pindah_domisili.print', compact('pindahDomisili', 'startDate', 'endDate'))->render();
+
+        // Generate PDF pakai Browsershot
+        return response()->streamDownload(function () use ($html) {
+            echo Browsershot::html($html)
+                ->format('A4')
+                ->margins(10, 10, 10, 10)
+                ->pdf();
+        }, 'domisili_usaha_' . date('Ymd') . '.pdf');
     }
 }

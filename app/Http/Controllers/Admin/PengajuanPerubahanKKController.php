@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kartukeluarga;
 use App\Models\Penduduk;
 use App\Models\PengajuanPerubahanKK;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Browsershot\Browsershot;
 
 class PengajuanPerubahanKKController extends Controller
 {
@@ -84,5 +87,34 @@ class PengajuanPerubahanKKController extends Controller
 
     return redirect()->route('kartu-keluarga.surat', $pengajuanPerubahanKK->id);
 }
+
+public function print(Request $request)
+    {   // Validasi input date (format Y-m-d karena <input type="date">)
+        $request->validate([
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d',
+        ]);
+
+        // Parsing tanggal (untuk keperluan query dan display)
+        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+        // Query data sesuai rentang tanggal dan status Diproses atau Selesai
+        $pengajuanPerubahanKK = PengajuanPerubahanKK::with('dataPenduduk')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereIn('status', ['Diproses', 'Selesai'])
+            ->get();
+
+        // Buat view HTML
+        $html = view('admin.kartu_keluarga.print', compact('pengajuanPerubahanKK', 'startDate', 'endDate'))->render();
+
+        // Generate PDF pakai Browsershot
+        return response()->streamDownload(function () use ($html) {
+            echo Browsershot::html($html)
+                ->format('A4')
+                ->margins(10, 10, 10, 10)
+                ->pdf();
+        }, 'kartu_keluarga' . date('Ymd') . '.pdf');
+    }
 
 }
