@@ -8,6 +8,7 @@ use App\Models\Penduduk;
 use App\Models\PengajuanPerubahanKK;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Browsershot\Browsershot;
 
@@ -90,31 +91,42 @@ class PengajuanPerubahanKKController extends Controller
 
 public function print(Request $request)
     {   // Validasi input date (format Y-m-d karena <input type="date">)
-        $request->validate([
-            'start_date' => 'required|date_format:Y-m-d',
-            'end_date' => 'required|date_format:Y-m-d',
-        ]);
+        // Validasi input tanggal
+    $request->validate([
+        'start_date' => 'required|date_format:Y-m-d',
+        'end_date' => 'required|date_format:Y-m-d',
+    ]);
 
-        // Parsing tanggal (untuk keperluan query dan display)
-        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
-        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+    // Parsing tanggal
+    $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+    $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
 
-        // Query data sesuai rentang tanggal dan status Diproses atau Selesai
-        $pengajuanPerubahanKK = PengajuanPerubahanKK::with('dataPenduduk')
-            ->whereBetween('created_at', [$startDate, $endDate])
-            ->whereIn('status', ['Diproses', 'Selesai'])
-            ->get();
+    // Tentukan status berdasarkan role user
+    $user = Auth::user();
+    if ($user->role === 'admin') {
+        $status = ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'];
+    } elseif ($user->role === 'super_admin') {
+        $status = ['Diproses', 'Selesai'];
+    } else {
+        $status = []; // Kosongkan jika role tidak dikenali
+    }
 
-        // Buat view HTML
-        $html = view('admin.kartu_keluarga.print', compact('pengajuanPerubahanKK', 'startDate', 'endDate'))->render();
+    // Query data Pengajuan Perubahan KK berdasarkan tanggal dan status
+    $pengajuanPerubahanKK = PengajuanPerubahanKK::with('dataPenduduk')
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->whereIn('status', $status)
+        ->get();
 
-        // Generate PDF pakai Browsershot
-        return response()->streamDownload(function () use ($html) {
-            echo Browsershot::html($html)
-                ->format('A4')
-                ->margins(10, 10, 10, 10)
-                ->pdf();
-        }, 'kartu_keluarga' . date('Ymd') . '.pdf');
+    // Buat view HTML
+    $html = view('admin.kartu_keluarga.print', compact('pengajuanPerubahanKK', 'startDate', 'endDate'))->render();
+
+    // Generate PDF menggunakan Browsershot
+    return response()->streamDownload(function () use ($html) {
+        echo Browsershot::html($html)
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->pdf();
+    }, 'kartu_keluarga_' . date('Ymd') . '.pdf');
     }
 
 }

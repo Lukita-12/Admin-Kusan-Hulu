@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AktaKematian;
 use App\Models\Penduduk;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Browsershot\Browsershot;
 
 class AktaKematianController extends Controller
 {
@@ -167,6 +169,46 @@ class AktaKematianController extends Controller
     // Redirect langsung ke halaman surat berdasarkan ID
     return redirect()->route('akta_kematian.surat', $aktaKematian->id);
 }
+
+ public function print(Request $request)
+    {   // Validasi input tanggal
+    $request->validate([
+        'start_date' => 'required|date_format:Y-m-d',
+        'end_date' => 'required|date_format:Y-m-d',
+    ]);
+
+    // Parsing tanggal
+    $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+    $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+    // Tentukan status berdasarkan role user
+    $user = Auth::user();
+    if ($user->role === 'admin') {
+        $status = ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'];
+    } elseif ($user->role === 'super_admin') {
+        $status = ['Diproses', 'Selesai'];
+    } else {
+        $status = []; // Kosongkan jika role tidak dikenali
+    }
+
+    // Query data Akta Kematian berdasarkan tanggal dan status
+    $aktaKematian = AktaKematian::with('dataPenduduk')
+        ->whereBetween('tanggal', [$startDate, $endDate])
+        ->whereIn('status', $status)
+        ->get();
+
+    // Buat view HTML
+    $html = view('admin.akta_kematian.print', compact('aktaKematian', 'startDate', 'endDate'))->render();
+
+    // Generate PDF menggunakan Browsershot
+    return response()->streamDownload(function () use ($html) {
+        echo Browsershot::html($html)
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->pdf();
+    }, 'akta_kematian_' . date('Ymd') . '.pdf');
+
+    }
 
 
 }

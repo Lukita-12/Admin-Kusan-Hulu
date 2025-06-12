@@ -116,6 +116,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
     Route::controller(PenerbitanAktaKelahiranController::class)->group(function () {
         Route::get('/penerbitan-akta-kelahiran', 'index')->name('admin.penerbitan_akta_kelahiran.index');
         Route::get('/penerbitan-akta-kelahiran/create', 'create')->name('admin.penerbitan_akta_kelahiran.create');
+        Route::get('/penerbitan-akta-kelahiran/print','print')->name('admin.penerbitan_akta_kelahiran.print');
         Route::post('/penerbitan-akta-kelahiran', 'store')->name('admin.penerbitan_akta_kelahiran.store');
         Route::get('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}/edit', 'edit')->name('admin.penerbitan_akta_kelahiran.edit');
         Route::put('/penerbitan-akta-kelahiran/{penerbitanAktaKelahiran}', 'update')->name('admin.penerbitan_akta_kelahiran.update');
@@ -135,6 +136,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin,super_admin'])->group(fu
         Route::delete('/akta-kematian/{aktaKematian}', 'destroy')->name('admin.akta_kematian.destroy');
 
         Route::get('/akta-kematian/search', 'search')->name('admin.akta_kematian.search');
+        Route::get('/akta_kematian/print','print')->name('admin.akta_kematian.print');
         Route::get('/akta-kematian/filter', 'filter')->name('admin.akta_kematian.filter');
 
         Route::patch('/akta-kematian/{aktaKematian}/accept' , 'accept')->name('admin.akta_kematian.accept');

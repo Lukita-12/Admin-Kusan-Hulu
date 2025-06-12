@@ -161,30 +161,41 @@ class DomisiliPendudukController extends Controller
 
     public function print(Request $request)
     {// Validasi input date (format Y-m-d karena <input type="date">)
+    // Validasi input date
     $request->validate([
         'start_date' => 'required|date_format:Y-m-d',
         'end_date' => 'required|date_format:Y-m-d',
     ]);
 
-    // Parsing tanggal (untuk keperluan query dan display)
+    // Parsing tanggal
     $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
     $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
 
-    // Query data sesuai rentang tanggal dan status Diproses atau Selesai
+    // Tentukan status berdasarkan role user
+    $user = Auth::user();
+    if ($user->role === 'admin') {
+        $status = ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'];
+    } elseif ($user->role === 'super_admin') {
+        $status = ['Diproses', 'Selesai'];
+    } else {
+        $status = []; // default kosong jika role tidak dikenali
+    }
+
+    // Query data domisili penduduk
     $domisiliPenduduk = DomisiliPenduduk::with('dataPenduduk')
         ->whereBetween('tanggal', [$startDate, $endDate])
-        ->whereIn('status', ['Diproses', 'Selesai'])
+        ->whereIn('status', $status)
         ->get();
 
     // Buat view HTML
     $html = view('admin.domisili_penduduk.print', compact('domisiliPenduduk', 'startDate', 'endDate'))->render();
 
-    // Generate PDF pakai Browsershot
+    // Generate PDF dengan Browsershot
     return response()->streamDownload(function () use ($html) {
         echo Browsershot::html($html)
             ->format('A4')
             ->margins(10, 10, 10, 10)
             ->pdf();
-    }, 'domisili_usaha_' . date('Ymd') . '.pdf');
+    }, 'domisili_penduduk_' . date('Ymd') . '.pdf');
     }
 }

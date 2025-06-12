@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\PenerbitanAktaKelahiran;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Browsershot\Browsershot;
 
 class PenerbitanAktaKelahiranController extends Controller
 {
@@ -173,5 +175,44 @@ class PenerbitanAktaKelahiranController extends Controller
         $penerbitanAktaKelahiran->save();
 
         return redirect()->route('penerbitan-akta-kelahiran.surat', $penerbitanAktaKelahiran->id);
+    }
+
+    public function print(Request $request)
+    {  // Validasi input date (format Y-m-d karena <input type="date">)
+        $request->validate([
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d',
+        ]);
+
+        // Parsing tanggal
+        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+        // Tentukan status yang akan difilter berdasarkan role user
+        $user = Auth::user(); // pastikan kamu sudah pakai middleware auth
+        if ($user->role === 'admin') {
+            $status = ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'];
+        } elseif ($user->role === 'super_admin') {
+            $status = ['Diproses', 'Selesai'];
+        } else {
+            $status = []; // jika role tidak dikenali, bisa set default atau kosong
+        }
+
+        // Query data berdasarkan tanggal dan status sesuai role
+        $penerbitanAktaKelahiran = PenerbitanAktaKelahiran::with('dataPenduduk')
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereIn('status', $status)
+            ->get();
+
+        // Buat view HTML
+        $html = view('admin.penerbitan_akta_kelahiran.print', compact('penerbitanAktaKelahiran', 'startDate', 'endDate'))->render();
+
+        // Generate PDF pakai Browsershot
+        return response()->streamDownload(function () use ($html) {
+            echo Browsershot::html($html)
+                ->format('A4')
+                ->margins(10, 10, 10, 10)
+                ->pdf();
+        }, 'penerbitan_akta_kelahiran_' . date('Ymd') . '.pdf');
     }
 }

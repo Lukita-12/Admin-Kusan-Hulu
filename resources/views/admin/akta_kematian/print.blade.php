@@ -91,7 +91,7 @@
 
     <div class="line"></div>
 
-    <h2>Laporan Data Penduduk Pengajuan Perubahan Kartu Keluarga</h2>
+    <h2>Laporan Data Penduduk Akta Kematian</h2>
 
 {{-- Tambahkan periode tanggal di bawah judul --}}
 <p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
@@ -100,33 +100,15 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>No. kartu keluarga</th>
-            <th>Nik</th>
-            <th>Kepala Keluarga</th>
-            <th>Alamat</th>
-            <th>Kelurahan/Desa</th>
-            <th>Kecamatan</th>
-            <th>Kabupaten</th>
-            <th>Provinsi</th>
-            <th>Kode Pos</th>
+            <th>Tanggal Meninggal</th>
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach($pengajuanPerubahanKK as $item)
+        @foreach($aktaKematian as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->dataPenduduk->nama }}</td>
-            <td>{{ $item->no_kk }}</td>
-            <td>{{ $item->kepala_keluarga }}</td>
-            <td>{{ $item->alamat }}</td>
-            <td>{{ $item->kelurahan_desa }}</td>
-            <td>{{ $item->kecamatan }}</td>
-            <td>{{ $item->kabupaten }}</td>
-            <td>{{ $item->provinsi }}</td>
-            <td>{{ $item->kode_pos }}</td>
-        </tr>
+            <td>{{ $item->tanggal_meninggal }}</td>
         @endforeach
     </tbody>
 </table>

@@ -91,7 +91,7 @@
 
     <div class="line"></div>
 
-    <h2>Laporan Data Penduduk Pengajuan Perubahan Kartu Keluarga</h2>
+    <h2>Laporan Data Penduduk Penerbiatan Akta Kelahiran</h2>
 
 {{-- Tambahkan periode tanggal di bawah judul --}}
 <p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
@@ -100,32 +100,29 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>No. kartu keluarga</th>
-            <th>Nik</th>
-            <th>Kepala Keluarga</th>
-            <th>Alamat</th>
-            <th>Kelurahan/Desa</th>
-            <th>Kecamatan</th>
-            <th>Kabupaten</th>
-            <th>Provinsi</th>
-            <th>Kode Pos</th>
+            <th>Nama Anak</th>
+            <th>Nama Ayah</th>
+            <th>Nama Ibu </th>
+            <th>Tempat Lahir</th>
+            <th>Tanggal Lahir</th>
+            <th>Jenis Kelamin</th>
+            <th>Agama</th>
+            <th>Anak Ke</th>
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach($pengajuanPerubahanKK as $item)
+        @foreach($penerbitanAktaKelahiran as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->dataPenduduk->nama }}</td>
-            <td>{{ $item->no_kk }}</td>
-            <td>{{ $item->kepala_keluarga }}</td>
-            <td>{{ $item->alamat }}</td>
-            <td>{{ $item->kelurahan_desa }}</td>
-            <td>{{ $item->kecamatan }}</td>
-            <td>{{ $item->kabupaten }}</td>
-            <td>{{ $item->provinsi }}</td>
-            <td>{{ $item->kode_pos }}</td>
+            <td>{{ $item->nama_anak }}</td>
+            <td>{{ $item->nama_ayah }}</td>
+            <td>{{ $item->nama_ibu }}</td>
+            <td>{{ $item->tempat_lahir }}</td>
+            <td>{{ $item->tanggal_lahir }}</td>
+            <td>{{ $item->jenis_kelamin }}</td>
+            <td>{{ $item->agama }}</td>
+            <td>{{ $item->anak_ke }}</td>
         </tr>
         @endforeach
     </tbody>

@@ -162,30 +162,42 @@ class PindahDomisiliController extends Controller
 
     public function print(Request $request)
     {   // Validasi input date (format Y-m-d karena <input type="date">)
-        $request->validate([
-            'start_date' => 'required|date_format:Y-m-d',
-            'end_date' => 'required|date_format:Y-m-d',
-        ]);
+        // Validasi input date
+    $request->validate([
+        'start_date' => 'required|date_format:Y-m-d',
+        'end_date' => 'required|date_format:Y-m-d',
+    ]);
 
-        // Parsing tanggal (untuk keperluan query dan display)
-        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
-        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+    // Parsing tanggal
+    $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+    $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
 
-        // Query data sesuai rentang tanggal dan status Diproses atau Selesai
-        $pindahDomisili = PindahDomisili::with('dataPenduduk')
-            ->whereBetween('tanggal', [$startDate, $endDate])
-            ->whereIn('status', ['Diproses', 'Selesai'])
-            ->get();
+    // Tentukan status berdasarkan role user
+    $user = Auth::user();
+    if ($user->role === 'admin') {
+        $status = ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'];
+    } elseif ($user->role === 'super_admin') {
+        $status = ['Diproses', 'Selesai'];
+    } else {
+        $status = []; // Jika role tidak dikenali, kosongkan hasil
+    }
 
-        // Buat view HTML
-        $html = view('admin.pindah_domisili.print', compact('pindahDomisili', 'startDate', 'endDate'))->render();
+    // Query data Pindah Domisili
+    $pindahDomisili = PindahDomisili::with('dataPenduduk')
+        ->whereBetween('tanggal', [$startDate, $endDate])
+        ->whereIn('status', $status)
+        ->get();
 
-        // Generate PDF pakai Browsershot
-        return response()->streamDownload(function () use ($html) {
-            echo Browsershot::html($html)
-                ->format('A4')
-                ->margins(10, 10, 10, 10)
-                ->pdf();
-        }, 'domisili_usaha_' . date('Ymd') . '.pdf');
+    // Buat view HTML
+    $html = view('admin.pindah_domisili.print', compact('pindahDomisili', 'startDate', 'endDate'))->render();
+
+    // Generate PDF dengan Browsershot
+    return response()->streamDownload(function () use ($html) {
+        echo Browsershot::html($html)
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->pdf();
+    }, 'pindah_domisili_' . date('Ymd') . '.pdf');
+
     }
 }

@@ -9,6 +9,21 @@
                 <x-table.search type="text" placeholder="Cari" />
                 <x-table.button-link variant="create" href="{{ route('admin.penerbitan_akta_kelahiran.create') }}">+ Buat</x-table.button-link>
             </x-table.container>
+
+        <form method="GET" action="{{ route('admin.penerbitan_akta_kelahiran.print') }}" target="_blank" class="flex items-center gap-2">
+                <input type="date" name="start_date" id="start_date"
+                    class="bg-slate-100 px-3 py-1 rounded-sm"
+                    value="{{ request('start_date') }}">
+                <span class="text-white font-semibold">s/d</span>
+                <input type="date" name="end_date" id="end_date"
+                    class="bg-slate-100 px-3 py-1 rounded-sm"
+                    value="{{ request('end_date') }}">
+                <button type="submit"
+                        class="bg-green-600 hover:bg-green-700 text-white font-semibold px-3 py-1 rounded-sm">
+                    Print
+                </button>
+            </form>
+
             <x-table.filter>
                 <option value="Terbaru">Terbaru</option>
                 <option value="Terlama">Terlama</option>
