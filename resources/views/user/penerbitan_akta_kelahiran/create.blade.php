@@ -104,6 +104,14 @@
                 </x-form.container>
 
                 <x-form.container variant="label-input">
+                    <x-form.label for="tanggal_kelahiran">Tanggal kelahiran</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.textarea name="tanggal_kelahiran" id="tanggal_kelahiran" placeholder="Tanggal kelahiran..." required >{{ old('tanggal_kelahiran') }}</x-form.textarea>
+                        <x-form.error errorFor="tanggal_kelahiran" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
                     <x-form.label for="jenis_kelamin">Jenis kelamin</x-form.label>
                     <x-form.container variant="input-error">
                         <x-form.select name="jenis_kelamin" id="jenis_kelamin" required>

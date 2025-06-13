@@ -118,8 +118,8 @@
             <td>{{ $item->nama_anak }}</td>
             <td>{{ $item->nama_ayah }}</td>
             <td>{{ $item->nama_ibu }}</td>
-            <td>{{ $item->tempat_lahir }}</td>
-            <td>{{ $item->tanggal_lahir }}</td>
+            <td>{{ $item->tempat_lahiran }}</td>
+            <td>{{ $item->tanggal_lahiran }}</td>
             <td>{{ $item->jenis_kelamin }}</td>
             <td>{{ $item->agama }}</td>
             <td>{{ $item->anak_ke }}</td>

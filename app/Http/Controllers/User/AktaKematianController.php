@@ -34,6 +34,7 @@ class AktaKematianController extends Controller
         {
             $validatedData = $request->validate([
                 'data_penduduk_id'       => ['required', 'exists:data_penduduk,id'],
+                'nama_alm'          => ['required'],
                 'tanggal_meninggal' => ['required'],
                 'tempat_meninggal'  => ['required'],
                 'penyebab_meninggal'=> ['required'],

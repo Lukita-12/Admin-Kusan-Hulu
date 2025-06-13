@@ -31,7 +31,8 @@ class PenerbitanAktaKelahiranController extends Controller
         $validatedData = $request->validate([
             'data_penduduk_id'       => ['required', 'exists:data_penduduk,id'],
             'nama_anak'         => ['required'],
-            'tempat_kelahiran'  => ['required'],
+            'tempat_kelahiran' => ['required'],
+            'tanggal_kelahiran'  => ['required'],
             'nama_ayah'         => ['required'],
             'nama_ibu'          => ['required'],
             'jenis_kelamin'     => ['required', 'in:Laki-laki,Perempuan'],

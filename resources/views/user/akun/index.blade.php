@@ -50,7 +50,7 @@
         <a href="{{ route('user.akun.edit', Auth::user()) }}" class="bg-slate-700 font-semibold text-center text-slate-100 px-3 py-1 rounded-md">Edit profile</a>
 
         <span class="text-center">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est distinctio ducimus id ea modi vitae molestias repellat numquam adipisci eveniet blanditiis repudiandae quas amet unde corrupti itaque tenetur natus quia, vero animi, maxime magni sequi? Asperiores minus iusto eaque sit, dicta cum voluptate excepturi ut incidunt recusandae earum quasi labore!
+            Hallo
         </span>
     </div>
     @endauth

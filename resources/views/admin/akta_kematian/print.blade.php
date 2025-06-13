@@ -100,7 +100,7 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Tanggal Meninggal</th>
+            <th>Nama Alm</th>
             </th>
         </tr>
     </thead>
@@ -108,7 +108,7 @@
         @foreach($aktaKematian as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->tanggal_meninggal }}</td>
+            <td>{{ $item->nama_alm }}</td>
         @endforeach
     </tbody>
 </table>

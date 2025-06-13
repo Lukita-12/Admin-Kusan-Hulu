@@ -70,6 +70,7 @@ class AktaKematianController extends Controller
         $validatedData = $request->validate([
             'penduduk_id'       => ['required', 'exists:penduduk,id'],
             'tanggal'           => ['required', 'date'],
+            'nama_alm'          => ['required'],
             'tanggal_meninggal' => ['required'],
             'tempat_meninggal'  => ['required'],
             'penyebab_meninggal'=> ['required'],
@@ -103,6 +104,7 @@ class AktaKematianController extends Controller
         $validatedData = $request->validate([
             'penduduk_id'       => ['required', 'exists:penduduk,id'],
             'tanggal'           => ['required', 'date'],
+            'nama_alm'          => ['required'],
             'tanggal_meninggal' => ['required'],
             'tempat_meninggal'  => ['required'],
             'penyebab_meninggal'=> ['required'],

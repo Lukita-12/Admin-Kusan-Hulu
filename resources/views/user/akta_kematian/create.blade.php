@@ -63,6 +63,14 @@
 
                 <x-form.span variant="dashed" />
 
+             <x-form.container variant="label-input">
+                    <x-form.label for="nama_alm">Nama Alm</x-form.label>
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nama_alm" id="nama_alm" :value="old('nama_alm')" placeholder="Nama Alm..." required />
+                        <x-form.error errorFor="nama_alm" />
+                    </x-form.container>
+                </x-form.container>
+
                 <x-form.container variant="label-input">
                     <x-form.label for="tanggal_meninggal">Tanggal Meninggal</x-form.label>
                     <x-form.container variant="input-error">

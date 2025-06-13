@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\DataPenduduk;
 use App\Models\Desa;
+use App\Models\Penduduk;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,31 +47,41 @@ class DataPendudukController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $validatedData = $request->validate([
-           
-            'desa_id'                   => ['required', 'exists:desa,id'],
-            'nama'                      => ['required'],
-            'nik'                       => ['required'],
-            'no_kk'                     => ['required'],
-            
-            'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
-            'status_perkawinan'         => ['required'],
-            'tempat_lahir'              => ['required'],
-            'tanggal_lahir'             => ['required', 'date'],
-            'agama'                     => ['required'],
-            'pendidikan_terakhir'       => ['required'],
-            'pekerjaan'                 => ['required'],
-            'alamat_lengkap'            => ['required'],
-            'kedudukan_dalam_keluarga'  => ['required'],
-            'warga_negara'              => ['required'],
-        ]);
 
-        $validatedData['user_id'] = $user->id;
+    // Validasi awal untuk field umum
+    $validatedData = $request->validate([
+        'desa_id'                   => ['required', 'exists:desa,id'],
+        'nama'                      => ['required'],
+        'nik'                       => ['required'],
+        'no_kk'                     => ['required'],
+        'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
+        'status_perkawinan'         => ['required'],
+        'tempat_lahir'              => ['required'],
+        'tanggal_lahir'            => ['required', 'date'],
+        'agama'                     => ['required'],
+        'pendidikan_terakhir'       => ['required'],
+        'pekerjaan'                 => ['required'],
+        'alamat_lengkap'            => ['required'],
+        'kedudukan_dalam_keluarga'  => ['required'],
+        'warga_negara'              => ['required'],
+    ]);
 
-        DataPenduduk::create($validatedData);
+    // Cek apakah NIK ada di tabel penduduk
+    $pendudukExists = Penduduk::where('nik', $validatedData['nik'])->exists();
 
-        return redirect()->route('beranda');
+    if (!$pendudukExists) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['nik' => 'NIK tidak valid. Data penduduk tidak ditemukan.']);
     }
+
+    // Simpan data jika valid
+    $validatedData['user_id'] = $user->id;
+
+    DataPenduduk::create($validatedData);
+
+    return redirect()->route('beranda');
+}
 
     /**
      * Display the specified resource.

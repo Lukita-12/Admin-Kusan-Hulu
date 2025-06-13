@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(DataPenduduk::class)->constrained()->cascadeOnDelete();
             $table->date('tanggal');
+            $table->string('nama_alm');
             $table->string('tanggal_meninggal');
             $table->text('tempat_meninggal');
             $table->text('penyebab_meninggal');

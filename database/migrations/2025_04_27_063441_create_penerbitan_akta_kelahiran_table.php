@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->text('tempat_kelahiran');
+            $table->text('tanggal_kelahiran');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->default('Laki-laki');
             $table->string('agama');
             $table->string('anak_ke');
