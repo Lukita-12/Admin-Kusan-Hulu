@@ -75,6 +75,23 @@
             background-color: #f2f2f2;
         }
 
+        .ttd {
+            width: 100%;
+            margin-top: 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .ttd .content {
+            text-align: center;
+            width: 250px;
+        }
+
+        .ttd .content .nama {
+            margin-top: 60px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -84,49 +101,60 @@
         <div class="kop-text">
             <h1>PEMERINTAH KABUPATEN TANAH BUMBU</h1>
             <h2>KECAMATAN KUSAN HULU</h2>
-            <p>Jl. Contoh Alamat No. 123, Kecamatan ABC, Provinsi DEF</p>
-            <p>Telepon: (0123) 456789</p>
+            <p>Jl. Binawara - Kusan Hulu, Kabupaten Tanah Bumbu,</p>
+            <p>Kalimantan Selatan Kode Pos 72273</p>
         </div>
     </div>
 
     <div class="line"></div>
 
-    <h2>Laporan Data Penduduk Penerbiatan Akta Kelahiran</h2>
+    <h2>Laporan Data Penduduk Penerbitan Akta Kelahiran</h2>
 
-{{-- Tambahkan periode tanggal di bawah judul --}}
-<p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+    <p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama Anak</th>
-            <th>Nama Ayah</th>
-            <th>Nama Ibu </th>
-            <th>Tempat Lahir</th>
-            <th>Tanggal Lahir</th>
-            <th>Jenis Kelamin</th>
-            <th>Agama</th>
-            <th>Anak Ke</th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($penerbitanAktaKelahiran as $item)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->nama_anak }}</td>
-            <td>{{ $item->nama_ayah }}</td>
-            <td>{{ $item->nama_ibu }}</td>
-            <td>{{ $item->tempat_lahiran }}</td>
-            <td>{{ $item->tanggal_lahiran }}</td>
-            <td>{{ $item->jenis_kelamin }}</td>
-            <td>{{ $item->agama }}</td>
-            <td>{{ $item->anak_ke }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Anak</th>
+                <th>Nama Ayah</th>
+                <th>Nama Ibu</th>
+                <th>Tempat Lahir</th>
+                <th>Tanggal Lahir</th>
+                <th>Jenis Kelamin</th>
+                <th>Agama</th>
+                <th>Anak Ke</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($penerbitanAktaKelahiran as $item)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->nama_anak }}</td>
+                <td>{{ $item->nama_ayah }}</td>
+                <td>{{ $item->nama_ibu }}</td>
+                <td>{{ $item->tempat_lahiran }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggal_lahiran)->format('d-m-Y') }}</td>
+                <td>{{ $item->jenis_kelamin }}</td>
+                <td>{{ $item->agama }}</td>
+                <td>{{ $item->anak_ke }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    @if($penerbitanAktaKelahiran->count() > 0)
+    <div class="ttd">
+        <div class="content">
+            <p>Kusan Hulu, {{ \Carbon\Carbon::parse($penerbitanAktaKelahiran->first()->tanggal_lahiran)->translatedFormat('d F Y') }}</p>
+            <p class="font-bold uppercase">CAMAT KUSAN HULU</p>
+            {{-- Tambahkan gambar tanda tangan jika ada --}}
+            {{-- <img src="{{ public_path('images/ttd_camat.png') }}" alt="Tanda Tangan" style="width:120px;"> --}}
+            <p class="nama">H. ABDUL JABAR, S.AP</p>
+            <p>NIP. 19661120 198602 1033</p>
+        </div>
+    </div>
+    @endif
 
 </body>
 </html>

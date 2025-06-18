@@ -101,10 +101,16 @@
                 </x-form.container>
 
                 <x-form.container variant="label-input">
-                    <x-form.label for="pendidikan_terakhir">Pendidikan terakhir</x-form.label>
+                    <x-form.label for="pendidikan_terakhir">Pendidikan Terakhir</x-form.label>
 
                     <x-form.container variant="input-error">
-                        <x-form.input type="text" name="pendidikan_terakhir" id="pendidikan_terakhir" :value="old('pendidikan_terakhir')" placeholder="Pendidikan terakhir..." required />
+                        <x-form.select name="pendidikan_terakhir" id="pendidikan_terakhir" :value="old('pendidikan_terakhir')" required>
+                            <option value="Laki-laki" {{ old('pendidikan_terakhir') == 'SD/Sederajat' ? 'selected' : '' }}>SD/Sederajat</option>
+                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'SLTP/Sederajat' ? 'selected' : '' }}>SLTP/Sederajat</option>
+                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'S1' ? 'selected' : '' }}>S1</option>
+                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'TidakSekolah' ? 'selected' : '' }}>TidakSekolah</option>
+                        </x-form.select>
                         <x-form.error errorFor="pendidikan_terakhir" />
                     </x-form.container>
                 </x-form.container>

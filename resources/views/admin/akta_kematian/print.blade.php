@@ -75,6 +75,23 @@
             background-color: #f2f2f2;
         }
 
+        .ttd {
+            width: 100%;
+            margin-top: 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .ttd .content {
+            text-align: center;
+            width: 250px;
+        }
+
+        .ttd .content .nama {
+            margin-top: 60px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -84,8 +101,8 @@
         <div class="kop-text">
             <h1>PEMERINTAH KABUPATEN TANAH BUMBU</h1>
             <h2>KECAMATAN KUSAN HULU</h2>
-            <p>Jl. Contoh Alamat No. 123, Kecamatan ABC, Provinsi DEF</p>
-            <p>Telepon: (0123) 456789</p>
+            <p>Jl. Binawara - Kusan Hulu, Kabupaten Tanah Bumbu,</p>
+            <p>Kalimantan Selatan Kode Pos 72273</p>
         </div>
     </div>
 
@@ -93,25 +110,42 @@
 
     <h2>Laporan Data Penduduk Akta Kematian</h2>
 
-{{-- Tambahkan periode tanggal di bawah judul --}}
-<p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+    <p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama Alm</th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($aktaKematian as $item)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->nama_alm }}</td>
-        @endforeach
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Alm</th>
+                <th>Tanggal Meninggal</th>
+                <th>Tempat Meninggal</th>
+                <th>Penyebab Meninggal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($aktaKematian as $item)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->nama_alm }}</td>
+                <td>{{ $item->tanggal_meninggal }}</td>
+                <td>{{ $item->tempat_meninggal }}</td>
+                <td>{{ $item->penyebab_meninggal }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    @if($aktaKematian->count() > 0)
+    <div class="ttd">
+        <div class="content">
+            <p>Kusan Hulu, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+            <p class="font-bold uppercase">CAMAT KUSAN HULU</p>
+            {{-- <img src="{{ public_path('images/ttd_camat.png') }}" alt="Tanda Tangan" style="width:120px;"> --}}
+            <p class="nama">H. ABDUL JABAR, S.AP</p>
+            <p>NIP. 19661120 198602 1033</p>
+        </div>
+    </div>
+    @endif
 
 </body>
 </html>

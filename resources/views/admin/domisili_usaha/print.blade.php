@@ -75,6 +75,23 @@
             background-color: #f2f2f2;
         }
 
+        .ttd {
+            width: 100%;
+            margin-top: 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .ttd .content {
+            text-align: center;
+            width: 250px;
+        }
+
+        .ttd .content .nama {
+            margin-top: 60px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -84,8 +101,8 @@
         <div class="kop-text">
             <h1>PEMERINTAH KABUPATEN TANAH BUMBU</h1>
             <h2>KECAMATAN KUSAN HULU</h2>
-            <p>Jl. Contoh Alamat No. 123, Kecamatan ABC, Provinsi DEF</p>
-            <p>Telepon: (0123) 456789</p>
+            <p>Jl. Binawara - Kusan Hulu, Kabupaten Tanah Bumbu,</p>
+            <p>Kalimantan Selatan Kode Pos 72273</p>
         </div>
     </div>
 
@@ -93,31 +110,43 @@
 
     <h2>Laporan Data Penduduk Pengajuan Domisili Usaha</h2>
 
-{{-- Tambahkan periode tanggal di bawah judul --}}
-<p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+    {{-- Periode Tanggal --}}
+    <p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Nama Usaha</th>
-            <th>Jenis Usaha</th>
-            <th>Alamat Usaha</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($domisiliUsaha as $item)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->dataPenduduk->nama }}</td>
-            <td>{{ $item->nama_usaha }}</td>
-            <td>{{ $item->jenis_usaha }}</td>
-            <td>{{ $item->alamat_usaha }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Nama Usaha</th>
+                <th>Jenis Usaha</th>
+                <th>Alamat Usaha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($domisiliUsaha as $item)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->dataPenduduk->nama }}</td>
+                <td>{{ $item->nama_usaha }}</td>
+                <td>{{ $item->jenis_usaha }}</td>
+                <td>{{ $item->alamat_usaha }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    {{-- Tanda Tangan Camat --}}
+    @if($domisiliUsaha->count() > 0)
+    <div class="ttd">
+        <div class="content">
+            <p>Kusan Hulu, {{ \Carbon\Carbon::parse($domisiliUsaha->first()->tanggal)->translatedFormat('d F Y') }}</p>
+            <p class="font-bold uppercase">CAMAT KUSAN HULU</p>
+            <p class="nama">H. ABDUL JABAR, S.AP</p>
+            <p>NIP. 19661120 198602 1033</p>
+        </div>
+    </div>
+    @endif
 
 </body>
 </html>

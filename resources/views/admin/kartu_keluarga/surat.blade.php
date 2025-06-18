@@ -29,6 +29,11 @@
             </div>
         </div>
 
+        <div   div class="text-center mb-8">
+            <h1 class="text-xl font-bold uppercase underline">Surat Keterangan Pengajuan Perubahan KK</h1>
+            <!-- <p class="text-sm">Nomor: {{ $akta->nomor_surat ?? '...../...../.....' }}</p> -->
+        </div>
+
         <!-- Isi Surat -->
         <div class="mb-6 leading-relaxed text-justify">
             <p class="mb-4">

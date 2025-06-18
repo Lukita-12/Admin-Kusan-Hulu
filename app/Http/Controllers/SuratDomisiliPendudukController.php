@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DomisiliPenduduk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuratDomisiliPendudukController extends Controller
 {
@@ -35,10 +36,22 @@ class SuratDomisiliPendudukController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-    {
-        $domisiliPenduduk = DomisiliPenduduk::with('dataPenduduk')->findOrFail($id);
-    return view('admin.domisili_penduduk.surat', compact('domisiliPenduduk'));
-    }
+        {
+            // Ambil data surat dan relasi penduduk
+            $domisiliPenduduk = DomisiliPenduduk::with('dataPenduduk')->findOrFail($id);
+
+            // Jika role-nya user, pastikan hanya melihat surat miliknya
+            $user = Auth::user(); // ← baris ini
+
+            if ($user && $user->role === 'user') {
+                if ($domisiliPenduduk->dataPenduduk->user_id !== $user->id) {
+                    abort(403, 'Anda tidak memiliki akses ke surat ini.');
+                }
+            }
+
+            // Tampilkan view surat
+            return view('admin.domisili_penduduk.surat', compact('domisiliPenduduk'));
+        }
 
     /**
      * Show the form for editing the specified resource.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PindahDomisili;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuratPindahDomisiliController extends Controller
 {
@@ -35,11 +36,22 @@ class SuratPindahDomisiliController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-    {
-         $pindahDomisili = PindahDomisili::with('dataPenduduk')->findOrFail($id);
+        {
+            // Ambil data surat dan relasi penduduk
+            $pindahDomisili = PindahDomisili::with('dataPenduduk')->findOrFail($id);
 
-    return view('admin.pindah_domisili.surat', compact('pindahDomisili'));
-    }
+            // Jika role-nya user, pastikan hanya melihat surat miliknya
+            $user = Auth::user(); // ← baris ini
+
+            if ($user && $user->role === 'user') {
+                if ($pindahDomisili->dataPenduduk->user_id !== $user->id) {
+                    abort(403, 'Anda tidak memiliki akses ke surat ini.');
+                }
+            }
+
+            // Tampilkan view surat
+            return view('admin.pindah_domisili.surat', compact('pindahDomisili'));
+        }
 
     /**
      * Show the form for editing the specified resource.

@@ -12,7 +12,7 @@ class PendudukController extends Controller
 {
     public function index()
     {
-        $penduduks = Penduduk::latest()->simplePaginate(6);
+        $penduduks = Penduduk::latest()->simplePaginate(10);
 
         return view('/admin.penduduk.index', [
             'penduduks' => $penduduks
@@ -79,6 +79,7 @@ class PendudukController extends Controller
         $validatedData = $request->validate([
             'desa_id'                   => ['required', 'exists:desa,id'],
             'kartukeluarga_id'          => ['required', 'exists:kartukeluarga,id'],
+            'nik'                       => ['required'],
             'nama'                      => ['required'],
             'jenis_kelamin'             => ['required', 'in:Laki-laki,Perempuan'],
             'status_perkawinan'         => ['required'],

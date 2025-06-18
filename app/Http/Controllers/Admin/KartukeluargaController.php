@@ -14,19 +14,19 @@ class KartukeluargaController extends Controller
     public function index()
     {
         $user           = Auth::user();
-        $kartukeluargas = Kartukeluarga::with('penduduk')->latest()->simplePaginate(6);
+        $kartukeluargas = Kartukeluarga::with('penduduk')->latest()->simplePaginate(10);
 
         if($user->role === 'admin') {
             $pengajuanPerubahanKKs = PengajuanPerubahanKK::whereIn('status', ['Diajukan', 'Ditolak', 'Diproses', 'Selesai'])
                 ->orderByRaw("FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')")
                 ->orderBy('created_at', 'asc') // asc = terlama ke terbaru
-                ->simplePaginate(6);
+                ->simplePaginate(10);
 
         } elseif ($user->role === 'super_admin') {
             $pengajuanPerubahanKKs = PengajuanPerubahanKK::whereIn('status', ['Diproses', 'Selesai'])
                 ->orderByRaw("FIELD(status, 'Diajukan', 'Diproses', 'Ditolak', 'Selesai')")
                 ->orderBy('created_at', 'asc') // asc = terlama ke terbaru
-                ->simplePaginate(6);
+                ->simplePaginate(10);
 
         }
         
@@ -86,6 +86,7 @@ class KartukeluargaController extends Controller
     {
         $validatedData = $request->validate([
             'no_kk'             => ['required'],
+            'nik'               => ['required'],
             'kepala_keluarga'   => ['required'],
             'alamat'            => ['required'],
             'kelurahan_desa'    => ['required'],
@@ -93,6 +94,11 @@ class KartukeluargaController extends Controller
             'kabupaten'         => ['required'],
             'provinsi'          => ['required'],
             'kode_pos'          => ['required'],
+            'status_hubungan_dalam_keluarga'  => ['required'],
+            'no_paspor'         => ['required'],
+            'no_kitas_kitap'    => ['required'],
+            'ayah'              => ['required'],
+            'ibu'               => ['required'],
             'tanggal_penerbitan'=> ['required', 'date'],
         ]);
 
@@ -121,6 +127,7 @@ class KartukeluargaController extends Controller
     {
         $validatedAttributes = $request->validate([
             'no_kk'             => ['required'],
+            'nik'               => ['required'],
             'kepala_keluarga'   => ['required'],
             'alamat'            => ['required'],
             'kelurahan_desa'    => ['required'],
@@ -128,6 +135,11 @@ class KartukeluargaController extends Controller
             'kabupaten'         => ['required'],
             'provinsi'          => ['required'],
             'kode_pos'          => ['required'],
+            'status_hubungan_dalam_keluarga'  => ['required'],
+            'no_paspor'         => ['required'],
+            'no_kitas_kitap'    => ['required'],
+            'ayah'              => ['required'],
+            'ibu'               => ['required'],
             'tanggal_penerbitan'=> ['required', 'date'],
         ]);
 

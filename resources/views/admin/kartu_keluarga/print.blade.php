@@ -75,6 +75,23 @@
             background-color: #f2f2f2;
         }
 
+        .ttd {
+            width: 100%;
+            margin-top: 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .ttd .content {
+            text-align: center;
+            width: 250px;
+        }
+
+        .ttd .content .nama {
+            margin-top: 60px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -84,8 +101,8 @@
         <div class="kop-text">
             <h1>PEMERINTAH KABUPATEN TANAH BUMBU</h1>
             <h2>KECAMATAN KUSAN HULU</h2>
-            <p>Jl. Contoh Alamat No. 123, Kecamatan ABC, Provinsi DEF</p>
-            <p>Telepon: (0123) 456789</p>
+            <p>Jl. Binawara - Kusan Hulu, Kabupaten Tanah Bumbu,</p>
+            <p>Kalimantan Selatan Kode Pos 72273</p>
         </div>
     </div>
 
@@ -93,43 +110,55 @@
 
     <h2>Laporan Data Penduduk Pengajuan Perubahan Kartu Keluarga</h2>
 
-{{-- Tambahkan periode tanggal di bawah judul --}}
-<p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+    <p><strong>Periode:</strong> {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>No. kartu keluarga</th>
-            <th>Nik</th>
-            <th>Kepala Keluarga</th>
-            <th>Alamat</th>
-            <th>Kelurahan/Desa</th>
-            <th>Kecamatan</th>
-            <th>Kabupaten</th>
-            <th>Provinsi</th>
-            <th>Kode Pos</th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($pengajuanPerubahanKK as $item)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->dataPenduduk->nama }}</td>
-            <td>{{ $item->no_kk }}</td>
-            <td>{{ $item->kepala_keluarga }}</td>
-            <td>{{ $item->alamat }}</td>
-            <td>{{ $item->kelurahan_desa }}</td>
-            <td>{{ $item->kecamatan }}</td>
-            <td>{{ $item->kabupaten }}</td>
-            <td>{{ $item->provinsi }}</td>
-            <td>{{ $item->kode_pos }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Nama</th>
+                <th>NIK</th>
+                <th>No. Kartu Keluarga</th>
+                <th>Kepala Keluarga</th>
+                <th>Alamat</th>
+                <th>Kelurahan/Desa</th>
+                <th>Kecamatan</th>
+                <th>Kabupaten</th>
+                <th>Provinsi</th>
+                <th>Kode Pos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($pengajuanPerubahanKK as $item)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                <td>{{ $item->dataPenduduk->nama }}</td>
+                <td>{{ $item->dataPenduduk->nik }}</td>
+                <td>{{ $item->no_kk }}</td>
+                <td>{{ $item->kepala_keluarga }}</td>
+                <td>{{ $item->alamat }}</td>
+                <td>{{ $item->kelurahan_desa }}</td>
+                <td>{{ $item->kecamatan }}</td>
+                <td>{{ $item->kabupaten }}</td>
+                <td>{{ $item->provinsi }}</td>
+                <td>{{ $item->kode_pos }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    @if($pengajuanPerubahanKK->count() > 0)
+    <div class="ttd">
+        <div class="content">
+            <p>Kusan Hulu, {{ \Carbon\Carbon::parse($pengajuanPerubahanKK->first()->tanggal)->translatedFormat('d F Y') }}</p>
+            <p class="font-bold uppercase">CAMAT KUSAN HULU</p>
+            <p class="nama">H. ABDUL JABAR, S.AP</p>
+            <p>NIP. 19661120 198602 1033</p>
+        </div>
+    </div>
+    @endif
 
 </body>
 </html>

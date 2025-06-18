@@ -3,12 +3,22 @@
     <x-form.container variant="main">
         <x-form.form action="{{ route('admin.kartu_keluarga.store') }}">
             <x-form.container variant="form">
+
                 <x-form.container variant="label-input">
                     <x-form.label for="no_kk">Nomor Kartu Keluarga</x-form.label>
 
                     <x-form.container variant="input-error">
                         <x-form.input type="text" name="no_kk" id="no_kk" :value="old('no_kk')" placeholder="Nomor kartu keluarga..." required />
                         <x-form.error errorFor="no_kk" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="nik">NIK</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="nik" id="nik" :value="old('nik')" placeholder="NIK..." required />
+                        <x-form.error errorFor="nik" />
                     </x-form.container>
                 </x-form.container>
         
@@ -74,6 +84,51 @@
                     <x-form.container variant="input-error">
                         <x-form.input type="text" name="kode_pos" id="kode_pos" :value="old('kode_pos')" placeholder="Kode pos..." required />
                         <x-form.error errorFor="kode_pos" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="status_hubungan_dalam_keluarga">Status Hubungan Dalam Keluarga</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="status_hubungan_dalam_keluarga" id="status_hubungan_dalam_keluarga" :value="old('status_hubungan_dalam_keluarga')" placeholder="Status Hubungan Dalam Keluarga..." required />
+                        <x-form.error errorFor="status_hubungan_dalam_keluarga" />
+                    </x-form.container>
+                </x-form.container>
+                
+                <x-form.container variant="label-input">
+                    <x-form.label for="no_paspor">No Paspor</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="no_paspor" id="no_paspor" :value="old('no_paspor')" placeholder="No Paspor..." required />
+                        <x-form.error errorFor="no_paspor" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="no_kitas_kitap">No kitas / Kitap</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="no_kitas_kitap" id="no_kitas_kitap" :value="old('no_kitas_kitap')" placeholder="No kitas atau kitap..." required />
+                        <x-form.error errorFor="no_kitas_kitap" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="ayah">nama Ayah</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="ayah" id="ayah" :value="old('ayah')" placeholder="Nama Ayah..." required />
+                        <x-form.error errorFor="ayah" />
+                    </x-form.container>
+                </x-form.container>
+
+                <x-form.container variant="label-input">
+                    <x-form.label for="ibu">Nama Ibu</x-form.label>
+
+                    <x-form.container variant="input-error">
+                        <x-form.input type="text" name="ibu" id="ibu" :value="old('ibu')" placeholder="Nama Ibu..." required />
+                        <x-form.error errorFor="ibu" />
                     </x-form.container>
                 </x-form.container>
 

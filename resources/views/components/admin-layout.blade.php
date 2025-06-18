@@ -59,9 +59,9 @@
                 </x-heading.container>
             </x-heading.container>
             
-            <div class="w-full min-h-full flex flex-col justify-center items-center px-6 py-12 gap-12">
-                {{ $slot }}
-            </div>
+            <div class="w-full min-h-full flex flex-col justify-start items-start px-6 py-6 gap-6">
+            {{ $slot }}
+        </div>
         </main>
 
     </body>

@@ -93,7 +93,26 @@
                 </div>
             @elseif($surat->status == 'Selesai')
                 <div class="mt-2 p-2 bg-green-100 text-green-700 rounded">
-                    Permohonan Anda selesai. Silakan ambil surat Anda di Kecamatan Kusan Hulu.
+                    Surat Anda Telah Selesai 
+                </div>
+
+                {{-- Tombol Lihat Surat --}}
+                <div class="mt-3">
+                    @php
+                        $routeName = match (class_basename($surat)) {
+                            'DomisiliUsaha' => 'domisili-usaha.show',
+                            'PindahDomisili' => 'pindah-domisili.show',
+                            'DomisiliPenduduk' => 'domisili-penduduk.show',
+                            default => null
+                        };
+                    @endphp
+
+                    @if($routeName)
+                    <a href="{{ route($routeName, $surat->id) }}" target="_blank"
+                       class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                        Lihat Surat
+                    </a>
+                    @endif
                 </div>
             @endif
 

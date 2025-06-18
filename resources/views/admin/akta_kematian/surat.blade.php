@@ -33,7 +33,7 @@
     <!-- Judul Surat -->
     <div class="text-center mb-8">
         <h1 class="text-xl font-bold uppercase underline">Surat Keterangan Kematian</h1>
-        <p class="text-sm">Nomor: {{ $akta->nomor_surat ?? '...../...../.....' }}</p>
+        <!-- <p class="text-sm">Nomor: {{ $akta->nomor_surat ?? '...../...../.....' }}</p> -->
     </div>
 
     <!-- Isi Surat -->
