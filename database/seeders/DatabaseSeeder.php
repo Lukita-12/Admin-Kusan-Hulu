@@ -29,6 +29,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PengajuanPerubahanKKSeeder::class,
         ]);
+
+        $this->call([
+        KartuKeluargaSeeder::class,
+        ]);
     }
 
 }

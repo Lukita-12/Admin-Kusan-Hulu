@@ -37,11 +37,16 @@
     
 
     <!-- Teks -->
-<div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-    <h1 class="text-4xl md:text-6xl lg:text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-pink-500 to-yellow-500 drop-shadow-lg">
-        SELAMAT DATANG DI WEBSITE KECAMATAN KUSAN HULU
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 font-sans">
+    <h1 class="text-2xl md:text-6xl lg:text-7xl font-semibold drop-shadow-lg">
+        SELAMAT DATANG 
     </h1>
+    <h2 class="text-2xl md:text-6xl lg:text-7xl font-semibold drop-shadow-lg">
+        DI WEBSITE KECAMATAN KUSAN HULU
+    </h2>
 </div>
+
+
 
 </div>
 
