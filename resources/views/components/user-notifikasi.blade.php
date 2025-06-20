@@ -37,12 +37,12 @@
 
                 {{-- Step 2: Ditolak (jika status == Ditolak) --}}
                 @if($surat->status == 'Ditolak')
-                <div class="flex items-center">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-red-500 text-white">
-                        2
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center bg-red-500 text-white">
+                            2
+                        </div>
+                        <span class="ml-2 text-sm">Ditolak</span>
                     </div>
-                    <span class="ml-2 text-sm">Ditolak</span>
-                </div>
                 @endif
 
                 {{-- Divider Step 2-3 --}}
@@ -64,9 +64,7 @@
                 </div>
 
                 {{-- Divider Step 3-4 --}}
-                <div class="flex-1 border-t-2
-                    {{ $surat->status == 'Selesai' ? 'border-green-500' : 'border-gray-300' }}">
-                </div>
+                <div class="flex-1 border-t-2 {{ $surat->status == 'Selesai' ? 'border-green-500' : 'border-gray-300' }}"></div>
 
                 {{-- Step 4: Selesai --}}
                 <div class="flex items-center">
@@ -93,29 +91,35 @@
                 </div>
             @elseif($surat->status == 'Selesai')
                 <div class="mt-2 p-2 bg-green-100 text-green-700 rounded">
-                    Surat Anda Telah Selesai 
+                    Surat Anda telah selesai.
                 </div>
 
-                {{-- Tombol Lihat Surat --}}
-                <div class="mt-3">
-                    @php
-                        $routeName = match (class_basename($surat)) {
-                            'DomisiliUsaha' => 'domisili-usaha.show',
-                            'PindahDomisili' => 'pindah-domisili.show',
-                            'DomisiliPenduduk' => 'domisili-penduduk.show',
-                            default => null
-                        };
-                    @endphp
+                {{-- Ambil jenis surat dan cek route --}}
+                @php
+                    $routeName = match (class_basename($surat)) {
+                        'DomisiliUsaha' => 'domisili-usaha.show',
+                        'PindahDomisili' => 'pindah-domisili.show',
+                        'DomisiliPenduduk' => 'domisili-penduduk.show',
+                        default => null
+                    };
+                @endphp
 
-                    @if($routeName)
-                    <a href="{{ route($routeName, $surat->id) }}" target="_blank"
-                       class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                        Lihat Surat
-                    </a>
-                    @endif
-                </div>
+                @if($routeName)
+                    {{-- Jika surat bisa diunduh secara online --}}
+                    <div class="mt-3">
+                        <a href="{{ route($routeName, $surat->id) }}" target="_blank"
+                           class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                            Lihat Surat
+                        </a>
+                    </div>
+                @else
+                    {{-- Selain surat-surat di atas --}}
+                    <div class="mt-2 p-2 bg-yellow-100 text-yellow-800 rounded">
+                        Silahkan ambil surat Anda di kantor Kecamatan.
+                    </div>
+                @endif
             @endif
-
+            
         </div>
         @endforeach
     </div>

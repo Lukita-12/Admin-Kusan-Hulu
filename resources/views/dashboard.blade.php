@@ -3,7 +3,7 @@
         DASHBOARD
     </x-slot:heading>
 
-     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+     <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
         <!-- DOMISILI USAHA -->
         <a href="{{ route('admin.domisili_usaha.index') }}" class="bg-slate-200 rounded-sm shadow shadow-slate-500 p-4">
             <div class="flex items-center gap-4">

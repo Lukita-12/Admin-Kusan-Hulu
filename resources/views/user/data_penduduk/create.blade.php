@@ -105,11 +105,12 @@
 
                     <x-form.container variant="input-error">
                         <x-form.select name="pendidikan_terakhir" id="pendidikan_terakhir" :value="old('pendidikan_terakhir')" required>
-                            <option value="Laki-laki" {{ old('pendidikan_terakhir') == 'SD/Sederajat' ? 'selected' : '' }}>SD/Sederajat</option>
-                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'SLTP/Sederajat' ? 'selected' : '' }}>SLTP/Sederajat</option>
-                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'S1' ? 'selected' : '' }}>S1</option>
-                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'D3' ? 'selected' : '' }}>D3</option>
-                            <option value="Perempuan" {{ old('pendidikan_terakhir') == 'TidakSekolah' ? 'selected' : '' }}>TidakSekolah</option>
+                            <option value="TAMAT SD/SEDERAJAT" {{ old('pendidikan_terakhir') == 'TAMAT SD/SEDERAJAT' ? 'selected' : '' }}>TAMAT SD/SEDERAJAT</option>
+                            <option value="SLTP/SEDERAJAT" {{ old('pendidikan_terakhir') == 'SLTP/SEDERAJAT' ? 'selected' : '' }}>SLTP/SEDERAJAT</option>
+                            <option value="SLTA/SEDERAJAT" {{ old('pendidikan_terakhir') == 'SLTA/SEDERAJAT' ? 'selected' : '' }}>SLTA/SEDERAJAT</option>
+                            <option value="S1" {{ old('pendidikan_terakhir') == 'S1' ? 'selected' : '' }}>S1</option>
+                            <option value="D3" {{ old('pendidikan_terakhir') == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="Tidak Sekolah" {{ old('pendidikan_terakhir') == 'Tidak Sekolah' ? 'selected' : '' }}>Tidak Sekolah</option>
                         </x-form.select>
                         <x-form.error errorFor="pendidikan_terakhir" />
                     </x-form.container>
