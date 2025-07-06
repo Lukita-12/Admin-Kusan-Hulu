@@ -143,7 +143,7 @@
     {{-- Tanda Tangan Camat --}}
     <div class="ttd">
         <div class="content">
-            <p>Kusan Hulu, {{ \Carbon\Carbon::parse($domisiliPenduduk->first()->tanggal)->translatedFormat('d F Y') }}</p>
+            <p>Kusan Hulu, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
             <p class="font-bold uppercase">CAMAT KUSAN HULU</p>
             <p class="nama">H. ABDUL JABAR, S.AP</p>
             <p>NIP. 19661120 198602 1033</p>
